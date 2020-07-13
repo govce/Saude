@@ -2,7 +2,6 @@
 namespace Saude;
 use MapasCulturais\Themes\BaseV1;
 use MapasCulturais\App;
-use MapasCulturais\i;
 
 class Theme extends BaseV1\Theme{
 
@@ -42,7 +41,7 @@ class Theme extends BaseV1\Theme{
         return __DIR__;
     }
 
-    function _init() {
+    function _init() {        
         parent::_init();
         $app = App::i();
        
