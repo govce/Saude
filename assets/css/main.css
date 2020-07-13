@@ -633,7 +633,7 @@ h6 {
   background-color: #42515e !important; }
 
 .bg-opportunity {
-  background-color: #F88800 !important; }
+  background-color: #CC0033 !important; }
 
 .color-agent {
   color: #ff641f !important; }
@@ -648,7 +648,7 @@ h6 {
   color: #42515e !important; }
 
 .color-opportunity {
-  color: #F88800 !important; }
+  color: #CC0033 !important; }
 
 #header-search-row {
   position: relative;
@@ -709,9 +709,9 @@ h6 {
     background: #42515e; }
 
 #filter-opportunities {
-  background: #F88800; }
+  background: #CC0033; }
   #filter-opportunities .advanced-filters {
-    background: #F88800; }
+    background: #CC0033; }
 
 .filter {
   box-sizing: border-box;
@@ -938,8 +938,8 @@ h6 {
   border-right-color: #42515e; }
 
 #opportunity-list-header {
-  border-left-color: #F88800;
-  border-right-color: #F88800; }
+  border-left-color: #CC0033;
+  border-right-color: #CC0033; }
 
 #seal-list-header {
   border-left-color: #684224;
@@ -1030,7 +1030,7 @@ h6 {
   color: #42515e; }
 
 .opportunity .objeto:hover h1 a, .opportunity .objeto-meta a {
-  color: #F88800; }
+  color: #CC0033; }
 
 .seal .objeto:hover h1 a, .seal .objeto-meta a {
   color: #684224; }
@@ -1259,7 +1259,7 @@ article.project .header-image {
   background-color: #42515e; }
 
 article.opportunity .header-image, article.registration .header-image {
-  background-color: #F88800; }
+  background-color: #CC0033; }
 
 article.subsite .header-image {
   background-color: #cc0033; }
@@ -1301,7 +1301,7 @@ article.seal .header-image {
   .header-content .project-type {
     color: #42515e; }
   .header-content .opportunity-type, .header-content .registration-type {
-    color: #F88800; }
+    color: #CC0033; }
   .header-content .agent-type {
     color: #ff641f; }
   .header-content .event-type {
@@ -1645,15 +1645,15 @@ article.seal .header-image {
   border-right: 8px solid transparent; }
 
 #entities-menu-opportunity.active, #entities-menu-opportunity:hover, #entities-menu-opportunity.current-entity-parent {
-  border-top-color: #F88800;
-  color: #F88800; }
+  border-top-color: #CC0033;
+  color: #CC0033; }
   #entities-menu-opportunity.active a, #entities-menu-opportunity:hover a, #entities-menu-opportunity.current-entity-parent a {
-    color: #F88800; }
+    color: #CC0033; }
 #entities-menu-opportunity.active:after {
   content: "";
   position: absolute;
   top: -8px;
-  border-bottom: 8px solid #F88800;
+  border-bottom: 8px solid #CC0033;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent; }
 
@@ -1918,7 +1918,7 @@ article.seal .header-image {
   background: #42515e; }
 
 #nav-opportunities {
-  background: #F88800; }
+  background: #CC0033; }
 
 #nav-subsite {
   background: #cc0033; }
@@ -2155,7 +2155,7 @@ article.seal .header-image {
 
 #opportunities-filter:hover,
 #opportunities-filter:focus {
-  background-color: #F88800; }
+  background-color: #CC0033; }
 
 #seals-filter:hover,
 #seals-filter:focus {
@@ -2182,9 +2182,9 @@ article.seal .header-image {
     border-bottom-color: #42515e; }
 
 #home-opportunities {
-  background: #F88800; }
+  background: #CC0033; }
   #home-opportunities .abas li.active {
-    border-bottom-color: #F88800; }
+    border-bottom-color: #CC0033; }
 
 #home-subsite {
   background: #cc0033; }
@@ -2893,11 +2893,11 @@ nav.sidebar-panel ul {
     color: #42515e; }
 
 .sidebar.opportunity, .sidebar.registration {
-  border-top-color: #F88800; }
+  border-top-color: #CC0033; }
   .sidebar.opportunity:before, .sidebar.registration:before {
-    border-top-color: #F88800 !important; }
+    border-top-color: #CC0033 !important; }
   .sidebar.opportunity .widget-list-item > a, .sidebar.registration .widget-list-item > a {
-    color: #F88800; }
+    color: #CC0033; }
 
 .sidebar.seal {
   border-top-color: #684224; }
@@ -4521,7 +4521,7 @@ h1 .icon {
   background-color: #42515e; }
 
 .tag-opportunity {
-  background-color: #F88800; }
+  background-color: #CC0033; }
 
 .tag-seal {
   background-color: #684224; }
@@ -4920,7 +4920,7 @@ h1 .icon {
     margin-bottom: 0.75rem;
     line-height: 1.5; }
   .registrations-table tbody a, .my-registrations tbody a {
-    color: #F88800; }
+    color: #CC0033; }
     .registrations-table tbody a.icon-download, .my-registrations tbody a.icon-download {
       width: 100%;
       vertical-align: top; }
@@ -5074,7 +5074,7 @@ h1 .icon {
       content: ""; } }
 
 .registration-header {
-  background-color: #F88800;
+  background-color: #CC0033;
   color: #fff;
   padding: 0.75rem;
   border-radius: 2px; }

@@ -3,15 +3,17 @@
 //eval(\psy\sh());
 //dump($config);
 return [
-    'app.siteName' => \MapasCulturais\i::__('Nome do site'),
-    'app.useAssetsUrlCache' => true,
-    'app.assetsUrlCache.lifetime' => 0,
     // 'routes' => [
     //     'shortcuts' => [
     //         'evento'     => array('entityRevision','history'),
     //     ]
     // ],
-    
+    'app.useAssetsUrlCache' => false,
+    'app.assetsUrlCache.lifetime' => 0,
+    'plugins.enabled' => array(
+        'agenda-singles', 'taxonomia'
+    ),
+    'app.siteName' => \MapasCulturais\i::__('Nome do site'),
     // 'namespaces' => array(
     //     'MapasCulturais\Themes' => THEMES_PATH
     // ),

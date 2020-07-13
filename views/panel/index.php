@@ -34,21 +34,6 @@ $aprovado = $this->aprovado();
             </div>
         </div>
         <?php endif; ?>
-        <?php if($admin): ?>
-        <div>
-            <div>
-                <div class="clearfix">
-                    <span class="alignleft">Taxonomias</span>
-                    <div class="icon icon-project alignright"></div>
-                </div>
-                <div class="clearfix">
-                    <a href="<?php echo $app->createUrl('taxonomias', 'taxonomias_area') ?>" class="btn btn-success hltip">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    Adicionar taxonomias
-                    </a>
-                </div>
-            </div>
-        </div>
-        <?php endif; ?>
+        <?php $this->applyTemplateHook('form','begin'); ?>
     </section>
 </div>

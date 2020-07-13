@@ -29,7 +29,7 @@ $em = $app->em;
 
 <?php $this->part('home-opportunities'); ?>
 
-<?php $this->part('home-indicadores'); ?>
+<?php //$this->part('home-indicadores'); ?>
 
 <?php $this->part('home-developers'); ?>
 
