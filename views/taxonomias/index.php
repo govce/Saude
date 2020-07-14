@@ -8,20 +8,8 @@ $conn = $em->getConnection();
 
 $query = $conn->fetchAll("SELECT * FROM term WHERE taxonomy = 'area' ");
 $totalArea = count($query);
-// $app->hook('panel.menu:after', function() use ($app){
-//   if(!$app->user->is('admin') && !$app->user->is('staff'))
-//       return;
-
-//   $a_class = $this->template == 'panel/em-cartaz' ? 'active' : '';
-
-//   $url = $app->createUrl('panel', 'em-cartaz');
-//   echo "<li><a class='$a_class' href='$url'><span class='icon icon-em-cartaz'></span> Em Cartaz</a></li>";
-// });
-// dump($terms);
-// $areas = array_map(function($term) { return $term->term; }, $terms);
-// dump($areas);
 ?>
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <div class="panel-list panel-main-content">
   <header class="panel-header clearfix">
 		<h2><?php \MapasCulturais\i::_e("Taxonomias");?></h2>
@@ -42,6 +30,9 @@ $totalArea = count($query);
         <input type="hidden" name="type" value="area">
       </div>
       <button type="button" id="saveAreaTaxo" class="btn btn-success">Cadastrar área</button>
+      <a href="<?php echo $app->createUrl('taxonomias', 'pdf'); ?>" target="_blank" class="btn btn-default js-edibox sidebar-right">
+      <span class='fa fa-print'></span> Imprimir
+      </a>
     </form>
     <table class="table table-striped table-hover" style="width: 100%;">
       <thead>
