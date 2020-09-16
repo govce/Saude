@@ -38,20 +38,6 @@
             </li>
             <?php $this->applyTemplateHook('nav.main.events','after'); ?>
         <?php endif; ?>
-        
-        <?php if($app->isEnabled('agents')): ?>
-            <?php $this->applyTemplateHook('nav.main.agents','before'); ?>
-            <li id="entities-menu-agent"
-                ng-class="{'active':data.global.filterEntity === 'agent',
-                           'current-entity-parent':'<?php echo $this->controller->id;?>' == 'agent'}"
-                ng-click="tabClick('agent')">
-                <a href="<?php if ($this->controller->action !== 'search') echo $app->createUrl('site', 'search') . '##(global:(enabled:(agent:!t),filterEntity:agent))'; ?>">
-                    <div class="icon icon-agent"></div>
-                    <div class="menu-item-label"><?php $this->dict('entities: Agents') ?></div>
-                </a>
-            </li>
-            <?php $this->applyTemplateHook('nav.main.agents','after'); ?>
-        <?php endif; ?>
 
         <?php if($app->isEnabled('spaces')): ?>
             <?php $this->applyTemplateHook('nav.main.spaces','before'); ?>
@@ -66,7 +52,21 @@
             </li>
             <?php $this->applyTemplateHook('nav.main.spaces','after'); ?>
         <?php endif; ?>
-        
+
+        <?php if($app->isEnabled('agents')): ?>
+            <?php $this->applyTemplateHook('nav.main.agents','before'); ?>
+            <li id="entities-menu-agent"
+                ng-class="{'active':data.global.filterEntity === 'agent',
+                           'current-entity-parent':'<?php echo $this->controller->id;?>' == 'agent'}"
+                ng-click="tabClick('agent')">
+                <a href="<?php if ($this->controller->action !== 'search') echo $app->createUrl('site', 'search') . '##(global:(enabled:(agent:!t),filterEntity:agent))'; ?>">
+                    <div class="icon icon-agent"></div>
+                    <div class="menu-item-label"><?php $this->dict('entities: Agents') ?></div>
+                </a>
+            </li>
+            <?php $this->applyTemplateHook('nav.main.agents','after'); ?>
+        <?php endif; ?>
+
         <?php if($app->isEnabled('projects')): ?>
             <?php $this->applyTemplateHook('nav.main.projects','before'); ?>
             <li id="entities-menu-project"
