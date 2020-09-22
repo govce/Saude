@@ -24,4 +24,5 @@ class Indicadores extends \MapasCulturais\Controller{
     function GET_taxonomiasArea() {
         echo "GET_taxonomiasArea";
     }
+
 }

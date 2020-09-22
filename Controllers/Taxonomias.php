@@ -55,4 +55,8 @@ class Taxonomias extends \MapasCulturais\Controller{
        }
         
     }
+
+    function GET_pdf() {
+        $this->render('pdf');
+    }
 }
