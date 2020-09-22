@@ -1,2 +1,2 @@
-- [Sobre o Site](/sobre/)
+- [Sobre o Mapa da Saúde](/sobre/)
 - [Como usar](/como-usar/)
