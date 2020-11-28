@@ -4,6 +4,8 @@ namespace Saude;
 use MapasCulturais\Themes\BaseV1;
 use MapasCulturais\App;
 
+use MapasCulturais\i;
+
 class Theme extends BaseV1\Theme{
 
     protected static function _getTexts(){
@@ -234,5 +236,181 @@ class Theme extends BaseV1\Theme{
             <?php
         });
     }
+    
 
+
+    protected function _getFilters(){
+        $filters = [
+            'space' => [
+                'En_Municipio' => [
+                    'label' => i::__('Municípios'),
+                    'placeholder' => i::__('Selecione os municípios'),
+                    'type' => 'metadata',
+                    'filter' => [
+                        'param' => 'En_Municipio',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'tipos' => [
+                    'label' => i::__('Tipos'),
+                    'placeholder' => i::__('Selecione os tipos'),
+                    'type' => 'entitytype',
+                    'filter' => [
+                        'param' => 'type',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'verificados' => [
+                    'label' => $this->dict('search: verified results', false),
+                    'tag' => $this->dict('search: verified', false),
+                    'placeholder' => 'Exibir somente ' . $this->dict('search: verified results', false),
+                    'fieldType' => 'checkbox-verified',
+                    'addClass' => 'verified-filter',
+                    'isArray' => false,
+                    'filter' => [
+                        'param' => '@verified',
+                        'value' => 'IN(1)'
+                    ]
+                ]
+            ],
+            'agent' => [
+                'area' => [
+                    'label'=> i::__('Área de Atuação'),
+                    'placeholder' =>i::__( 'Selecione as áreas'),
+                    'type' => 'term',
+                    'filter' => [
+                        'param' => 'area',
+                        'value' => 'IN({val})'
+                    ],
+                ],
+                'tipos' => [
+                    'label' => i::__('Tipos'),
+                    'placeholder' => i::__('Todos'),
+                    'fieldType' => 'singleselect',
+                    'type' => 'entitytype',
+                    // 'isArray' => false,
+                    'filter' => [
+                        'param' => 'type',
+                        'value' => 'EQ({val})'
+                    ]
+                ],
+                'verificados' => [
+                    'label' => $this->dict('search: verified results', false),
+                    'tag' => $this->dict('search: verified', false),
+                    'placeholder' => $this->dict('search: display only verified results', false),
+                    'fieldType' => 'checkbox-verified',
+                    'addClass' => 'verified-filter',
+                    'isArray' => false,
+                    'filter' => [
+                        'param' => '@verified',
+                        'value' => 'IN(1)'
+                    ]
+                ]
+            ],
+            'event' => [
+                // TODO: Apply filter FromTo from configuration, removing from template "filter-field.php"
+                // [
+                //     'label' => ['De', 'a'],
+                //     'fieldType' => 'dateFromTo',
+                //     'placeholder' => '00/00/0000',
+                //     'isArray' => false,
+                //     'prefix' => '@',
+                //     'filter' => [
+                //         'param' => ['from', 'to'],
+                //         'value' => ['LTE({val})', 'GTE({val})']
+                //     ]
+                // ],
+                'linguagem' => [
+                    'label' => i::__('Linguagem'),
+                    'placeholder' => i::__('Selecione as linguagens'),
+                    'fieldType' => 'checklist',
+                    'type' => 'term',
+                    'filter' => [
+                        'param' => 'linguagem',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'classificacao' => [
+                    'label' => i::__('Classificação'),
+                    'placeholder' => i::__('Selecione a classificação'),
+                    'filter' => [
+                        'param' => 'classificacaoEtaria',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'verificados' => [
+                    'label' => $this->dict('search: verified results', false),
+                    'tag' => $this->dict('search: verified', false),
+                    'placeholder' => $this->dict('search: display only verified results', false),
+                    'fieldType' => 'checkbox-verified',
+                    'isArray' => false,
+                    'addClass' => 'verified-filter',
+                    'filter' => [
+                        'param' => '@verified',
+                        'value' => 'IN(1)'
+                    ]
+                ]
+            ],
+            'project' => [
+                'tipos' => [
+                    'label' => i::__('Tipo'),
+                    'placeholder' => i::__('Selecione os tipos'),
+                    'type' => 'entitytype',
+                    'filter' => [
+                        'param' => 'type',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'inscricoes' => [
+                    'label' => i::__('Inscrições Abertas'),
+                    'fieldType' => 'custom.project.ropen'
+                ],
+                'verificados' => [
+                    'label' => $this->dict('search: verified results', false),
+                    'tag' => $this->dict('search: verified', false),
+                    'placeholder' => $this->dict('search: display only verified results', false),
+                    'fieldType' => 'checkbox-verified',
+                    'addClass' => 'verified-filter',
+                    'isArray' => false,
+                    'filter' => [
+                        'param' => '@verified',
+                        'value' => 'IN(1)'
+                    ]
+                ]
+            ],
+            'opportunity' => [
+                'tipos' => [
+                    'label' => i::__('Tipo'),
+                    'placeholder' => i::__('Selecione os tipos'),
+                    'type' => 'entitytype',
+                    'filter' => [
+                        'param' => 'type',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'inscricoes' => [
+                    'label' => i::__('Inscrições Abertas'),
+                    'fieldType' => 'custom.opportunity.ropen'
+                ],
+                'verificados' => [
+                    'label' => $this->dict('search: verified results', false),
+                    'tag' => $this->dict('search: verified', false),
+                    'placeholder' => $this->dict('search: display only verified results', false),
+                    'fieldType' => 'checkbox-verified',
+                    'addClass' => 'verified-filter',
+                    'isArray' => false,
+                    'filter' => [
+                        'param' => '@verified',
+                        'value' => 'IN(1)'
+                    ]
+                ]
+            ]
+        ];
+
+        App::i()->applyHookBoundTo($this, 'search.filters', [&$filters]);
+
+        return $filters;
+    }
 }
+
+
