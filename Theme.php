@@ -244,123 +244,64 @@ class Theme extends BaseV1\Theme{
             'space' => [
                 'En_Municipio' => [
                     'label' => i::__('Municípios'),
-                    'placeholder' => i::__('Selecione os municípios'),
+                    'placeholder' => i::__('Municípios'),
                     'type' => 'metadata',
                     'filter' => [
                         'param' => 'En_Municipio',
                         'value' => 'IN({val})'
                     ]
                 ],
-                'tipos' => [
-                    'label' => i::__('Tipos'),
-                    'placeholder' => i::__('Selecione os tipos'),
-                    'type' => 'entitytype',
+                'tipos_unidades' => [
+                    'label' => i::__('Tipos de unidades de unidades'),
+                    'placeholder' => i::__('Tipos de unidades'),
+                    'type' => 'metadata',
                     'filter' => [
-                        'param' => 'type',
+                        'param' => 'tipos_unidades',
                         'value' => 'IN({val})'
                     ]
                 ],
-                'verificados' => [
-                    'label' => $this->dict('search: verified results', false),
-                    'tag' => $this->dict('search: verified', false),
-                    'placeholder' => 'Exibir somente ' . $this->dict('search: verified results', false),
-                    'fieldType' => 'checkbox-verified',
-                    'addClass' => 'verified-filter',
-                    'isArray' => false,
+                'tipos_gestao' => [
+                    'label' => i::__('Tipos de gestão'),
+                    'placeholder' => i::__('Tipos de gestão'),
+                    'type' => 'metadata',
                     'filter' => [
-                        'param' => '@verified',
-                        'value' => 'IN(1)'
+                        'param' => 'tipos_gestao',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'servicos' => [
+                    'label' => i::__('Serviços'),
+                    'placeholder' => i::__('Serviços'),
+                    'type' => 'metadata',
+                    'filter' => [
+                        'param' => 'servicos',
+                        'value' => 'IN({val})'
                     ]
                 ]
             ],
             'agent' => [
-                'area' => [
-                    'label'=> i::__('Área de Atuação'),
-                    'placeholder' =>i::__( 'Selecione as áreas'),
-                    'type' => 'term',
+                'graus_academicos' => [
+                    'label' => i::__('Grau académico'),
+                    'placeholder' => i::__('Grau académico'),
+                    'type' => 'metadata',
                     'filter' => [
-                        'param' => 'area',
+                        'param' => 'graus_academicos',
                         'value' => 'IN({val})'
-                    ],
-                ],
-                'tipos' => [
-                    'label' => i::__('Tipos'),
-                    'placeholder' => i::__('Todos'),
-                    'fieldType' => 'singleselect',
-                    'type' => 'entitytype',
-                    // 'isArray' => false,
-                    'filter' => [
-                        'param' => 'type',
-                        'value' => 'EQ({val})'
                     ]
                 ],
-                'verificados' => [
-                    'label' => $this->dict('search: verified results', false),
-                    'tag' => $this->dict('search: verified', false),
-                    'placeholder' => $this->dict('search: display only verified results', false),
-                    'fieldType' => 'checkbox-verified',
-                    'addClass' => 'verified-filter',
-                    'isArray' => false,
+                'especialidades' => [
+                    'label' => i::__('Especialidades'),
+                    'placeholder' => i::__('Especialidades'),
+                    'type' => 'metadata',
                     'filter' => [
-                        'param' => '@verified',
-                        'value' => 'IN(1)'
+                        'param' => 'especialidades',
+                        'value' => 'IN({val})'
                     ]
-                ]
+                ],
             ],
             'event' => [
-                // TODO: Apply filter FromTo from configuration, removing from template "filter-field.php"
-                // [
-                //     'label' => ['De', 'a'],
-                //     'fieldType' => 'dateFromTo',
-                //     'placeholder' => '00/00/0000',
-                //     'isArray' => false,
-                //     'prefix' => '@',
-                //     'filter' => [
-                //         'param' => ['from', 'to'],
-                //         'value' => ['LTE({val})', 'GTE({val})']
-                //     ]
-                // ],
-                'linguagem' => [
-                    'label' => i::__('Linguagem'),
-                    'placeholder' => i::__('Selecione as linguagens'),
-                    'fieldType' => 'checklist',
-                    'type' => 'term',
-                    'filter' => [
-                        'param' => 'linguagem',
-                        'value' => 'IN({val})'
-                    ]
-                ],
-                'classificacao' => [
-                    'label' => i::__('Classificação'),
-                    'placeholder' => i::__('Selecione a classificação'),
-                    'filter' => [
-                        'param' => 'classificacaoEtaria',
-                        'value' => 'IN({val})'
-                    ]
-                ],
-                'verificados' => [
-                    'label' => $this->dict('search: verified results', false),
-                    'tag' => $this->dict('search: verified', false),
-                    'placeholder' => $this->dict('search: display only verified results', false),
-                    'fieldType' => 'checkbox-verified',
-                    'isArray' => false,
-                    'addClass' => 'verified-filter',
-                    'filter' => [
-                        'param' => '@verified',
-                        'value' => 'IN(1)'
-                    ]
-                ]
             ],
             'project' => [
-                'tipos' => [
-                    'label' => i::__('Tipo'),
-                    'placeholder' => i::__('Selecione os tipos'),
-                    'type' => 'entitytype',
-                    'filter' => [
-                        'param' => 'type',
-                        'value' => 'IN({val})'
-                    ]
-                ],
                 'inscricoes' => [
                     'label' => i::__('Inscrições Abertas'),
                     'fieldType' => 'custom.project.ropen'
@@ -379,15 +320,6 @@ class Theme extends BaseV1\Theme{
                 ]
             ],
             'opportunity' => [
-                'tipos' => [
-                    'label' => i::__('Tipo'),
-                    'placeholder' => i::__('Selecione os tipos'),
-                    'type' => 'entitytype',
-                    'filter' => [
-                        'param' => 'type',
-                        'value' => 'IN({val})'
-                    ]
-                ],
                 'inscricoes' => [
                     'label' => i::__('Inscrições Abertas'),
                     'fieldType' => 'custom.opportunity.ropen'

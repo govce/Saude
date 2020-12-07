@@ -94,16 +94,6 @@
             </li>
             <?php $this->applyTemplateHook('nav.main.opportunities','after'); ?>
         <?php endif; ?>
-
-
-
-        <li class="js-submenu-toggle">
-            <a class="js-submenu-toggle" href="<?php echo $app->createUrl('indicadores', ''); ?>">
-                <div class="icon icon-panel"></div>
-                <div class="menu-item-label"><?php \MapasCulturais\i::_e("Indicadores");?></div>
-            </a>
-        </li>
-
     </ul>
     <!--.menu.entities-menu-->
     <ul class="menu session-menu clearfix">
