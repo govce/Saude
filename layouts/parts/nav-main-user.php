@@ -99,7 +99,7 @@
                 <a href="<?php echo $app->createUrl('auth'); ?>"><?php \MapasCulturais\i::_e("Trocar Usuário");?></a>
                 <?php if(!empty($fake_options)) echo $fake_options; ?>
             <?php endif; ?>
-            <a href="<?php echo $app->createUrl('auth', 'logout'); ?>" onclick="return logoutForce()"><?php \MapasCulturais\i::_e("Sair");?></a>
+            <a href="<?php echo $app->createUrl('auth', 'logout'); ?>"><?php \MapasCulturais\i::_e("Sair");?></a>
         </li>
     </ul>
 </li>

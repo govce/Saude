@@ -44,8 +44,8 @@ class Theme extends BaseV1\Theme{
     function register() {
         parent::register();
 
-        // ao executar o método abaixo no tema o contador interno não funciona, funciona o contador apenas quando adicionado ao App.php
-        //$this->registerAuthProvider('keycloak');
+        $app = App::i();
+        $app->registerAuthProvider('keycloak');
     }
     
 
