@@ -18,12 +18,12 @@ return [
 
     'auth.provider' => 'OpauthKeyCloak',
     'auth.config' => [
-        'logout_url'            => 'https://dev.id.org.br/auth/realms/saude/protocol/openid-connect/logout',
-        'client_id'             => 'DigitalSaude',
-        'client_secret'         => 'xxx',
-	    'auth_endpoint'         => 'https://dev.id.org.br/auth/realms/saude/protocol/openid-connect/auth',
-        'token_endpoint'        => 'https://dev.id.org.br/auth/realms/saude/protocol/openid-connect/token',
-        'user_info_endpoint'    => 'https://dev.id.org.br/auth/realms/saude/protocol/openid-connect/userinfo',
-        'redirect_uri'          => 'http://localhost:85/autenticacao/keycloak/oauth2callback',
+        'logout_url'            => env('LOGOUT_URL', ''),
+        'client_id'             => env('CLIENT_ID', ''),
+        'client_secret'         => env('CLIENT_SECRET', ''),
+	    'auth_endpoint'         => env('AUTH_ENDPOINT', ''),
+        'token_endpoint'        => env('TOKEN_ENDPOINT', ''),
+        'user_info_endpoint'    => env('USER_INFO_ENDPOINT', ''),
+        'redirect_uri'          => env('REDIRECT_URI', ''),
     ],
 ];
