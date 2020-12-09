@@ -61,51 +61,24 @@ class Theme extends BaseV1\Theme{
                         'param' => 'En_Municipio',
                         'value' => 'IN({val})'
                     ]
-                ],
-                'tipos_unidades' => [
-                    'label' => i::__('Tipos de unidades de unidades'),
-                    'placeholder' => i::__('Tipos de unidades'),
-                    'type' => 'metadata',
-                    'filter' => [
-                        'param' => 'tipos_unidades',
-                        'value' => 'IN({val})'
-                    ]
-                ],
-                'tipos_gestao' => [
-                    'label' => i::__('Tipos de gestão'),
-                    'placeholder' => i::__('Tipos de gestão'),
-                    'type' => 'metadata',
-                    'filter' => [
-                        'param' => 'tipos_gestao',
-                        'value' => 'IN({val})'
-                    ]
-                ],
-                'servicos' => [
-                    'label' => i::__('Serviços'),
-                    'placeholder' => i::__('Serviços'),
-                    'type' => 'metadata',
-                    'filter' => [
-                        'param' => 'servicos',
-                        'value' => 'IN({val})'
-                    ]
                 ]
             ],
             'agent' => [
-                'graus_academicos' => [
+                'profissionais_graus_academicos' => [
                     'label' => i::__('Grau académico'),
                     'placeholder' => i::__('Grau académico'),
                     'type' => 'metadata',
                     'filter' => [
-                        'param' => 'graus_academicos',
+                        'param' => 'profissionais_graus_academicos',
                         'value' => 'IN({val})'
                     ]
                 ],
-                'especialidades' => [
+                'profissionais_especialidades' => [
                     'label' => i::__('Especialidades'),
                     'placeholder' => i::__('Especialidades'),
                     'type' => 'metadata',
                     'filter' => [
-                        'param' => 'especialidades',
+                        'param' => 'profissionais_especialidades',
                         'value' => 'IN({val})'
                     ]
                 ],

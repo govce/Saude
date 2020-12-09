@@ -20,10 +20,10 @@ return [
     'auth.config' => [
         'logout_url'            => 'https://dev.id.org.br/auth/realms/saude/protocol/openid-connect/logout',
         'client_id'             => 'DigitalSaude',
-        'client_secret'         => 'xxx',
+        'client_secret'         => '1085ca2a-ab21-46ef-828d-5fb01b43c918',
 	    'auth_endpoint'         => 'https://dev.id.org.br/auth/realms/saude/protocol/openid-connect/auth',
         'token_endpoint'        => 'https://dev.id.org.br/auth/realms/saude/protocol/openid-connect/token',
         'user_info_endpoint'    => 'https://dev.id.org.br/auth/realms/saude/protocol/openid-connect/userinfo',
-        'redirect_uri'          => 'http://localhost:85/autenticacao/keycloak/oauth2callback',
+        'redirect_uri'          => 'http://localhost/autenticacao/keycloak/oauth2callback',
     ],
 ];

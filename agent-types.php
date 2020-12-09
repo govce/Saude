@@ -2,6 +2,11 @@
 /**
  * See https://github.com/Respect/Validation to know how to write validations
  */
+$app = MapasCulturais\App::i();
+$termsGraus = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_graus_academicos']);
+$graus = array_map(function($term) { return $term->term; }, $termsGraus);
+$termsSpecialties = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_graus_academicos']);
+$specialties = array_map(function($term) { return $term->term; }, $termsSpecialties);
 
 return array(
     'metadata' => array(
@@ -91,11 +96,6 @@ return array(
             ),
             'available_for_opportunities' => true
         ),
-        
-        
-        
-        
-        
         
         'emailPublico' => array(
             'label' => \MapasCulturais\i::__('Email Público'),
@@ -483,15 +483,14 @@ return array(
             ),
             'available_for_opportunities' => true
         ),
-        'graus_academicos' => [
+        #NO DB profissionais_graus_academicos
+        'profissionais_graus_academicos' => [
             'label' => \MapasCulturais\i::__('Grau académico'),
             'type' => 'select',
-            'options' => array(
-                'GRAU 1',
-                'GRAU 2',
-            )
+            'options' => $graus
         ],
-        'especialidades' => [
+        #NO DB profissionais_especialidades
+        'profissionais_especialidades' => [
             'label' => \MapasCulturais\i::__('Especialidades'),
             'type' => 'select',
             'options' => array(

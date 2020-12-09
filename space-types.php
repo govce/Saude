@@ -2,6 +2,14 @@
 /**
  * See https://github.com/Respect/Validation to know how to write validations
  */
+$app = MapasCulturais\App::i();
+$termsUnidade = $app->repo('Term')->findBy(['taxonomy' => 'instituicao_tipos_unidades']);
+$tiposUnidades = array_map(function($term) { return $term->term; }, $termsUnidade);
+$termsGestao = $app->repo('Term')->findBy(['taxonomy' => 'instituicao_tipos_gestao']);
+$tiposGestao = array_map(function($term) { return $term->term; }, $termsGestao);
+$termsServico = $app->repo('Term')->findBy(['taxonomy' => 'instituicao_servicos']);
+$tiposServico = array_map(function($term) { return $term->term; }, $termsServico);
+
 return array(
     'metadata' => array(
         'emailPublico' => array(
@@ -399,29 +407,20 @@ return array(
             ),
             'available_for_opportunities' => true
         ),
-        'tipos_unidades' => [
+        'instituicao_tipos_unidades' => [
             'label' => \MapasCulturais\i::__('Tipos de unidade'),
             'type' => 'select',
-            'options' => array(
-                'CENTRAL DE ABASTECIMENTO',
-                'CENTRAL DE ABASTECIMENTO 2',
-            )
+            'options' => $tiposUnidades
         ],
-        'tipos_gestao' => [
+        'instituicao_tipos_gestao' => [
             'label' => \MapasCulturais\i::__('Tipo de gestão'),
             'type' => 'select',
-            'options' => array(
-                'TIPO GESTÃO 1',
-                'TIPO_GESTÃO 2',
-            )
+            'options' => $tiposGestao
         ],
-        'servicos' => [
+        'instituicao_servicos' => [
             'label' => \MapasCulturais\i::__('Serviços'),
             'type' => 'select',
-            'options' => array(
-                'Serviço 1',
-                'Serviço 2',
-            )
+            'options' => $tiposServico
         ],
     ),
 
