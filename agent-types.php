@@ -493,10 +493,7 @@ return array(
         'profissionais_especialidades' => [
             'label' => \MapasCulturais\i::__('Especialidades'),
             'type' => 'select',
-            'options' => array(
-                'Especialidade 1',
-                'Especialidade 2',
-            )
+            'options' => $specialties 
         ],
     ),
     'items' => array(

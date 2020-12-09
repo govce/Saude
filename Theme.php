@@ -61,7 +61,34 @@ class Theme extends BaseV1\Theme{
                         'param' => 'En_Municipio',
                         'value' => 'IN({val})'
                     ]
-                ]
+                ],
+                'instituicao_tipos_unidades' => [
+                    'label' => i::__('Tipos de unidade'),
+                    'placeholder' => i::__('Tipo de unidade'),
+                    'type' => 'metadata',
+                    'filter' => [
+                        'param' => 'instituicao_tipos_unidades',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'instituicao_tipos_gestao' => [
+                    'label' => i::__('Tipo de gestão'),
+                    'placeholder' => i::__('Tipo de gestão'),
+                    'type' => 'metadata',
+                    'filter' => [
+                        'param' => 'instituicao_tipos_gestao',
+                        'value' => 'IN({val})'
+                    ]
+                ],
+                'instituicao_servicos' => [
+                    'label' => i::__('Serviços'),
+                    'placeholder' => i::__('Serviços'),
+                    'type' => 'metadata',
+                    'filter' => [
+                        'param' => 'instituicao_servicos',
+                        'value' => 'IN({val})'
+                    ]
+                ],
             ],
             'agent' => [
                 'profissionais_graus_academicos' => [
