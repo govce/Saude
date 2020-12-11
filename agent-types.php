@@ -493,7 +493,7 @@ return array(
             'type' => 'select',
             'options' => $graus
         ],
-
+        #NO DB profissionais_categorias_profissionais
         'profissionais_categorias_profissionais' => [
             'label' => \MapasCulturais\i::__('Categoria profissional'),
             'type' => 'select',
