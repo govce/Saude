@@ -5,6 +5,10 @@
 $app = MapasCulturais\App::i();
 $termsGraus = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_graus_academicos']);
 $graus = array_map(function($term) { return $term->term; }, $termsGraus);
+
+$termsCategoria = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_categorias_profissionais']);
+$categoriasProfissionais = array_map(function($term) { return $term->term; }, $termsCategoria);
+
 $termsSpecialties = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_graus_academicos']);
 $specialties = array_map(function($term) { return $term->term; }, $termsSpecialties);
 
@@ -489,6 +493,13 @@ return array(
             'type' => 'select',
             'options' => $graus
         ],
+
+        'profissionais_categorias_profissionais' => [
+            'label' => \MapasCulturais\i::__('Categoria profissional'),
+            'type' => 'select',
+            'options' => $categoriasProfissionais
+        ],
+
         #NO DB profissionais_especialidades
         'profissionais_especialidades' => [
             'label' => \MapasCulturais\i::__('Especialidades'),

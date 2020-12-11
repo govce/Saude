@@ -100,6 +100,15 @@ class Theme extends BaseV1\Theme{
                         'value' => 'IN({val})'
                     ]
                 ],
+                'profissionais_categorias_profissionais' => [
+                    'label' => i::__('Categorias profissionais'),
+                    'placeholder' => i::__('Categorias profissionais'),
+                    'type' => 'metadata',
+                    'filter' => [
+                        'param' => 'profissionais_categorias_profissionais',
+                        'value' => 'IN({val})'
+                    ]
+                ],
                 'profissionais_especialidades' => [
                     'label' => i::__('Especialidades'),
                     'placeholder' => i::__('Especialidades'),
