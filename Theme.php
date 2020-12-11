@@ -86,7 +86,7 @@ class Theme extends BaseV1\Theme{
                     'type' => 'metadata',
                     'filter' => [
                         'param' => 'instituicao_servicos',
-                        'value' => 'IN({val})'
+                        'value' => 'like(*{val}*)'
                     ]
                 ],
             ],
