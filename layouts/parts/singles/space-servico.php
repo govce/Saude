@@ -1,3 +1,8 @@
+<style>
+#editable-multiselect-instituicao_servicos .edit-box {
+    top: 0px !important
+}
+</style>
 <div class="servico">
     <?php $this->applyTemplateHook('tab-about-service','begin'); ?>
 
