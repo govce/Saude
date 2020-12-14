@@ -191,6 +191,12 @@ return array(
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_servicos', 'TELECONSULTORIA');");
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_servicos', 'TRANSPLANTE');");
     },
+
+    'insert taxo project saúde' => function () use($conn){
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Cezoa Davar');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Lorem ipsum pulvinar');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Lorem rutrum himenaeos');");
+    }
 );
 
 
