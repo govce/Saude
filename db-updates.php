@@ -78,6 +78,45 @@ return array(
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_categorias_profissionais', 'Coordenação Clínica');");
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_categorias_profissionais', 'Coordenação de Enfermagem');");
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_categorias_profissionais', 'Outra');");
+
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Assistência direta ao paciente');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Apoio diagnóstico ou terapêutico');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Apoio técnico');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Administração e gestão');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Pronto-socorro');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Ambulatório');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Centro cirúrgico');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Centro obstétrico');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Internação');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'UTI');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Outro setor ou serviço de assistência direta ao paciente');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Laboratório clínico');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Diagnóstico por imagem');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Hemodinâmica ou cardiologia intervencionista');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Nefrologia ou terapia renal substitutiva');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Outro setor ou serviço de apoio diagnóstico e terapêutico');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Triagem e acolhimento');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Acolhimento psicossocial');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Alimentação e assistência nutricional e dietética');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Farmácia e assistência farmacêutica');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Fisioterapia fonoaudiologia e terapia ocupacional');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Esterilização de materiais');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Arquivo médico e estatística');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Epidemiologia vigilância epidemiológica e registro de óbito');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Outro setor ou serviço de apoio técnico');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Gestão estratégica');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Regulação contas hospitalares e gestão de riscos');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Gestão de pessoas');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Formação ou qualificação profissional');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Estágio profissional');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Residência médica ou multiprofissional');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Saúde e segurança do trabalho');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Apoio administrativo');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Higiene e limpeza');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Transporte e segurança');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Materiais e suprimentos');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Manutenção e reparos');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Outro setor ou serviço de apoio administrativo');");
     },
 
 
@@ -194,6 +233,13 @@ return array(
 
     'insert taxo opportunity saúde' => function () use($conn){
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Pretium volutpat consectetur');");
+
+    },
+    
+    'insert taxo project saúde' => function () use($conn){
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Cezoa Davar');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Lorem ipsum pulvinar');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Lorem rutrum himenaeos');");
     }
 );
 

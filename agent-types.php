@@ -12,6 +12,9 @@ $categoriasProfissionais = array_map(function($term) { return $term->term; }, $t
 $termsSpecialties = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_especialidades']);
 $specialties = array_map(function($term) { return $term->term; }, $termsSpecialties);
 
+$termsSectorOperation = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_setor_atuacao']);
+$sectorOperation = array_map(function($term) { return $term->term; }, $termsSectorOperation);
+
 return array(
     'metadata' => array(
         'nomeCompleto' => array(
@@ -473,13 +476,13 @@ return array(
             ),
             'available_for_opportunities' => true
         ),
-        'googleplus' => array(
-            'label' => \MapasCulturais\i::__('Google+'),
-            'validations' => array(
-                "v::url('plus.google.com')" => \MapasCulturais\i::__("A url informada é inválida.")
-            ),
-            'available_for_opportunities' => true
-        ),
+        // 'googleplus' => array(
+        //     'label' => \MapasCulturais\i::__('Google+'),
+        //     'validations' => array(
+        //         "v::url('plus.google.com')" => \MapasCulturais\i::__("A url informada é inválida.")
+        //     ),
+        //     'available_for_opportunities' => true
+        // ),
         'instagram' => array(
             'label' => \MapasCulturais\i::__('Instagram'),
             'validations' => array(
@@ -499,12 +502,19 @@ return array(
             'type' => 'select',
             'options' => $categoriasProfissionais
         ],
-
         #NO DB profissionais_especialidades
         'profissionais_especialidades' => [
             'label' => \MapasCulturais\i::__('Especialidades'),
             'type' => 'select',
             'options' => $specialties 
+        ],
+        #NO DB profissionais_especialidades
+        'profissionais_setor_atuacao' => [
+            'label' => \MapasCulturais\i::__('Selecione'),
+            'type' => 'multiselect',
+            'allowOther' => true,
+            'allowOtherText' => \MapasCulturais\i::__('Outros'),
+            'options' => $sectorOperation
         ],
     ),
     'items' => array(

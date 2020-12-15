@@ -136,6 +136,12 @@
                 <?php echo $entity->profissionais_especialidades; ?>
             </span>
         </p> 
+
+        <!-- Setor de Atuação -->
+        <p>
+            <span class="label"><?php \MapasCulturais\i::_e("Setor de Atuação");?>:</span>
+            <editable-multiselect entity-property="profissionais_setor_atuacao" empty-label="<?php \MapasCulturais\i::esc_attr_e('Selecione');?>" allow-other="true" box-title="<?php \MapasCulturais\i::esc_attr_e('Setor de Atuação:');?>"></editable-multiselect>
+        </p> 
         
         <?php $this->applyTemplateHook('tab-about-service','end'); ?><!--. hook tab-about-service:end -->
     </div><!--.servico -->
