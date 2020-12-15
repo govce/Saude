@@ -161,7 +161,7 @@ return array(
 
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_tipos_gestao', 'DUPLA');");
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_tipos_gestao', 'ESTADUAL');");
-            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_tipos_gestao', 'MISTA');");
+            $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_tipos_gestao', 'MUNICIPAL');");
 
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_servicos', 'ATENÇÃO A DOENÇA RENAL CRÔNICA');");
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_servicos', 'ATENÇÃO A SAÚDE DE POPULACOES INDIGENAS');");
