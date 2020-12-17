@@ -240,6 +240,25 @@ return array(
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Cezoa Davar');");
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Lorem ipsum pulvinar');");
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_taxonomia', 'Lorem rutrum himenaeos');");
+    },
+
+    'insert taxo project_type saúde' => function () use($conn){
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Concurso');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Conferência');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Congresso');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Convenção');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Curso');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Edital');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Encontro');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Exposição');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Feira');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Fórum');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Mostra');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Oficina');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Palestra');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Reunião');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Simpósio');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Workshop');");
     }
 );
 
