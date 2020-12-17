@@ -119,7 +119,6 @@ return array(
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_setor_atuacao', 'Outro setor ou serviço de apoio administrativo');");
     },
 
-
     'insert taxo spaces saúde' => function () use($conn){
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_tipos_unidades', 'CENTRAL DE ABASTECIMENTO');");
             $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('instituicao_tipos_unidades', 'CENTRAL DE GESTÃO EM SAÚDE');");
@@ -232,7 +231,22 @@ return array(
     },
 
     'insert taxo opportunity saúde' => function () use($conn){
-        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Pretium volutpat consectetur');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Concurso');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Conferência');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Congresso');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Convenção');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Curso');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Edital');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Encontro');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Exposição');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Feira');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Fórum');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Mostra');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Oficina');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Palestra');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Reunião');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Simpósio');");
+        $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('opportunity_taxonomia', 'Workshop');");
 
     },
     
