@@ -80,13 +80,13 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
                         foreach ($servicos as $serv) {
                             // NECESSÁRIO TRATAR AS ACENTUAÇÕES QUE DO CNES VEM SEM ACENTUAÇÃO, E POR PADRÃO PRECISAMOS USAR COM O PORTUGUÊS CORRETO
                             if (!empty($serv->descricao)) {
-                                $servicosArray[] = $serv->descricao;
+                                $servicosArray[] = adicionarAcentos($serv->descricao);
                             }
 
                             $servicosString = implode(';', $servicosArray);
                         }
                     } else {
-                        $servicosString = $servicos->descricao;
+                        $servicosString = adicionarAcentos($servicos->descricao);
                     }  
                     
                     salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_servicos', $servicosString);
@@ -142,4 +142,12 @@ function salvarEstabelecimentoMeta($conMap, $idSpace, $meta, $valor)
                                                                 $id
                                                     )";
     $conMap->exec($sqlInsertMeta);
+}
+
+function adicionarAcentos($frase) 
+{
+    $arrayComAcento = ['ATENÇÃO' , 'BÁSICA' , 'DOENÇA' , 'CRÔNICA', 'FAMÍLIA' , 'ESTRATEGIA' ,'COMUNITÁRIOS' , 'LOGÍSTICA' ,  'IMUNOBIOLÓGICOS', 'REGULAÇÃO', 'AÇÕES', 'SERVIÇOS', 'SERVIÇO', 'HANSENÍASE', 'MÓVEL', 'URGÊNCIAS', 'DIAGNÓSTICO', 'LABORATÓRIO', 'CLÍNICO', 'DISPENSAÇÃO', 'ÓRTESES' ,'PRÓTESES', 'REABILITAÇÃO', 'PRÁTICAS', 'URGÊNCIA', 'EMERGÊNCIA', 'VIGILÂNCIA', 'BIOLOGICOS', 'FARMÁCIA', 'GRÁFICOS', 'DINÂMICOS', 'METODOS', 'PATOLÓGICA', 'INTERMEDIÁRIOS', 'TORÁCICA', 'PRÉ-NATAL', 'IMUNIZAÇÃO', 'CONSULTÓRIO', 'VIOLÊNCIA','SITUAÇÃO', 'POPULAÇÕES' ,'INDÍGENAS', 'SAÚDE'];
+    $arraySemAcento = ['ATENCAO' , 'BASICA' , 'DOENCA' , 'CRONICA', 'FAMILIA' , 'ESTRATÉGIA' ,'COMUNITARIOS' , 'LOGISTICA' ,  'IMUNOBIOLOGICOS', 'REGULACAO' , 'ACOES', 'SERVICOS', 'SERVICO', 'HANSENIASE', 'MOVEL' , 'URGENCIAS', 'DIAGNOSTICO', 'LABORATORIO' , 'CLINICO', 'DISPENSACAO' ,'ORTESES' ,'PROTESES', 'REABILITACAO', 'PRATICAS', 'URGENCIA' , 'EMERGÊNCIA' , 'VIGILANCIA', 'BIOLOGICOS', 'FARMACIA', 'GRAFICOS' , 'DINAMICOS' , 'METODOS', 'PATOLOGICA', 'INTERMEDIARIOS', 'TORACICA', 'PRE-NATAL', 'IMUNIZACAO', 'CONSULTORIO', 'VIOLENCIA', 'SITUACAO', 'POPULACOES' ,'INDIGENAS', 'SAUDE'];
+
+    return str_replace($arraySemAcento , $arrayComAcento, $frase);
 }
