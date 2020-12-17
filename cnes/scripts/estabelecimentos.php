@@ -10,6 +10,7 @@ if (!$conMap) {
 }
 
 
+
 $row = 1;
 if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -51,7 +52,7 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
                 }
     
                 $data = date('Y-m-d H:i:s');
-                $idAgenteResponsavel = 3; //mudar esse valor, pois ? baseado no agente
+                $idAgenteResponsavel = $argv[1]; //mudar esse valor, pois ? baseado no agente
                 $sqlInsert = "INSERT INTO public.space (location, _geo_location, name, short_description, long_description, create_timestamp, status, is_verified, public, agent_id, type) 
                             VALUES ('" . $location . "', '0101000020E610000000000008A63E43C090B78B3B9BCF0DC0', '" . $nomeFantasia . "', '" . $nomeFantasia . "', '" . $nomeFantasia . "', '" . $data . "', 1, 'FALSE', 'FALSE', '" . $idAgenteResponsavel ."', 1)";
                 $conMap->exec($sqlInsert);
