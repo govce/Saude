@@ -107,9 +107,9 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
                 
     
                 $row++;
-                if ($row == 1000) {
-                    die;
-                }
+                // if ($row == 1000) {
+                //     die;
+                // }
             } catch (Exception $e) {
                 echo 'Problema CNES: ' . $cnes . ' | erro: ' . $e->getMessage() . PHP_EOL;
                 continue;
