@@ -273,6 +273,10 @@ return array(
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Reunião');");
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Simpósio');");
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('project_type', 'Workshop');");
+    },
+
+    'size type agent relation column' => function () use($conn){
+        $conn->executeQuery("ALTER TABLE public.agent_relation ALTER COLUMN type TYPE varchar(200);");
     }
 );
 
