@@ -3,7 +3,7 @@
 require_once "php-cnes-master/ws-security.php";
 ini_set('display_errors', true);
 
-$conMap = new PDO("pgsql:host=172.19.0.2;port=5432;dbname=mapas", "mapas", "mapas");
+$conMap = new PDO("pgsql:host=172.23.0.2;port=5432;dbname=mapas", "mapas", "mapas");
 $conMap->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if (!$conMap) {
     echo 'não conectou';
@@ -17,7 +17,8 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
         $num = count($data);
         for ($c=0; $c < $num; $c++) {
             try {
-                $cnes = $data[$c];
+                $cnes = sprintf("%07s", $data[$c]);
+                
                 $options = array('location' => 'https://servicoshm.saude.gov.br/cnes/EstabelecimentoSaudeService/v1r0',
                     'encoding' => 'utf-8',
                     'soap_version' => SOAP_1_2,
