@@ -29,7 +29,7 @@ foreach ($resultCNSS as $cns) {
             'location' => 'https://servicoshm.saude.gov.br/cnes/ProfissionalSaudeService/v1r0', 
             'encoding' => 'utf-8', 
             'soap_version' => SOAP_1_2,
-            'connection_timeout' => 1800000,
+            'connection_timeout' => 5,
             'trace'        => 1, 
             'exceptions'   => 1 
         );
@@ -55,9 +55,9 @@ foreach ($resultCNSS as $cns) {
         $cnsMeta = $result->ProfissionalSaude->CNS->numeroCNS;
         $data = date('Y-m-d H:i:s');
 
-        $idAgenteResponsavel = $argv[1]; 
+        $idUsr = $argv[1]; 
         $sqlInsert = "INSERT INTO public.agent (user_id, type, name,  create_timestamp, status, is_verified, public_location, update_timestamp, short_description) 
-            VALUES ({$idAgenteResponsavel}, 1, '{$nomePessoa}', '{$data}', '1', 'FALSE', 'TRUE', '{$data}', '{$nomePessoa}')";
+            VALUES ({$idUsr}, 1, '{$nomePessoa}', '{$data}', '1', 'FALSE', 'TRUE', '{$data}', '{$nomePessoa}')";
         $conMap->exec($sqlInsert);
         $idAgent = $conMap->lastInsertId();
     
@@ -70,8 +70,7 @@ foreach ($resultCNSS as $cns) {
         if (is_array($cnessss)) {
             foreach ($cnessss as $cnesProfissional) {
                 $vinculo = retornaVinculos($cns, $cnesProfissional->CodigoCNES->codigo);
-      
-                echo $cnesProfissional->CodigoCNES->codigo;die;
+ 
                 $sql3 = "SELECT object_id FROM public.space_meta WHERE key = 'instituicao_cnes' AND value = '{$cnesProfissional->CodigoCNES->codigo}'";
                 $query3 = $conMap->query($sql3);
                 $idSpace = $query3->fetchColumn();
@@ -94,7 +93,8 @@ foreach ($resultCNSS as $cns) {
 
 
         $row++;
-        if ($row == 100) {
+        echo $row . PHP_EOL;
+        if ($row == 50) {
             die;
         }
     } catch (Exception $e) {
@@ -132,7 +132,7 @@ function retornaVinculos($cns, $cnes)
     $options = array( 'location' => 'https://servicoshm.saude.gov.br/cnes/VinculacaoProfissionalService/v1r0',
 	'encoding' => 'utf-8', 
 	'soap_version' => SOAP_1_2,
-	'connection_timeout' => 1800000,
+	'connection_timeout' => 5,
 	'trace'        => 1, 
 	'exceptions'   => 1 );
 
@@ -169,7 +169,7 @@ function retornaTipoDeVinculo($cns, $cnes)
     $options = array( 'location' => 'https://servicoshm.saude.gov.br/cnes/VinculacaoProfissionalService/v1r0',
         'encoding' => 'utf-8',
         'soap_version' => SOAP_1_2,
-        'connection_timeout' => 180,
+        'connection_timeout' => 5,
         'trace'        => 1,
         'exceptions'   => 1 );
 
