@@ -94,9 +94,9 @@ foreach ($resultCNSS as $cns) {
 
         $row++;
         echo $row . PHP_EOL;
-        if ($row == 50) {
-            die;
-        }
+        // if ($row == 50) {
+        //     die;
+        // }
     } catch (Exception $e) {
         echo 'Problema CNS: ' . $cns . ' | erro: ' . $e->getMessage() . PHP_EOL;
         continue;
