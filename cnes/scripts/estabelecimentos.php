@@ -3,7 +3,7 @@
 require_once "php-cnes-master/ws-security.php";
 ini_set('display_errors', true);
 
-$conMap = new PDO("pgsql:host=172.23.0.2;port=5432;dbname=mapas", "mapas", "mapas");
+$conMap = new PDO("pgsql:host=192.168.32.3;port=5432;dbname=mapas", "mapas", "mapas");
 $conMap->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if (!$conMap) {
     echo 'não conectou';
@@ -105,6 +105,8 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
                 salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_tipos_unidades', $tipoUnidade);
                 salvarEstabelecimentoMeta($conMap, $idSpace, 'telefonePublico', $telefone);
                 salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_pertence_sus', $percenteAoSus);
+
+                salvarSelos($conMap, $idSpace, $idAgenteResponsavel);
                 
     
                 $row++;
@@ -114,11 +116,7 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
             } catch (Exception $e) {
                 echo 'Problema CNES: ' . $cnes . ' | erro: ' . $e->getMessage() . PHP_EOL;
                 continue;
-            }
-
-
-
-            
+            }            
         }
     }
     fclose($handle);
@@ -152,4 +150,21 @@ function adicionarAcentos($frase)
     $arraySemAcento = ['ATENCAO' , 'BASICA' , 'DOENCA' , 'CRONICA', 'FAMILIA' ,'ESTRATEGIA' ,'COMUNITARIOS' , 'LOGISTICA' ,  'IMUNOBIOLOGICOS', 'REGULACAO' , 'ACOES', 'SERVICOS', 'SERVICO', 'HANSENIASE', 'MOVEL' , 'URGENCIAS', 'DIAGNOSTICO', 'LABORATORIO' , 'CLINICO', 'DISPENSACAO' ,'ORTESES' ,'PROTESES', 'REABILITACAO', 'PRATICAS', 'URGENCIA' , 'EMERGENCIA' , 'VIGILANCIA', 'BIOLOGICOS', 'FARMACIA', 'GRAFICOS' , 'DINAMICOS' , 'METODOS', 'PATOLOGICA', 'INTERMEDIARIOS', 'TORACICA', 'PRE-NATAL', 'IMUNIZACAO', 'CONSULTORIO', 'VIOLENCIA', 'SITUACAO', 'POPULACOES' ,'INDIGENAS', 'ASSISTENCIA', 'COMISSOES', 'COMITES'];
 
     return str_replace($arraySemAcento , $arrayComAcento, $frase);
+}
+
+function salvarSelos($conMap, $idSpace, $idAgent)
+{
+
+    $sql = "SELECT MAX(id)+1 FROM public.seal_relation";
+    $maxSealRelation = $conMap->query($sql);
+    $id = $maxSealRelation->fetchColumn();
+
+    $id = !empty($id) ? $id : 1;
+
+    $dataHora = date('Y-m-d H:i:s');
+    $sqlInsertSeal = "INSERT INTO public.seal_relation 
+                    (id, seal_id, object_id, create_timestamp, status, object_type, agent_id, validate_date, renovation_request) 
+                    VALUES ({$id} ,'2', '" . $idSpace . "', '{$dataHora}' , '1' , 'MapasCulturais\Entities\Space' , {$idAgent},
+                    '2029-12-08 00:00:00' , true)";
+            $conMap->exec($sqlInsertSeal);
 }
