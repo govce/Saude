@@ -9,15 +9,19 @@ $oportunidades = array_map(function($term) { return $term->term; }, $termsOp);
 $taxoOpportunityType = $app->repo('Term')->findBy(['taxonomy' => 'opportunity_taxonomia']);
 $typeOpportunity = [];
 $new = "";
+$indice = 0;
 foreach ($taxoOpportunityType as $key => $value) {
+    $indice = ($indice + 1);
     //PREENCHENDO O VALOR QUE É RETORNADO DO BANCO
     $new = $value->term;
     //EXCLUINDO O INDICE
     unset($chave);
     //INSERINDO UM NOVO ARRAY NO FINAL DO ARRAY
-    array_push($typeOpportunity, ['name' => $new]);
+    $typeOpportunity[$indice] = ['name' => $new];//array iniciando com indice 1
+    //array iniciando com indice 0
+    //array_push($typeOpportunity, ['name' => $new]);
 }
-
+;
 return array(
     'metadata' => array(
 
