@@ -3,7 +3,7 @@
 require_once "php-cnes-master/ws-security.php";
 ini_set('display_errors', true);
 
-$conMap = new PDO("pgsql:host=192.168.32.3;port=5432;dbname=mapas", "mapas", "mapas");
+$conMap = new PDO("pgsql:host=192.168.32.2;port=5432;dbname=mapas", "mapas", "mapas");
 $conMap->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if (!$conMap) {
     echo 'não conectou';
@@ -51,15 +51,7 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
                 if ($result->DadosGeraisEstabelecimentoSaude->Localizacao->longitude == null) {
                     $location = '(0, 0)';
                 }
-    
-                $data = date('Y-m-d H:i:s');
-                $idAgenteResponsavel = $argv[1]; //mudar esse valor, pois ? baseado no agente
-                $sqlInsert = "INSERT INTO public.space (location, _geo_location, name, short_description, long_description, create_timestamp, status, is_verified, public, agent_id, type) 
-                            VALUES ('" . $location . "', '0101000020E610000000000008A63E43C090B78B3B9BCF0DC0', '" . $nomeFantasia . "', '" . $nomeFantasia . "', '" . $nomeFantasia . "', '" . $data . "', 1, 'FALSE', 'FALSE', '" . $idAgenteResponsavel ."', 1)";
-                $conMap->exec($sqlInsert);
-                $idSpace = $conMap->lastInsertId();
-    
-    
+
                 $endereco = $result->DadosGeraisEstabelecimentoSaude->Endereco;
                 $codigoCnes = $result->DadosGeraisEstabelecimentoSaude->CodigoCNES->codigo;
                 $dataAtualizacao = $result->DadosGeraisEstabelecimentoSaude->dataAtualizacao;
@@ -72,6 +64,19 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
                 $percenteAoSus = $result->DadosGeraisEstabelecimentoSaude->perteceSistemaSUS == 1 ? 'SIM' : 'NÃO';
 
                 $servicos = $result->DadosGeraisEstabelecimentoSaude->servicoespecializados->servicoespecializado;
+
+
+                $idTipo = retornaIdTipoEstabelecimentoPorNome($conMap, $tipoUnidade);
+                if ($idTipo == null || $idTipo == '') {
+                    echo $tipoUnidade . PHP_EOL;
+                }
+    
+                $data = date('Y-m-d H:i:s');
+                $idAgenteResponsavel = $argv[1]; //mudar esse valor, pois ? baseado no agente
+                $sqlInsert = "INSERT INTO public.space (location, _geo_location, name, short_description, long_description, create_timestamp, status, is_verified, public, agent_id, type) 
+                            VALUES ('" . $location . "', '0101000020E610000000000008A63E43C090B78B3B9BCF0DC0', '" . $nomeFantasia . "', '" . $nomeFantasia . "', '" . $nomeFantasia . "', '" . $data . "', 1, 'FALSE', 'FALSE', '" . $idAgenteResponsavel ."', $idTipo)";
+                $conMap->exec($sqlInsert);
+                $idSpace = $conMap->lastInsertId();
 
                 
                 if (isset($servicos)) {
@@ -102,7 +107,7 @@ if (($handle = fopen("../csv/estabelecimentos.csv", "r")) !== FALSE) {
                 salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_cnes', $codigoCnes);
                 salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_cnes_data_atualizacao', $dataAtualizacao);
                 salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_cnes_competencia', date('m/Y'));
-                salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_tipos_unidades', $tipoUnidade);
+                salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_tipos_unidades', adicionarAcentos($tipoUnidade));
                 salvarEstabelecimentoMeta($conMap, $idSpace, 'telefonePublico', $telefone);
                 salvarEstabelecimentoMeta($conMap, $idSpace, 'instituicao_pertence_sus', $percenteAoSus);
 
@@ -145,9 +150,9 @@ function salvarEstabelecimentoMeta($conMap, $idSpace, $meta, $valor)
 
 function adicionarAcentos($frase) 
 {
-    $arrayComAcento = ['ATENÇÃO' , 'BÁSICA' , 'DOENÇA' , 'CRÔNICA', 'FAMÍLIA' ,  'ESTRATÉGIA' ,'COMUNITÁRIOS' , 'LOGÍSTICA' ,  'IMUNOBIOLÓGICOS', 'REGULAÇÃO', 'AÇÕES', 'SERVIÇOS', 'SERVIÇO', 'HANSENÍASE', 'MÓVEL', 'URGÊNCIAS', 'DIAGNÓSTICO', 'LABORATÓRIO', 'CLÍNICO', 'DISPENSAÇÃO', 'ÓRTESES' ,'PRÓTESES', 'REABILITAÇÃO', 'PRÁTICAS', 'URGÊNCIA', 'EMERGÊNCIA', 'VIGILÂNCIA', 'BIOLÓGICOS', 'FARMÁCIA', 'GRÁFICOS', 'DINÂMICOS', 'MÉTODOS', 'PATOLÓGICA', 'INTERMEDIÁRIOS', 'TORÁCICA', 'PRÉ-NATAL', 'IMUNIZAÇÃO', 'CONSULTÓRIO', 'VIOLÊNCIA','SITUAÇÃO', 'POPULAÇÕES' ,'INDÍGENAS', 'ASSISTÊNCIA', 'COMISSÕES', 'COMITÊS'];
+    $arrayComAcento = ['GESTÃO', 'ATENÇÃO' , 'BÁSICA' , 'DOENÇA' , 'CRÔNICA', 'FAMÍLIA' ,  'ESTRATÉGIA' ,'COMUNITÁRIOS' , 'LOGÍSTICA' ,  'IMUNOBIOLÓGICOS', 'REGULAÇÃO', 'AÇÕES', 'SERVIÇOS', 'SERVIÇO', 'HANSENÍASE', 'MÓVEL', 'URGÊNCIAS', 'DIAGNÓSTICO', 'LABORATÓRIO', 'CLÍNICO', 'DISPENSAÇÃO', 'ÓRTESES' ,'PRÓTESES', 'REABILITAÇÃO', 'PRÁTICAS', 'URGÊNCIA', 'EMERGÊNCIA', 'VIGILÂNCIA', 'BIOLÓGICOS', 'FARMÁCIA', 'GRÁFICOS', 'DINÂMICOS', 'MÉTODOS', 'PATOLÓGICA', 'INTERMEDIÁRIOS', 'TORÁCICA', 'PRÉ-NATAL', 'IMUNIZAÇÃO', 'CONSULTÓRIO', 'VIOLÊNCIA','SITUAÇÃO', 'POPULAÇÕES' ,'INDÍGENAS', 'ASSISTÊNCIA', 'COMISSÕES', 'COMITÊS', 'SAÚDE', 'BÁSICA'];
 
-    $arraySemAcento = ['ATENCAO' , 'BASICA' , 'DOENCA' , 'CRONICA', 'FAMILIA' ,'ESTRATEGIA' ,'COMUNITARIOS' , 'LOGISTICA' ,  'IMUNOBIOLOGICOS', 'REGULACAO' , 'ACOES', 'SERVICOS', 'SERVICO', 'HANSENIASE', 'MOVEL' , 'URGENCIAS', 'DIAGNOSTICO', 'LABORATORIO' , 'CLINICO', 'DISPENSACAO' ,'ORTESES' ,'PROTESES', 'REABILITACAO', 'PRATICAS', 'URGENCIA' , 'EMERGENCIA' , 'VIGILANCIA', 'BIOLOGICOS', 'FARMACIA', 'GRAFICOS' , 'DINAMICOS' , 'METODOS', 'PATOLOGICA', 'INTERMEDIARIOS', 'TORACICA', 'PRE-NATAL', 'IMUNIZACAO', 'CONSULTORIO', 'VIOLENCIA', 'SITUACAO', 'POPULACOES' ,'INDIGENAS', 'ASSISTENCIA', 'COMISSOES', 'COMITES'];
+    $arraySemAcento = ['GESTAO', 'ATENCAO' , 'BASICA' , 'DOENCA' , 'CRONICA', 'FAMILIA' ,'ESTRATEGIA' ,'COMUNITARIOS' , 'LOGISTICA' ,  'IMUNOBIOLOGICOS', 'REGULACAO' , 'ACOES', 'SERVICOS', 'SERVICO', 'HANSENIASE', 'MOVEL' , 'URGENCIAS', 'DIAGNOSTICO', 'LABORATORIO' , 'CLINICO', 'DISPENSACAO' ,'ORTESES' ,'PROTESES', 'REABILITACAO', 'PRATICAS', 'URGENCIA' , 'EMERGENCIA' , 'VIGILANCIA', 'BIOLOGICOS', 'FARMACIA', 'GRAFICOS' , 'DINAMICOS' , 'METODOS', 'PATOLOGICA', 'INTERMEDIARIOS', 'TORACICA', 'PRE-NATAL', 'IMUNIZACAO', 'CONSULTORIO', 'VIOLENCIA', 'SITUACAO', 'POPULACOES' ,'INDIGENAS', 'ASSISTENCIA', 'COMISSOES', 'COMITES', 'SAUDE', 'BASICA'];
 
     return str_replace($arraySemAcento , $arrayComAcento, $frase);
 }
@@ -167,4 +172,14 @@ function salvarSelos($conMap, $idSpace, $idAgent)
                     VALUES ({$id} ,'2', '" . $idSpace . "', '{$dataHora}' , '1' , 'MapasCulturais\Entities\Space' , {$idAgent},
                     '2029-12-08 00:00:00' , true)";
             $conMap->exec($sqlInsertSeal);
+}
+
+function retornaIdTipoEstabelecimentoPorNome($conMap, $tipoNome)
+{
+    $tipoNome = adicionarAcentos($tipoNome);
+
+    $sql = "SELECT id FROM public.term WHERE taxonomy='instituicao_tipos_unidades' AND term='{$tipoNome}'";
+    $result = $conMap->query($sql);
+    $id = $result->fetchColumn();
+    return $id;
 }
