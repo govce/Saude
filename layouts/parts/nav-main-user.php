@@ -61,12 +61,6 @@
                 <a class="add" href="<?php echo $app->createUrl('project', 'create') ?>"></a>
             </li>
             <?php $this->applyTemplateHook('nav.dropdown.projects','after'); ?>
-
-            <?php $this->applyTemplateHook('nav.dropdown.registrations','before'); ?>
-            <li>
-                <a href="<?php echo $app->createUrl('panel', 'registrations') ?>"><?php \MapasCulturais\i::_e("Minhas Inscrições");?></a>
-            </li>
-            <?php $this->applyTemplateHook('nav.dropdown.registrations','after'); ?>
         <?php endif; ?>
 
         <?php if($app->isEnabled('opportunities')): ?>
@@ -75,13 +69,13 @@
                 <a href="<?php echo $app->createUrl('panel', 'opportunities') ?>"><?php \MapasCulturais\i::_e("Minhas Oportunidades");?></a>
             </li>
             <?php $this->applyTemplateHook('nav.dropdown.opportunities','after'); ?>
-
-            <?php $this->applyTemplateHook('nav.dropdown.registrations','before'); ?>
-            <li>
-                <a href="<?php echo $app->createUrl('panel', 'registrations') ?>"><?php \MapasCulturais\i::_e("Minhas Inscrições");?></a>
-            </li>
-            <?php $this->applyTemplateHook('nav.dropdown.registrations','after'); ?>
         <?php endif; ?>
+
+        <?php $this->applyTemplateHook('nav.dropdown.registrations','before'); ?>
+        <li>
+            <a href="<?php echo $app->createUrl('panel', 'registrations') ?>"><?php \MapasCulturais\i::_e("Minhas Inscrições");?></a>
+        </li>
+        <?php $this->applyTemplateHook('nav.dropdown.registrations','after'); ?>
 
         <?php if($app->user->is('saasAdmin') && $app->isEnabled('subsite')): ?>
             <?php $this->applyTemplateHook('nav.dropdown.subsite','before'); ?>
