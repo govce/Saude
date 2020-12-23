@@ -10,6 +10,19 @@ $tiposGestao = array_map(function($term) { return $term->term; }, $termsGestao);
 $termsServico = $app->repo('Term')->findBy(['taxonomy' => 'instituicao_servicos']);
 $tiposServico = array_map(function($term) { return $term->term; }, $termsServico);
 
+$taxoSpaceType = $app->repo('Term')->findBy(['taxonomy' => 'instituicao_tipos_unidades']);
+$typeSpaces = [];
+$new = "";
+$indice = 0;
+foreach ($taxoSpaceType as $key => $value) {
+    $indice = $value->id;
+    $new = $value->term;
+    unset($chave);
+
+    $typeSpaces[$indice] = ['name' => $new];
+
+}
+
 return array(
     'metadata' => array(
         'emailPublico' => array(
@@ -427,9 +440,7 @@ return array(
     'items' => array(
         \MapasCulturais\i::__('') => array(
             'range' => array(1,2000),
-            'items' => array(
-                1 => array( 'name' => \MapasCulturais\i::__("NÃO DE APLICA")),
-            )
+            'items' => $typeSpaces
         )
     )
 );

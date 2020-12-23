@@ -5,6 +5,22 @@
 $app = MapasCulturais\App::i();
 $termsOp = $app->repo('Term')->findBy(['taxonomy' => 'opportunity_taxonomia']);
 $oportunidades = array_map(function($term) { return $term->term; }, $termsOp);
+$taxoOpportunityType = $app->repo('Term')->findBy(['taxonomy' => 'opportunity_taxonomia']);
+$typeOpportunity = [];
+$new = "";
+$indice = 0;
+foreach ($taxoOpportunityType as $key => $value) {
+    $indice = ($indice + 1);
+    //PREENCHENDO O VALOR QUE É RETORNADO DO BANCO
+    $new = $value->term;
+    //EXCLUINDO O INDICE
+    unset($chave);
+    //INSERINDO UM NOVO ARRAY NO FINAL DO ARRAY
+    $typeOpportunity[$indice] = ['name' => $new];//array iniciando com indice 1
+    //array iniciando com indice 0
+    //array_push($typeOpportunity, ['name' => $new]);
+}
+;
 return array(
     'metadata' => array(
 
@@ -84,6 +100,7 @@ return array(
             'options' => $oportunidades
         ]
     ),
+<<<<<<< HEAD
     'items' => array(
         1 =>  array( 'name' => \MapasCulturais\i::__("Festival")),
         2 =>  array( 'name' => \MapasCulturais\i::__("Encontro")),
@@ -130,6 +147,9 @@ return array(
 
 
     )
+=======
+    'items' => $typeOpportunity
+>>>>>>> e5a9884c108891e9d4e7ec185f16d11d9f47f8a0
     /* EXEMPLOS DE METADADOS:
 
     'cnpj' => array(

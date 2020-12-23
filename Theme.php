@@ -68,16 +68,7 @@ class Theme extends BaseV1\Theme{
                     'type' => 'metadata',
                     'filter' => [
                         'param' => 'instituicao_tipos_unidades',
-                        'value' => 'IN({val})'
-                    ]
-                ],
-                'instituicao_tipos_gestao' => [
-                    'label' => i::__('Tipo de gestão'),
-                    'placeholder' => i::__('Tipo de gestão'),
-                    'type' => 'metadata',
-                    'filter' => [
-                        'param' => 'instituicao_tipos_gestao',
-                        'value' => 'IN({val})'
+                        'value' => 'like(%{val}%)'
                     ]
                 ],
                 'instituicao_servicos' => [

@@ -1,13 +1,8 @@
-<?php
-// VERIFICANDO SE É UM ENTIDADE DE ESPACO PARA ADICIONAR O ESTILO NA CAIXA DE SELEÇÃO
-if ($this->controller->id === 'space') {
-?>
 <style>
 #editable-multiselect-instituicao_servicos .edit-box {
     top: 0px !important
 }
 </style>
-<? } ?>
 <div class="servico">
     <?php $this->applyTemplateHook('tab-about-service','begin'); ?>
 
