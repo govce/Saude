@@ -5,7 +5,6 @@
 $app = MapasCulturais\App::i();
 $termsOp = $app->repo('Term')->findBy(['taxonomy' => 'opportunity_taxonomia']);
 $oportunidades = array_map(function($term) { return $term->term; }, $termsOp);
-
 $taxoOpportunityType = $app->repo('Term')->findBy(['taxonomy' => 'opportunity_taxonomia']);
 $typeOpportunity = [];
 $new = "";
