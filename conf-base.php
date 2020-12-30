@@ -32,4 +32,21 @@ return [
 
     'cep.token_header'  => env('CEP_TOKEN_HEADER', 'Authorization: Token token="%s"'),
     'cep.token'         => env('CEP_TOKEN', ''),
+
+    'themes.assetManager' => new \MapasCulturais\AssetManagers\FileSystem([
+        'publishPath' => BASE_PATH . 'assets/',
+
+        'mergeScripts' => false,
+        'mergeStyles' => false,
+
+        'process.js' => true ?
+                'cp {IN} {OUT}':
+                'terser {IN} --source-map --output {OUT} ',
+
+        'process.css' => true ?
+                'cp {IN} {OUT}':
+                'uglifycss {IN} > {OUT}',
+
+        'publishFolderCommand' => 'cp -R {IN} {PUBLISH_PATH}{FILENAME}'
+    ]),
 ];
