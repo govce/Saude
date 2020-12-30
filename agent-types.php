@@ -9,7 +9,7 @@ $graus = array_map(function($term) { return $term->term; }, $termsGraus);
 $termsCategoria = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_categorias_profissionais']);
 $categoriasProfissionais = array_map(function($term) { return $term->term; }, $termsCategoria);
 
-$termsSpecialties = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_especialidades']);
+$termsSpecialties = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_especialidades'], ['term' => 'ASC']);
 $specialties = array_map(function($term) { return $term->term; }, $termsSpecialties);
 
 $termsSectorOperation = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_setor_atuacao']);
