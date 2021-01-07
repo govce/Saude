@@ -65,8 +65,8 @@ class Theme extends BaseV1\Theme{
                     'lon' => @$json->longitude,
                     'streetName' => @$json->logradouro,
                     'neighborhood' => @$json->bairro,
-                    'city' => @$json->cidade->nome,
-                    'state' => @$json->estado->sigla
+                    'city' => @$json->cidade,
+                    'state' => @$json->estado
                 ];
 
             } else {

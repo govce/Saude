@@ -24,20 +24,16 @@ $has_private_location = isset($has_private_location) && $has_private_location
             <?php $this->jsObject['angularAppDependencies'][] = 'entity.module.opportunity'; ?>
             <div ng-controller="AgentCityController">
                 <p>
-                    <span class="label">
-                        <?php \MapasCulturais\i::esc_attr_e("Estado");?>: 
-                    </span>
-                    <select name="repeatSelect" id="En_Estado" ng-model="data.model.estado" ng-change="update()" ng-blur="saveLocation()">
-                        <option ng-repeat="option in allUf.value" value="{{[{'id':option.id,'nome':option.sigla, 'params' : 'En_Estado'}]}}">{{option.sigla}}</option>
-                    </select>
+                <span class="label"><?php \MapasCulturais\i::_e("Estado");?>:</span> <span class="js-editable" id="En_Estado" data-edit="En_Estado" data-original-title="<?php \MapasCulturais\i::esc_attr_e("Estado");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o Estado");?>" data-showButtons="bottom"><?php echo $entity->En_Estado ?>
+                </span>
                 </p>
                 <p>
-                    <span class="label">
-                        <?php \MapasCulturais\i::esc_attr_e("Cidade");?>:
+                    <span class="label"><?php \MapasCulturais\i::_e("Município");?>:</span> 
+                    <span class="js-editable" id="En_Municipio" 
+                    data-original-title="<?php \MapasCulturais\i::esc_attr_e("Município");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o Município");?>" 
+                    data-type="select"
+                    data-showButtons="bottom">
                     </span>
-                    <select name="repeatSelect" id="En_Municipio" ng-model="data.model.cidade" ng-blur="saveLocation()">
-                        <option ng-repeat="option in allCity.value" value="{{[{'id':option.id,'nome':option.nome, 'params' : 'En_Municipio'}]}}">{{option.nome}}</option>
-                    </select>
                 </p>
             
             </div>

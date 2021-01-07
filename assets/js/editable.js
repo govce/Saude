@@ -1016,15 +1016,15 @@ $(function(){
         var numero = $('#En_Num').editable('getValue', true);
         var complemento = $('#En_Complemento').editable('getValue', true);
         var bairro = $('#En_Bairro').editable('getValue', true);
-        var municipio = $('#En_Municipio option:selected').text();
-        var estado = $('#En_Estado option:selected').text();
+        var municipio = $('#En_Municipio').editable('getValue', true);
+        var estado = $('#En_Estado').editable('getValue', true);
+        console.log({estado})
+        //var estado = $('#En_Estado option:selected').text();
 
         if(cep && nome_logradouro && numero && bairro && municipio && estado){
             var endereco = MapasCulturais.buildAddress(nome_logradouro, numero, complemento, bairro, municipio, estado, cep);
-            console.log("End: " + endereco);
             $('#endereco').editable('setValue', endereco);
-            console.log($('#endereco'));
-            $('#endereco').trigger(endereco);
+            $('#endereco').trigger('changeAddress', endereco);
             $('.js-endereco').html(endereco);
         }
 
@@ -1041,8 +1041,8 @@ $(function(){
             if (r.success) {
                 $('#En_Nome_Logradouro').editable('setValue', r.streetName != null ? r.streetName : '');
                 $('#En_Bairro').editable('setValue', r.neighborhood != null ? r.neighborhood : '');
-                //$('#En_Municipio').editable('setValue', r.city != null ? r.city.nome : '');
-                //$('#En_Estado').editable('setValue', r.state != null ? r.state.sigla : '');
+                $('#En_Municipio').editable('setValue', r.city != null ? r.city.nome : '');
+                $('#En_Estado').editable('setValue', r.state != null ? r.state.sigla : '');
                 concatena_enderco();
             }
         }).fail(function(response) {

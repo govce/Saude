@@ -2525,7 +2525,7 @@ module.factory('AgentCityService',[ '$q', '$http', function($q, $http){
             
             return $http.post( MapasCulturais.baseURL+ '/location/city/'+MapasCulturais.entity.id, data).
             success(function (data, status) {
-                jQuery("#En_Municipio").append('<option selected>'+data.message+'</option>');
+                //jQuery("#En_Municipio").append('<option selected>'+data.message+'</option>');
                 //var res = [{'value' : data, 'text' : data}];
                 // $('#En_Municipio').editable({
                 //     mode        : 'inline',
@@ -2535,7 +2535,7 @@ module.factory('AgentCityService',[ '$q', '$http', function($q, $http){
             error(function (data, status) {
                 console.log('error')
                 console.log(data.message)
-                jQuery("#En_Municipio").append('<option selected>'+data.message+'</option>');
+                //jQuery("#En_Municipio").append('<option selected>'+data.message+'</option>');
             });  
         },
         // BUSCA O ESTADO EM CASO DE EDIÇÃO
@@ -2548,10 +2548,10 @@ module.factory('AgentCityService',[ '$q', '$http', function($q, $http){
             return $http.post( MapasCulturais.baseURL+ 'location/state/'+MapasCulturais.entity.id, data).
             success(function (data, status) {
                 console.log(data);
-                jQuery("#En_Estado").append('<option selected value="[{"id":"CE","nome":"CE","params":"En_Estado"}]">'+data.message+'</option>');
+                // jQuery("#En_Estado").append('<option selected value="[{"id":"CE","nome":"CE","params":"En_Estado"}]">'+data.message+'</option>');
             }).
             error(function (data, status) {
-                jQuery("#En_Estado").append('<option selected>'+data.message+'</option>');
+                //jQuery("#En_Estado").append('<option selected>'+data.message+'</option>');
             });  
         },
         // SALVA OS DADOS DO ESTADO E DA CIDADE AO SAIR DO CAMPO
@@ -2586,12 +2586,17 @@ module.controller('AgentCityController' , ['$scope', '$rootScope', 'AgentCitySer
     $scope.source = [];
     $scope.city = AgentCityService.getCity();
     AgentCityService.getUfSelected();
-    
+        
+
     $scope.update = function() {
         //$('#En_Municipio').editable('setValue', null);
+        
         var source = [];
         var jsonUf = JSON.parse($scope.data.model.estado);
         $scope.allCity = AgentCityService.getCityUf(jsonUf[0].id)
+       
+        var codigo = $scope.converterEstados(estado);
+        console.log({codigo})
         /**
          * PARA USO DO X-EDITABLE
          */
@@ -2635,3 +2640,125 @@ module.controller('AgentCityController' , ['$scope', '$rootScope', 'AgentCitySer
 
 
 })(angular);
+
+$(function(){ 
+
+    function converterEstados(val) {
+        var data;
+        console.log('converterEstados');
+        console.log(val);
+        switch (val.toUpperCase()) {
+            /* UFs */
+            case "AC":
+                data = 12;
+                break;
+            case "AL":
+                data = 27;
+                break;
+            case "AM":
+                data = 13;
+                break;
+            case "AP":
+                data = 16;
+                break;
+            case "BA":
+                data = 29;
+                break;
+            case "CE":
+                data = 23;
+                break;
+            case "DF":
+                data = 53;
+                break;
+            case "ES":
+                data = 32;
+                break;
+            case "GO":
+                data = 52;
+                break;
+            case "MA":
+                data = 21;
+                break;
+            case "MG":
+                data = 31;
+                break;
+            case "MS":
+                data = 50;
+                break;
+            case "MT":
+                data = 51;
+                break;
+            case "PA":
+                data = 15;
+                break;
+            case "PB":
+                data = 25;
+                break;
+            case "PE":
+                data = 26;
+                break;
+            case "PI":
+                data = 22;
+                break;
+            case "PR":
+                data = 41;
+                break;
+            case "RJ":
+                data = 33;
+                break;
+            case "RN":
+                data = 24;
+                break;
+            case "RO":
+                data = 11;
+                break;
+            case "RR":
+                data = 14;
+                break;
+            case "RS":
+                data = 43;
+                break;
+            case "SC":
+                data = 42;
+                break;
+            case "SE":
+                data = 28;
+                break;
+            case "SP":
+                data = 35;
+                break;
+            case "TO":
+                data = 17;
+                break;
+        
+        }
+        console.log({data})
+        return data;
+    }; 
+    $('#En_Estado').on('save', function(e, params) {
+        var codigo = converterEstados(params.newValue);
+        console.log(codigo);
+        var dataLocation = {
+            'key' : 'En_Municipio',
+            'idAgente'  : MapasCulturais.entity.id
+        };
+        $.ajax({
+            type: "GET",
+            url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+codigo+'/distritos',
+            data: dataLocation,
+            dataType: "json",
+            success: function (response) {
+                var sourceCity = [];
+                $.each(response, function (indexInArray, valueOfElement) { 
+                    sourceCity.push({'value': valueOfElement.nome, 'text': valueOfElement.nome});  
+                });
+                console.log(sourceCity)
+                
+                $('#En_Municipio').editable({
+                    mode        : 'inline',
+                    source      : sourceCity
+                });
+            }
+        });
+   });
+});
