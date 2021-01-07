@@ -1016,18 +1016,16 @@ $(function(){
         var numero = $('#En_Num').editable('getValue', true);
         var complemento = $('#En_Complemento').editable('getValue', true);
         var bairro = $('#En_Bairro').editable('getValue', true);
-        // var municipio = $('#En_Municipio option:selected').text();
-        // var estado = $('#En_Estado option:selected').text();
-        var municipio = "Fortaleza";
-        var estado = "CE";
-        console.log(endereco)
+        var municipio = $('#En_Municipio option:selected').text();
+        var estado = $('#En_Estado option:selected').text();
+
         if(cep && nome_logradouro && numero && bairro && municipio && estado){
-            var endereco = MapasCulturais.buildAddress(nome_logradouro, numero, complemento, bairro, cep, municipio, estado);
+            var endereco = MapasCulturais.buildAddress(nome_logradouro, numero, complemento, bairro, municipio, estado, cep);
             console.log("End: " + endereco);
             $('#endereco').editable('setValue', endereco);
-            $('#endereco').trigger('changeAddress', endereco);
+            console.log($('#endereco'));
+            $('#endereco').trigger(endereco);
             $('.js-endereco').html(endereco);
-            //Avenida Santos Dumont, 2525 , Centro, 60150-160, FORTALEZA, CE
         }
 
 
@@ -1043,13 +1041,14 @@ $(function(){
             if (r.success) {
                 $('#En_Nome_Logradouro').editable('setValue', r.streetName != null ? r.streetName : '');
                 $('#En_Bairro').editable('setValue', r.neighborhood != null ? r.neighborhood : '');
-                console.log('aqui')
-                console.log(r)
                 //$('#En_Municipio').editable('setValue', r.city != null ? r.city.nome : '');
                 //$('#En_Estado').editable('setValue', r.state != null ? r.state.sigla : '');
                 concatena_enderco();
             }
-        });
+        }).fail(function(response) {
+            console.log( "error" );
+            MapasCulturais.Messages.error(response.responseText +'. Endereço não encontrado, confira o CEP!');
+          });
     });
 });
 

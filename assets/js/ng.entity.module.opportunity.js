@@ -312,7 +312,6 @@ module.factory('EvaluationMethodConfigurationService', ['$rootScope', '$q', '$ht
 module.controller('RegistrationConfigurationsController', ['$scope', '$rootScope', '$timeout', '$interval', 'UrlService', 'RegistrationConfigurationService', 'EditBox', '$http', function ($scope, $rootScope, $timeout, $interval, UrlService, RegistrationConfigurationService, EditBox, $http) {
     var fileService = RegistrationConfigurationService('registrationfileconfiguration');
     var fieldService = RegistrationConfigurationService('registrationfieldconfiguration');
-    console.log('aquii');
     var labels = MapasCulturais.gettext.moduleOpportunity;
 
     let blockedOpportunityFields = $scope.data?.blockedOpportunityFields;
@@ -1428,7 +1427,7 @@ module.factory('OpportunityApiService',['$http', 'UrlService', function($http, U
 
 module.controller('OpportunityController', ['$scope', '$rootScope', '$location', '$anchorScroll', '$timeout', 'RegistrationService', 'EditBox', 'RelatedAgentsService', '$http', 'UrlService', 'OpportunityApiService', '$window', function ($scope, $rootScope, $location, $anchorScroll, $timeout, RegistrationService, EditBox, RelatedAgentsService, $http, UrlService, OpportunityApiService, $window) {
     var labels = MapasCulturais.gettext.moduleOpportunity;
-    console.log('OpportunityController');
+
     var opportunity_main_tab = $("#opportunity-main-info");
     if( $.trim($(opportunity_main_tab).text()).length === 0 ) {
         $(opportunity_main_tab).hide();
@@ -2518,8 +2517,7 @@ module.factory('AgentCityService',[ '$q', '$http', function($q, $http){
         },
         // BUSCA A CIDADE CASO JA TENHA CADASTRADO E COLOCA PREENCHIDO NO SELECT DA CIDADE
         getCity: function() {
-        
-            console.log(MapasCulturais.entity.id)
+
             var data = {
                 'key' : 'En_Municipio',
                 'idAgente'  : MapasCulturais.entity.id
@@ -2547,8 +2545,9 @@ module.factory('AgentCityService',[ '$q', '$http', function($q, $http){
                 'idAgente'  : MapasCulturais.entity.id
             };
             
-            return $http.post( MapasCulturais.baseURL+ '/location/state/'+MapasCulturais.entity.id, data).
+            return $http.post( MapasCulturais.baseURL+ 'location/state/'+MapasCulturais.entity.id, data).
             success(function (data, status) {
+                console.log(data);
                 jQuery("#En_Estado").append('<option selected value="[{"id":"CE","nome":"CE","params":"En_Estado"}]">'+data.message+'</option>');
             }).
             error(function (data, status) {
@@ -2562,16 +2561,16 @@ module.factory('AgentCityService',[ '$q', '$http', function($q, $http){
                 'key' : params,
                 'value' : loc
             };
-            console.log(data)
+            //console.log(data)
             return $http.post( MapasCulturais.baseURL+'/location/saveOrUpdate', data).
             success(function (data, status) {
                 console.log('success')
                 
             }).
             error(function (data, status) {
-                console.log('error')
-                console.log(data)
-                console.log(status)
+                // console.log('error')
+                // console.log(data)
+                // console.log(status)
             });  
         }
 
@@ -2617,14 +2616,19 @@ module.controller('AgentCityController' , ['$scope', '$rootScope', 'AgentCitySer
         var jsonUf;
         var nome;
         console.log($scope.data.model)
-        // if ($scope.data.model.hasOwnProperty('cidade')) {
-        //     jsonUf = JSON.parse($scope.data.model.cidade);
-        //     nome = jsonUf[0].nome;
-        // }else if($scope.data.model.hasOwnProperty('estado')){
-        //     jsonUf = JSON.parse($scope.data.model.estado);
-        //     nome = jsonUf[0].nome;
-        // }
-        // AgentCityService.saveLocation(nome, jsonUf[0].params);
+        if ($scope.data.model.hasOwnProperty('cidade')) {
+            // console.log($scope.data.model.cidade)
+            jsonUf = JSON.parse($scope.data.model.cidade);
+            // console.log(jsonUf);
+            nome = jsonUf[0].nome;
+        }else if($scope.data.model.hasOwnProperty('estado')){
+            //console.log($scope.data.model.estado)
+            jsonUf = JSON.parse($scope.data.model.estado);
+            console.log(jsonUf);
+            nome = jsonUf[0].nome;
+        }
+        console.log(jsonUf[0].params);
+        AgentCityService.saveLocation(nome, jsonUf[0].params);
     }
 
 }]);

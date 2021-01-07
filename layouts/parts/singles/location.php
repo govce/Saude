@@ -36,7 +36,7 @@ $has_private_location = isset($has_private_location) && $has_private_location
                         <?php \MapasCulturais\i::esc_attr_e("Cidade");?>:
                     </span>
                     <select name="repeatSelect" id="En_Municipio" ng-model="data.model.cidade" ng-blur="saveLocation()">
-                        <option ng-repeat="option in allCity.value" value="{{option.nome}}">{{option.nome}}</option>
+                        <option ng-repeat="option in allCity.value" value="{{[{'id':option.id,'nome':option.nome, 'params' : 'En_Municipio'}]}}">{{option.nome}}</option>
                     </select>
                 </p>
             
