@@ -22,12 +22,12 @@ $has_private_location = isset($has_private_location) && $has_private_location
             <input type="hidden" class="js-editable" id="endereco" data-edit="endereco" data-original-title="<?php \MapasCulturais\i::esc_attr_e("Endereço");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o endereço");?>" data-showButtons="bottom" value="<?php echo $entity->endereco ?>" data-value="<?php echo $entity->endereco ?>">
             <p class="endereco"><span class="label"><?php \MapasCulturais\i::_e("Endereço");?>:</span> <span class="js-endereco"><?php echo $entity->endereco ?></span></p>
             <?php $this->jsObject['angularAppDependencies'][] = 'entity.module.opportunity'; ?>
-            <div ng-controller="AgentCityController">
+            <div>
                 <p>
                 <span class="label"><?php \MapasCulturais\i::_e("Estado");?>:</span> <span class="js-editable" id="En_Estado" data-edit="En_Estado" data-original-title="<?php \MapasCulturais\i::esc_attr_e("Estado");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o Estado");?>" data-showButtons="bottom"><?php echo $entity->En_Estado ?>
                 </span>
                 </p>
-                <p>
+                <p id="divMunicipio">
                     <span class="label"><?php \MapasCulturais\i::_e("Município");?>:</span> 
                     <span class="js-editable" id="En_Municipio" 
                     data-original-title="<?php \MapasCulturais\i::esc_attr_e("Município");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o Município");?>" 

@@ -2486,167 +2486,13 @@ module.controller('SealsController', ['$scope', '$rootScope', 'RelatedSealsServi
     jQuery("#registrationSeals").editable('setValue',$scope.entity.registrationSeals);
 
 }]);
-
 // PARA LOCALIAÇÃO EM AGENTES E ESPAÇOS
-module.factory('AgentCityService',[ '$q', '$http', function($q, $http){
-   
-    return {
-        // RECUPERAR O DISTRITO PELO ID DA UF
-        getCityUf: function(id){
-            var deferred = $q.defer();
-            $http.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+id+'/distritos')
-                .success(
-                function(response){
-                    deferred.resolve(response);
-                }
-            );
-            //RETORNANDO A PROMISE
-            return deferred.promise.$$state;
-        },
-        // RECUPERANDO TODOS ESTADOS
-        getUf: function() {
-            var deferred = $q.defer();
-            $http.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
-                .success(
-                function(response){
-                    deferred.resolve(response);
-                }
-                
-            );
-            return deferred.promise.$$state;
-        },
-        // BUSCA A CIDADE CASO JA TENHA CADASTRADO E COLOCA PREENCHIDO NO SELECT DA CIDADE
-        getCity: function() {
-
-            var data = {
-                'key' : 'En_Municipio',
-                'idAgente'  : MapasCulturais.entity.id
-            };
-            
-            return $http.post( MapasCulturais.baseURL+ '/location/city/'+MapasCulturais.entity.id, data).
-            success(function (data, status) {
-                //jQuery("#En_Municipio").append('<option selected>'+data.message+'</option>');
-                //var res = [{'value' : data, 'text' : data}];
-                // $('#En_Municipio').editable({
-                //     mode        : 'inline',
-                //     value       : data
-                // });
-            }).
-            error(function (data, status) {
-                console.log('error')
-                console.log(data.message)
-                //jQuery("#En_Municipio").append('<option selected>'+data.message+'</option>');
-            });  
-        },
-        // BUSCA O ESTADO EM CASO DE EDIÇÃO
-        getUfSelected: function() {
-            var data = {
-                'key' : 'En_Estado',
-                'idAgente'  : MapasCulturais.entity.id
-            };
-            
-            return $http.post( MapasCulturais.baseURL+ 'location/state/'+MapasCulturais.entity.id, data).
-            success(function (data, status) {
-                console.log(data);
-                // jQuery("#En_Estado").append('<option selected value="[{"id":"CE","nome":"CE","params":"En_Estado"}]">'+data.message+'</option>');
-            }).
-            error(function (data, status) {
-                //jQuery("#En_Estado").append('<option selected>'+data.message+'</option>');
-            });  
-        },
-        // SALVA OS DADOS DO ESTADO E DA CIDADE AO SAIR DO CAMPO
-        saveLocation: function(loc, params){
-            var data = {
-                'idAgente'  : MapasCulturais.entity.id,
-                'key' : params,
-                'value' : loc
-            };
-            //console.log(data)
-            return $http.post( MapasCulturais.baseURL+'/location/saveOrUpdate', data).
-            success(function (data, status) {
-                console.log('success')
-                
-            }).
-            error(function (data, status) {
-                // console.log('error')
-                // console.log(data)
-                // console.log(status)
-            });  
-        }
-
-    }
-    
-}]);
-module.controller('AgentCityController' , ['$scope', '$rootScope', 'AgentCityService', 'EditBox', function($scope, $rootScope, AgentCityService, EditBox){
-    $scope.data = {};
-    $scope.allCity = {};
-    $scope.idUf = 0;
-    $scope.showCity = false;
-    $scope.allUf = AgentCityService.getUf();
-    $scope.source = [];
-    $scope.city = AgentCityService.getCity();
-    AgentCityService.getUfSelected();
-        
-
-    $scope.update = function() {
-        //$('#En_Municipio').editable('setValue', null);
-        
-        var source = [];
-        var jsonUf = JSON.parse($scope.data.model.estado);
-        $scope.allCity = AgentCityService.getCityUf(jsonUf[0].id)
-       
-        var codigo = $scope.converterEstados(estado);
-        console.log({codigo})
-        /**
-         * PARA USO DO X-EDITABLE
-         */
-        // $scope.allCity = AgentCityService.getCityUf($scope.data.model).then( function (vari){
-        //     //console.log(vari)
-        //     for(var i in vari) {
-        //         //console.log(vari[i].id+' + '+vari[i].nome)
-        //         source.push({'value': vari[i].nome, 'text': vari[i].nome});                
-        //     }
-        //     //$scope.getResorce(source)
-        // })
-        //console.log($scope.data.model)
-        // $scope.getResorce = function (res) {
-        //     $('#En_Municipio').editable({
-        //         mode        : 'inline',
-        //         source      : res
-        //     });
-        // }
-    }
-
-    $scope.saveLocation = function() {
-        var jsonUf;
-        var nome;
-        console.log($scope.data.model)
-        if ($scope.data.model.hasOwnProperty('cidade')) {
-            // console.log($scope.data.model.cidade)
-            jsonUf = JSON.parse($scope.data.model.cidade);
-            // console.log(jsonUf);
-            nome = jsonUf[0].nome;
-        }else if($scope.data.model.hasOwnProperty('estado')){
-            //console.log($scope.data.model.estado)
-            jsonUf = JSON.parse($scope.data.model.estado);
-            console.log(jsonUf);
-            nome = jsonUf[0].nome;
-        }
-        console.log(jsonUf[0].params);
-        AgentCityService.saveLocation(nome, jsonUf[0].params);
-    }
-
-}]);
-
-
 })(angular);
 
 $(function(){ 
-
+    //RECEBE A SIGLA E RETORNA O CODIGO DO ESTADO
     function converterEstados(val) {
         var data;
-        console.log('converterEstados');
-        console.log(val);
         switch (val.toUpperCase()) {
             /* UFs */
             case "AC":
@@ -2732,16 +2578,20 @@ $(function(){
                 break;
         
         }
-        console.log({data})
         return data;
     }; 
+    // QUANDO SALVA O ESTADO PESQUISA OS MUNICIPIO NA API DO IBGE
+    /**
+     * NOTA: o preenchimento do select dos municipios so funcionou quando eu removi o elemento do DOM e criando um outro com uma instancia do x-editable já preenchida.
+     */
     $('#En_Estado').on('save', function(e, params) {
+        $('#En_Municipio').editable('setValue', '');
         var codigo = converterEstados(params.newValue);
-        console.log(codigo);
         var dataLocation = {
             'key' : 'En_Municipio',
             'idAgente'  : MapasCulturais.entity.id
         };
+        // API IBGE
         $.ajax({
             type: "GET",
             url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+codigo+'/distritos',
@@ -2749,16 +2599,37 @@ $(function(){
             dataType: "json",
             success: function (response) {
                 var sourceCity = [];
+                $('#En_Municipio').remove();
+                $("#divMunicipio").append('<span class="js-editable" id="En_Municipio" data-original-title="Municipio" data-emptytext="Insira o Município" data-type="select" data-showButtons="bottom"></span>');
                 $.each(response, function (indexInArray, valueOfElement) { 
                     sourceCity.push({'value': valueOfElement.nome, 'text': valueOfElement.nome});  
                 });
-                console.log(sourceCity)
-                
                 $('#En_Municipio').editable({
                     mode        : 'inline',
                     source      : sourceCity
                 });
             }
         });
-   });
+    });
+});
+$(document).ready(function () {
+    // PARA PREENCHIMENTO DO MUNICIPIO QUANDO A PÁGINA É CARREGADA
+    function getCity() {
+        var dataLocation = {
+            'key' : 'En_Municipio',
+            'idAgente'  : MapasCulturais.entity.id
+        };
+        $.getJSON(MapasCulturais.baseURL+ 'location/city/', dataLocation,
+            function (data, textStatus, jqXHR) {
+                if(data.status == 200){
+                    $('#En_Municipio').editable({
+                        mode        : 'inline',
+                        source      : {'value': data.message}
+                    });
+                    $('#En_Municipio').html(data.message);
+                } 
+            }
+        );
+    }
+    getCity();
 });

@@ -6,10 +6,11 @@ use PHPUnit\Runner\Exception;
 
 class Location extends \MapasCulturais\Controller{
 
-    function POST_city() {
+    function GET_city() {
         $app = App::i();
-        $id = $this->postData['idAgente'];
-        $key = $this->postData['key'];
+        $id = $this->getData['idAgente'];
+        $key = $this->getData['key'];
+        //dump($this->getData);
         $taxoUp = $app->repo('AgentMeta')->findBy([
             'owner' => $id,
             'key' => $key 
