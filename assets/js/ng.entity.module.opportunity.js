@@ -2619,17 +2619,28 @@ $(document).ready(function () {
             'key' : 'En_Municipio',
             'idAgente'  : MapasCulturais.entity.id
         };
-        $.getJSON(MapasCulturais.baseURL+ 'location/city/', dataLocation,
-            function (data, textStatus, jqXHR) {
-                if(data.status == 200){
-                    $('#En_Municipio').editable({
-                        mode        : 'inline',
-                        source      : {'value': data.message}
-                    });
-                    $('#En_Municipio').html(data.message);
-                } 
-            }
-        );
+        
+            $.getJSON(MapasCulturais.baseURL+ 'location/city/', dataLocation,
+                function (data, textStatus, jqXHR) {
+                    if(data.status == 200){
+                        
+                        if(document.URL.match(/edita/)) {
+                            $('#En_Municipio').editable({
+                                mode        : 'inline',
+                                source      : {'value': data.message}
+                            });
+                            $('#En_Municipio').html(data.message);
+                        }else{
+                            //$('#En_Municipio').editable();
+                            $('#En_Municipio').html(data.message);
+                            $("#En_Municipio").removeClass('editable editable-click editable-empty');
+                        }
+                    } 
+                    
+                }
+            );
+       
+        
     }
     getCity();
 });
