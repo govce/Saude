@@ -39,6 +39,50 @@ class Theme extends BaseV1\Theme{
     function _init() {
         parent::_init();
         $app = App::i();
+
+    }
+
+    function getAddressByPostalCode($postalCode) {
+        $app = App::i();
+        if ($app->config['cep.token']) {
+            $cep = str_replace('-', '', $postalCode);
+            // $url = 'http://www.cepaberto.com/api/v2/ceps.json?cep=' . $cep;
+            $url = sprintf($app->config['cep.endpoint'], $cep);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            if ($app->config['cep.token_header']) {
+                // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Token token="' . $app->config['cep.token'] . '"'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(sprintf($app->config['cep.token_header'], $app->config['cep.token'])));
+            }
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $output = curl_exec($ch);
+            $json = json_decode($output);
+            
+            if (isset($json->cep)) {
+                $response = [
+                    'success' => true,
+                    'lat' => @$json->latitude,
+                    'lon' => @$json->longitude,
+                    'streetName' => @$json->logradouro,
+                    'neighborhood' => @$json->bairro,
+                    'city' => @$json->cidade,
+                    'state' => @$json->estado
+                ];
+
+            } else {
+                $response = [
+                    'success' => false,
+                    'error_msg' => 'Falha ao buscar o endereço'
+                ];
+            }
+        } else {
+            $response = [
+                'success' => false,
+                'error_msg' => 'No token for CEP'
+            ];
+        }
+
+        return $response;
     }
 
     function register() {
@@ -46,6 +90,7 @@ class Theme extends BaseV1\Theme{
 
         $app = App::i();
         $app->registerAuthProvider('keycloak');
+        $app->registerController('location' , 'Saude\Controllers\Location');
     }
     
 
