@@ -11,10 +11,18 @@ class Location extends \MapasCulturais\Controller{
         $id = $this->getData['idAgente'];
         $key = $this->getData['key'];
         //dump($this->getData);
-        $taxoUp = $app->repo('AgentMeta')->findBy([
-            'owner' => $id,
-            'key' => $key 
-        ]);
+        if($this->getData['params'] == 'agent') {
+            $taxoUp = $app->repo('AgentMeta')->findBy([
+                'owner' => $id,
+                'key' => $key 
+            ]);
+        }else {
+            $taxoUp = $app->repo('SpaceMeta')->findBy([
+                'owner' => $id,
+                'key' => $key 
+            ]);
+        }
+        
         if(empty($taxoUp)){
             return $this->json(['message' => '-- Selecione --', 'status' => 500]);
         }else{

@@ -1080,3 +1080,164 @@ $(function(){
     $.fn.editabletypes.color = Color;
 
 }(window.jQuery));
+
+$(document).ready(function () {
+    // PARA PREENCHIMENTO DO MUNICIPIO QUANDO A PÁGINA É CARREGADA
+    function getCity() {
+        var dataLocation = {
+            'key' : 'En_Municipio',
+            'idAgente'  : MapasCulturais.entity.id
+        };
+        if(MapasCulturais.request.controller == 'agent') {
+            dataLocation.params = 'agent';
+        }else if(MapasCulturais.request.controller == 'space'){
+            //dataLocation.push('params' , 'agent');
+            dataLocation.params = 'space';
+        }
+       
+        console.log(dataLocation);
+            // BUSCANDO NO BANCO QUAL A CIDADE CADASTRADA, CASO HAJA
+            $.getJSON(MapasCulturais.baseURL+ 'location/city/', dataLocation,
+                function (data, textStatus, jqXHR) {
+                    if(data.status == 200){
+                        
+                        if(document.URL.match(/edita/)) {
+                            $('#En_Municipio').editable({
+                                mode        : 'inline',
+                                source      : {'value': data.message}
+                            });
+                            $('#En_Municipio').html(data.message);
+                        }else{
+                            //$('#En_Municipio').editable();
+                            $('#En_Municipio').html(data.message);
+                            $("#En_Municipio").removeClass('editable editable-click editable-empty');
+                        }
+                    } 
+                    
+                }
+            );
+       
+        
+    }
+    getCity();
+});
+
+$(function(){ 
+    //RECEBE A SIGLA E RETORNA O CODIGO DO ESTADO
+    function converterEstados(val) {
+        var data;
+        switch (val.toUpperCase()) {
+            /* UFs */
+            case "AC":
+                data = 12;
+                break;
+            case "AL":
+                data = 27;
+                break;
+            case "AM":
+                data = 13;
+                break;
+            case "AP":
+                data = 16;
+                break;
+            case "BA":
+                data = 29;
+                break;
+            case "CE":
+                data = 23;
+                break;
+            case "DF":
+                data = 53;
+                break;
+            case "ES":
+                data = 32;
+                break;
+            case "GO":
+                data = 52;
+                break;
+            case "MA":
+                data = 21;
+                break;
+            case "MG":
+                data = 31;
+                break;
+            case "MS":
+                data = 50;
+                break;
+            case "MT":
+                data = 51;
+                break;
+            case "PA":
+                data = 15;
+                break;
+            case "PB":
+                data = 25;
+                break;
+            case "PE":
+                data = 26;
+                break;
+            case "PI":
+                data = 22;
+                break;
+            case "PR":
+                data = 41;
+                break;
+            case "RJ":
+                data = 33;
+                break;
+            case "RN":
+                data = 24;
+                break;
+            case "RO":
+                data = 11;
+                break;
+            case "RR":
+                data = 14;
+                break;
+            case "RS":
+                data = 43;
+                break;
+            case "SC":
+                data = 42;
+                break;
+            case "SE":
+                data = 28;
+                break;
+            case "SP":
+                data = 35;
+                break;
+            case "TO":
+                data = 17;
+                break;
+        
+        }
+        return data;
+    }; 
+    // QUANDO SALVA O ESTADO O ARRAY COM OS MUNICIPIOS É PREENCHIDO
+    /**
+     * NOTA: ADICIONADO O SELECT2 PARA FACILITAR NA BUSCA DA CIDADE
+     */
+    $('#En_Estado').on('hidden', function () {
+        var estado = $('#En_Estado').editable('getValue', true);
+        var totosDistritos = MapasCulturais['ibge'][estado];
+        var distrito = [];
+        $.each(totosDistritos, function (indexInArray, valueOfElement) { 
+            distrito.push(valueOfElement);
+        });
+        var sourceCity = [];
+        // REMOVENDO O ELEMENTO ATUAL
+        $('#En_Municipio').remove();
+        // CRIANDO  UM ELEMENTO PARA ARRAY COM AS CIDADES
+        $("#divMunicipio").append('<span class="js-editable" id="En_Municipio" data-original-title="Municipio" data-emptytext="Insira o Município" data-type="select2" data-showButtons="bottom"></span>');
+        $.each(distrito[3], function (indexInArray, valueOfElement) { 
+            // POPULANDO O ARRAY
+            sourceCity.push({'id': valueOfElement.nome, 'text': valueOfElement.nome});
+        });
+        //INSTANCIANDO O X-EDITABLE COM SELECT2
+        $('#En_Municipio').editable({
+            mode        : 'inline',
+            source      : sourceCity,
+            placeholder: 'insira um município'
+        });
+    });
+});

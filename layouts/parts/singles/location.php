@@ -32,7 +32,6 @@ $has_private_location = isset($has_private_location) && $has_private_location
                 <span class="label"><?php \MapasCulturais\i::_e("Estado");?>:</span> <span class="js-editable" id="En_Estado" data-edit="En_Estado" data-original-title="<?php \MapasCulturais\i::esc_attr_e("Estado");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o Estado");?>" data-showButtons="bottom"><?php echo $entity->En_Estado ?>
                 </span>
                 </p>
-
                 <p id="divMunicipio">
                     <span class="label"><?php \MapasCulturais\i::_e("Município");?>:</span> 
                     <span class="js-editable" id="En_Municipio" 
