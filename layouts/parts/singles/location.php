@@ -2,6 +2,11 @@
 $lat = $entity->location->latitude; $lng = $entity->location->longitude;
 $has_private_location = isset($has_private_location) && $has_private_location
 ?>
+<style>
+#select2-drop {
+    width: max-content !important;
+}
+</style>
 <?php if ( $this->isEditable() || (($has_private_location && $entity->publicLocation && $lat && $lng) || (!$has_private_location && $lat && $lng)) ): ?>
     <?php $this->applyTemplateHook('location','before'); ?>
     <div class="servico clearfix">
@@ -27,6 +32,7 @@ $has_private_location = isset($has_private_location) && $has_private_location
                 <span class="label"><?php \MapasCulturais\i::_e("Estado");?>:</span> <span class="js-editable" id="En_Estado" data-edit="En_Estado" data-original-title="<?php \MapasCulturais\i::esc_attr_e("Estado");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o Estado");?>" data-showButtons="bottom"><?php echo $entity->En_Estado ?>
                 </span>
                 </p>
+
                 <p id="divMunicipio">
                     <span class="label"><?php \MapasCulturais\i::_e("Município");?>:</span> 
                     <span class="js-editable" id="En_Municipio" 
@@ -35,7 +41,7 @@ $has_private_location = isset($has_private_location) && $has_private_location
                     data-showButtons="bottom">
                     </span>
                 </p>
-            
+                <p>
             </div>
             <p><span class="label"><?php \MapasCulturais\i::_e("CEP");?>:</span> <span class="js-editable js-mask-cep" id="En_CEP" data-edit="En_CEP" data-original-title="<?php \MapasCulturais\i::esc_attr_e("CEP");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o CEP");?>" data-showButtons="bottom"><?php echo $entity->En_CEP ?></span></p>
             <p><span class="label"><?php \MapasCulturais\i::_e("Logradouro");?>:</span> <span class="js-editable" id="En_Nome_Logradouro" data-edit="En_Nome_Logradouro" data-original-title="<?php \MapasCulturais\i::esc_attr_e("Logradouro");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Insira o logradouro");?>" data-showButtons="bottom"><?php echo $entity->En_Nome_Logradouro ?></span></p>

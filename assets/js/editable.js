@@ -1018,7 +1018,6 @@ $(function(){
         var bairro = $('#En_Bairro').editable('getValue', true);
         var municipio = $('#En_Municipio').editable('getValue', true);
         var estado = $('#En_Estado').editable('getValue', true);
-        console.log({estado})
         //var estado = $('#En_Estado option:selected').text();
 
         if(cep && nome_logradouro && numero && bairro && municipio && estado){

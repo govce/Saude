@@ -2580,46 +2580,44 @@ $(function(){
         }
         return data;
     }; 
-    // QUANDO SALVA O ESTADO PESQUISA OS MUNICIPIO NA API DO IBGE
+    // QUANDO SALVA O ESTADO O ARRAY COM OS MUNICIPIOS É PREENCHIDO
     /**
-     * NOTA: o preenchimento do select dos municipios so funcionou quando eu removi o elemento do DOM e criando um outro com uma instancia do x-editable já preenchida.
+     * NOTA: ADICIONADO O SELECT2 PARA FACILITAR NA BUSCA DA CIDADE
      */
-    $('#En_Estado').on('save', function(e, params) {
-        $('#En_Municipio').editable('setValue', '');
-        var codigo = converterEstados(params.newValue);
-        var dataLocation = {
-            'key' : 'En_Municipio',
-            'idAgente'  : MapasCulturais.entity.id
-        };
-        // API IBGE
-        $.ajax({
-            type: "GET",
-            url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+codigo+'/distritos',
-            data: dataLocation,
-            dataType: "json",
-            success: function (response) {
-                var sourceCity = [];
-                $('#En_Municipio').remove();
-                $("#divMunicipio").append('<span class="js-editable" id="En_Municipio" data-original-title="Municipio" data-emptytext="Insira o Município" data-type="select" data-showButtons="bottom"></span>');
-                $.each(response, function (indexInArray, valueOfElement) { 
-                    sourceCity.push({'value': valueOfElement.nome, 'text': valueOfElement.nome});  
-                });
-                $('#En_Municipio').editable({
-                    mode        : 'inline',
-                    source      : sourceCity
-                });
-            }
+    $('#En_Estado').on('hidden', function () {
+        var estado = $('#En_Estado').editable('getValue', true);
+        var totosDistritos = MapasCulturais['ibge'][estado];
+        var distrito = [];
+        $.each(totosDistritos, function (indexInArray, valueOfElement) { 
+            distrito.push(valueOfElement);
+        });
+        var sourceCity = [];
+        // REMOVENDO O ELEMENTO ATUAL
+        $('#En_Municipio').remove();
+        // CRIANDO  UM ELEMENTO PARA ARRAY COM AS CIDADES
+        $("#divMunicipio").append('<span class="js-editable" id="En_Municipio" data-original-title="Municipio" data-emptytext="Insira o Município" data-type="select2" data-showButtons="bottom"></span>');
+        $.each(distrito[3], function (indexInArray, valueOfElement) { 
+            // POPULANDO O ARRAY
+            sourceCity.push({'id': valueOfElement.code, 'text': valueOfElement.nome});
+        });
+        //INSTANCIANDO O X-EDITABLE COM SELECT2
+        $('#En_Municipio').editable({
+            mode        : 'inline',
+            source      : sourceCity,
+            placeholder: 'insira um município'
         });
     });
 });
+
 $(document).ready(function () {
+    $('.js-example-basic-single').select2();
     // PARA PREENCHIMENTO DO MUNICIPIO QUANDO A PÁGINA É CARREGADA
     function getCity() {
         var dataLocation = {
             'key' : 'En_Municipio',
             'idAgente'  : MapasCulturais.entity.id
         };
-        
+            // BUSCANDO NO BANCO QUAL A CIDADE CADASTRADA, CASO HAJA
             $.getJSON(MapasCulturais.baseURL+ 'location/city/', dataLocation,
                 function (data, textStatus, jqXHR) {
                     if(data.status == 200){
