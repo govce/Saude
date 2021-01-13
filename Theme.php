@@ -90,7 +90,7 @@ class Theme extends BaseV1\Theme{
 
         $app = App::i();
         $app->registerAuthProvider('keycloak');
-        // $app->registerController('location' , 'Saude\Controllers\Location');
+        $app->registerController('taxonomias', 'Saude\Controllers\Taxonomias');
     }
     
 
