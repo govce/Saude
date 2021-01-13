@@ -61,6 +61,12 @@ return array(
                 "v::url('facebook.com')" => \MapasCulturais\i::__("A url informada é inválida.")
             )
         ),
+        'instagram' => array(
+            'label' => \MapasCulturais\i::__('Instagram'),
+            'validations' => array(
+                "v::startsWith('@')" => \MapasCulturais\i::__("O usuário informado é inválido. Informe no formato @usuario e tente novamente")
+            )
+        ),
         'twitter' => array(
             'label' => \MapasCulturais\i::__('Twitter'),
             'validations' => array(
