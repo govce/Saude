@@ -54,7 +54,9 @@ class Theme extends BaseV1\Theme{
         //alertas
         $app->view->enqueueStyle('app', 'pnotify', 'css/pnotify.css');
         $app->view->enqueueStyle('app', 'brighttheme', 'css/pnotify.brighttheme.css');
+        $app->view->enqueueStyle('app', 'pnotifyButtons', 'css/pnotify.buttons.css');
         $app->view->enqueueScript('app', 'pnotify', 'js/pnotify.js');
+        $app->view->enqueueScript('app', 'pnotifyButtons', 'js/pnotify.buttons.js');
 
     }
 

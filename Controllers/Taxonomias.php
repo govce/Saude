@@ -2,7 +2,8 @@
 namespace Saude\Controllers;
 use \MapasCulturais\App;
 use \MapasCulturais\i;
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 class Taxonomias extends \MapasCulturais\Controller{
 
     function GET_info() {
@@ -37,7 +38,15 @@ class Taxonomias extends \MapasCulturais\Controller{
     function GET_allData() {
         $app = App::i();
         $termsGraus = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_graus_academicos']);
-        $graus = array_map(function($term) { return $term->term; }, $termsGraus);
+        $graus = [];
+        foreach ($termsGraus as $key => $value) {
+            //echo $key." - ".$value."<br />";
+            echo $termsGraus[$key]->id."<br />"; 
+            array_push($graus, [
+                'id' => $termsGraus[$key]->id, 
+                'nome' => $termsGraus[$key]->term]
+            );
+        }
         return $this->json($graus);
     }
 /*
