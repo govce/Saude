@@ -1,33 +1,7 @@
-// (function() {
-//     'use strict';
 
-//     var module = angular.module('taxonomies', ['ngSanitize', 'checklist-model','infinite-scroll']);
-
-//     module.config(['$httpProvider', function ($httpProvider) {
-//         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-//         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-//         $httpProvider.defaults.transformRequest = function (data) {
-//             var result = angular.isObject(data) && String(data) !== '[object File]' ? $.param(data) : data;
-
-//             return result;
-//         };
-//     }]);
-
-//     module.factory('TaxonomiaService',['$http', 'UrlService'], function($http,UrlService){
-//         var url = new UrlService('taxonomias');
-//         console.log({url});
-//     });
-
-//     module.controller('TaxonomiaController', ['TaxonomiaService' , '$scope', 'EditBox', '$http', 'UrlService'], function($scope,  TaxonomiaService, EditBox, $http, UrlService) {
-//         var labels = MapasCulturais.gettext.opportunityClaim.claimSendError;
-//         console.log({labels})
-//         $scope.labelTest = "CompliantController";
-//     })
-
-// })();
 $(document).ready(function () {
     console.log(MapasCulturais.baseURL);
-    
+    PNotify.prototype.options.styling = "brighttheme";
     function dataTable() {
         var graus = [];
         $.getJSON(MapasCulturais.baseURL+'taxonomias/allData',
@@ -43,9 +17,7 @@ $(document).ready(function () {
                             '<i class="fa fa-trash"></i> Excluir'+
                             '</a>'+
                         '</td>'+
-                        
                         '</tr>');
-                    console.log(data[i]);
                 }
                 
                 // graus.push(data);
@@ -75,7 +47,6 @@ $(function () {
             success: function (response) {
                 $('#taxonomiaForm')[0].reset();
                 dataTable();
-                console.log(response)
             }
         }).fail(function(request) {
             console.log(request)

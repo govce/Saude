@@ -42,8 +42,7 @@ class Theme extends BaseV1\Theme{
         $app = App::i();
         //$this->jsObject['angularAppDependencies'][] = 'taxonomies';
         $app->hook('view.render(<<*>>):before', function() use($app) {
-            $app->view->enqueueStyle('app', 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-            $this->jsObject['angularAppDependencies'][] = 'entity.module.opportunity';
+            
             $this->_publishAssets();
         });
     }
@@ -51,6 +50,12 @@ class Theme extends BaseV1\Theme{
     protected function _publishAssets() {
         $app = App::i();
         $app->view->enqueueScript('app', 'taxonomies', 'js/taxonomies.js');
+        $app->view->enqueueStyle('app', 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+        //alertas
+        $app->view->enqueueStyle('app', 'pnotify', 'css/pnotify.css');
+        $app->view->enqueueStyle('app', 'brighttheme', 'css/pnotify.brighttheme.css');
+        $app->view->enqueueScript('app', 'pnotify', 'js/pnotify.js');
+
     }
 
     function getAddressByPostalCode($postalCode) {
