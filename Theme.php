@@ -39,7 +39,15 @@ class Theme extends BaseV1\Theme{
     function _init() {
         parent::_init();
         $app = App::i();
+        //$this->jsObject['angularAppDependencies'][] = 'taxonomies';
+        $app->hook('view.render(<<*>>):before', function() use($app) {
+            $this->_publishAssets();
+        });
+    }
 
+    protected function _publishAssets() {
+        $app = App::i();
+        $app->view->enqueueScript('app', 'taxonomies', 'js/taxonomies.js');
     }
 
     function getAddressByPostalCode($postalCode) {
@@ -87,7 +95,7 @@ class Theme extends BaseV1\Theme{
 
     function register() {
         parent::register();
-
+        
         $app = App::i();
         $app->registerAuthProvider('keycloak');
         $app->registerController('taxonomias', 'Saude\Controllers\Taxonomias');

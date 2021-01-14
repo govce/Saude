@@ -9,26 +9,27 @@ class Taxonomias extends \MapasCulturais\Controller{
         $this->render('info');
         //echo "index";
     }
-/*
+
     function POST_create() {
-        if(empty($this->postData['term']))
-        {
-            $app = App::i();
-            $app->redirect($app->redirect('/taxonomias/taxonomias_area/' , 401));
-        }
-        try {
-            $taxo = new \MapasCulturais\Entities\Term;
-            $taxo->taxonomy = $this->postData['type'];
-            $taxo->term = $this->postData['term'];
-            $taxo->description = $this->postData['term']. ' - description';
-            $taxo->save();
-            return $this->json(true);
-        } catch (\Throwable $th) {
-            return "Retornar erro: ".$th->getMessage();
-        }
+        dump($this->postData);
+        // if(empty($this->postData['term']))
+        // {
+        //     $app = App::i();
+        //     $app->redirect($app->redirect('/taxonomias/taxonomias_area/' , 401));
+        // }
+        // try {
+        //     $taxo = new \MapasCulturais\Entities\Term;
+        //     $taxo->taxonomy = $this->postData['type'];
+        //     $taxo->term = $this->postData['term'];
+        //     $taxo->description = $this->postData['term']. ' - description';
+        //     $taxo->save();
+        //     return $this->json(true);
+        // } catch (\Throwable $th) {
+        //     return "Retornar erro: ".$th->getMessage();
+        // }
         
     }
-
+/*
     function POST_update() {
         try {
             $app = App::i();
