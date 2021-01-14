@@ -7073,3 +7073,7 @@ input-lg + .form-control-feedback,
     font-size: 12px;
   }
 }
+.required_form {
+  font-size: 9px;
+  color: #914545;
+}

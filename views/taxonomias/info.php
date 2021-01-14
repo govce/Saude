@@ -1,10 +1,10 @@
 <?php
-$app = MapasCulturais\App::i();
-$this->layout = 'panel';
-$subsite = $app->getCurrentSubsite();
+namespace MapasCulturais;
 
-$termsGraus = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_graus_academicos']);
-$graus = array_map(function($term) { return $term->term; }, $termsGraus);
+$this->layout = 'panel';
+
+$app = \MapasCulturais\App::i();
+$subsite = $app->getCurrentSubsite();
 
 ?>
 <?php $this->applyTemplateHook('content','before'); ?>
@@ -33,7 +33,7 @@ $graus = array_map(function($term) { return $term->term; }, $termsGraus);
             <?php $this->applyTemplateHook('tabs','after'); ?>
 
             <div id="grau-academico">
-                <?php $this->part('academic-degree', array('graus' => $graus)); ?>
+                <?php $this->part('academic-degree'); ?>
             </div>
             <div id="main-inscritos">
                 <h1>Inscroitp</h1>

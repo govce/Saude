@@ -3,7 +3,8 @@ namespace Saude;
 
 use MapasCulturais\Themes\BaseV1;
 use MapasCulturais\App;
-
+use MapasCulturais\Entities;
+use MapasCulturais\Definitions;
 use MapasCulturais\i;
 
 class Theme extends BaseV1\Theme{
@@ -41,6 +42,8 @@ class Theme extends BaseV1\Theme{
         $app = App::i();
         //$this->jsObject['angularAppDependencies'][] = 'taxonomies';
         $app->hook('view.render(<<*>>):before', function() use($app) {
+            $app->view->enqueueStyle('app', 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+            $this->jsObject['angularAppDependencies'][] = 'entity.module.opportunity';
             $this->_publishAssets();
         });
     }
