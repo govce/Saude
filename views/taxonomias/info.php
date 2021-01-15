@@ -1,11 +1,13 @@
 <?php
-namespace MapasCulturais;
+use MapasCulturais\App;
 
 $this->layout = 'panel';
 
 $app = \MapasCulturais\App::i();
 $subsite = $app->getCurrentSubsite();
-
+$this->includeMapAssets();  
+$this->includeSearchAssets(); 
+$this->bodyProperties['ng-app'] = "taxonomies";
 ?>
 <?php $this->applyTemplateHook('content','before'); ?>
 <div class="panel-main-content">

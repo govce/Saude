@@ -37,7 +37,7 @@ class Taxonomias extends \MapasCulturais\Controller{
 
     function GET_allData() {
         $app = App::i();
-        $termsGraus = $app->repo('Term')->findBy(['taxonomy' => 'profissionais_graus_academicos']);
+        $termsGraus = $app->repo('Term')->findBy(['taxonomy' => $this->getData['params']]);
         $graus = [];
         foreach ($termsGraus as $key => $value) {
             //echo $key." - ".$value."<br />";
@@ -49,19 +49,18 @@ class Taxonomias extends \MapasCulturais\Controller{
         }
         return $this->json($graus);
     }
-/*
-    function POST_update() {
-        try {
-            $app = App::i();
-            $taxoUp = $app->repo('Term')->findBy(['id' => $this->postData['id'] ]);
-            $taxoUp[0]->term = $this->postData['term'];
-            $taxoUp[0]->description = $this->postData['description'];
-            return $this->json(true);
-        } catch (\Throwable $th) {
-            return "Retornar erro: ".$th->getMessage();
-        }
-    }
 
+    function POST_alterTaxo() {
+        $app = App::i();
+        dump($this->postData);
+        $app = App::i();
+        $taxoUp = $app->repo('Term')->findBy(['id' => $this->postData['id'] ], ['id' => "ASC"]);
+        $taxoUp[0]->term = $this->postData['nome'];
+        $app->em->flush();
+        return $this->json(['message' => 'Cadastro com sucesso', 'status' => 'success'], 200);
+        
+    }
+/*
     function DELETE_delete()
     {
        try {

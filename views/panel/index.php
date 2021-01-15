@@ -30,7 +30,7 @@ $button = "";
                         <span class="alignleft"><?php \MapasCulturais\i::esc_attr_e("Taxonomias");  ?></span>
                     </div>
                     <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'agentes') ?>" class="btn btn-secound">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'info') ?>" class="btn btn-secound">
                         <div class="icon icon-agent alignleft"></div>
                         Agente</a>
                     </div>

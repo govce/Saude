@@ -1,0 +1,141 @@
+(function (angular) {
+    "use strict";
+    
+    var module = angular.module('taxonomies', ['search.service.find', 'infinite-scroll', 'mc.module.notifications']);
+
+    module.config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+        $httpProvider.defaults.transformRequest = function (data) {
+            var result = angular.isObject(data) && String(data) !== '[object File]' ? $.param(data) : data;
+
+            return result;
+        };
+    }]);
+
+    module.factory('TaxonomiaService',['$http'], function($http){
+       // var url = new UrlService('taxonmias');
+        console.log('url');
+    });
+    
+    module.controller('TaxonomiaController', ['$scope' , '$http', function ($scope , $http) {
+        
+        $scope.graus = [];
+        $scope.data;
+        $scope.data = {
+            showInput: false,
+            fields_: ""
+        }
+        $scope.getDataGrau = function(params){
+            $http({
+                method: 'GET',
+                url: MapasCulturais.baseURL+'taxonomias/allData/?params='+params
+            }).then(function successCallback(response) {
+                //console.log(response.data)
+                $scope.graus.push(response.data);
+            }, function errorCallback(error) {
+                console.log(error)
+            });
+        }
+
+        $scope.editarTaxo = function (id) {
+            console.log()
+            // console.log($event.target.dataset.id)
+            // var idInput = $scope.data.fields_.concat($event.target.dataset.id);
+            // console.log(idInput);
+            jQuery("#input_"+id).removeAttr('style');
+            jQuery("#saveInput_"+id).removeAttr('style');
+        }
+
+        $scope.getDataGrau('profissionais_graus_academicos');
+
+        $scope.saveTaxo = function ($event) {
+            console.log($event)
+            //$event.target.dataset.id
+            var data = {id: $event.target.dataset.cod, nome: $event.target.dataset.nome};
+            $http.post( MapasCulturais.baseURL+'taxonomias/alterTaxo', data)
+            .then(function successCallback(response) {
+                $scope.graus = [];
+                $("#input_"+$event.target.dataset.cod).css("display","none");
+                $("#saveInput_"+$event.target.dataset.cod).css("display","none");
+                $scope.getDataGrau('profissionais_graus_academicos');
+                new PNotify({
+                    title: 'Sucesso!',
+                    text: 'Alteração realizado com sucesso.',
+                    type: 'success'
+                });
+            });
+        }
+    }]);
+
+
+})(angular);
+jQuery(document).ready(function() {
+
+
+
+});
+
+// $(document).ready(function () {
+//     console.log(MapasCulturais.baseURL);
+//     PNotify.prototype.options.styling = "brighttheme";
+// });
+// function editarTaxo(id) {
+//     console.log('editarTaxo()' , id);
+// }
+// $(function () {
+   
+//     function dataTable() {
+//         var graus = [];
+//         $.getJSON(MapasCulturais.baseURL+'taxonomias/allData',
+//             function (data, textStatus, jqXHR) {
+//                 console.log(data);
+//                 for (var i = 0; i < data.length; i++) {
+//                     $("#table-taxo-grau > tbody").append('<tr>'+
+//                         '<td>'+data[i].nome+'</td>'+
+//                         '<td><a class="btn btn-default" href="#" onclick="editarTaxo('+data[i].id+')" style="margin: 5px">'+ 
+//                             '<i class="fa fa-edit"></i> Editar'+
+//                             '</a>'+
+//                             '<a class="btn btn-danger" href="#">'+ 
+//                             '<i class="fa fa-trash"></i> Excluir'+
+//                             '</a>'+
+//                         '</td>'+
+//                         '</tr>');
+//                 }
+                
+//                 // graus.push(data);
+//                 // $("#table-taxo-grau").append('<tbody>'+
+//                 //     '<tr><td>'+data[index]+'</td></tr>'+
+//                 // '</tbody>')
+                
+//             }
+//         );
+//     }
+
+//     dataTable();
+//     $("#btn-taxonomy-form").click(function (e) { 
+//         e.preventDefault();
+//         console.log('taxonomiaForm');
+//         var form = $("#taxonomiaForm").serialize();
+//         console.log(form);
+//         $.ajax({
+//             type: "POST",
+//             url: MapasCulturais.baseURL+'taxonomias/create',
+//             data: form,
+//             dataType: "json",
+//             success: function (response) {
+//                 $('#taxonomiaForm')[0].reset();
+//                 dataTable();
+//                 new PNotify({
+//                     title: 'Sucesso!',
+//                     text: 'Cadastro realizado com sucesso.',
+//                     type: 'success'
+//                 });
+//             }
+//         }).fail(function(request) {
+//             console.log(request)
+//             alert(request.responseJSON.message);
+//             MapasCulturais.Messages.error(request.responseJSON.message);
+//           });
+//     });
+// });
