@@ -14,12 +14,13 @@ class Taxonomias extends \MapasCulturais\Controller{
 
     function POST_create() {
         
-        if(empty($this->postData['term']) || empty($this->postData['taxonomy']))
-        {
-            return $this->json(['message' => 'Taxonomia e Term são obrigatórios', 'status' => 'error'], 500);
-            //$app->redirect($app->redirect('/taxonomias/info/' , 401));
-        }
-        
+        // if(empty($this->postData['nome']) || empty($this->postData['description']))
+        // {
+        //     return $this->json(['message' => 'Taxonomia e Term são obrigatórios', 'status' => 'error'], 500);
+        //     //$app->redirect($app->redirect('/taxonomias/info/' , 401));
+        // }
+        // dump($this->postData);
+        // die();
         // $app->em->persist($taxo);
         // $app->em->flush();
         //dump($taxo);

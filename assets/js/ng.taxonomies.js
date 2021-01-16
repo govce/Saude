@@ -23,8 +23,8 @@
         $scope.graus = [];
         $scope.data;
         $scope.data = {
-            showInput: false,
-            fields_: ""
+            termName: "",
+            termDescription: ""
         }
         $scope.getDataGrau = function(params){
             $http({
@@ -49,7 +49,7 @@
 
         $scope.getDataGrau('profissionais_graus_academicos');
 
-        $scope.saveTaxo = function ($event) {
+        $scope.alterTaxo = function ($event) {
             console.log($event)
             //$event.target.dataset.id
             var data = {id: $event.target.dataset.cod, nome: $event.target.dataset.nome};
@@ -62,6 +62,20 @@
                 new PNotify({
                     title: 'Sucesso!',
                     text: 'Alteração realizado com sucesso.',
+                    type: 'success'
+                });
+            });
+        }
+        $scope.saveTaxo = function (dados, params) {
+            //$event.target.dataset.id
+            var data = {taxonomy: params ,term: dados.termName, description: dados.termDescription};
+            $http.post( MapasCulturais.baseURL+'taxonomias/create', data)
+            .then(function successCallback(response) {
+                $scope.graus = [];
+                $scope.getDataGrau('profissionais_graus_academicos');
+                new PNotify({
+                    title: 'Sucesso!',
+                    text: 'Cadastro realizado com sucesso.',
                     type: 'success'
                 });
             });
@@ -113,29 +127,28 @@ jQuery(document).ready(function() {
 //     }
 
 //     dataTable();
-//     $("#btn-taxonomy-form").click(function (e) { 
-//         e.preventDefault();
-//         console.log('taxonomiaForm');
-//         var form = $("#taxonomiaForm").serialize();
-//         console.log(form);
-//         $.ajax({
-//             type: "POST",
-//             url: MapasCulturais.baseURL+'taxonomias/create',
-//             data: form,
-//             dataType: "json",
-//             success: function (response) {
-//                 $('#taxonomiaForm')[0].reset();
-//                 dataTable();
-//                 new PNotify({
-//                     title: 'Sucesso!',
-//                     text: 'Cadastro realizado com sucesso.',
-//                     type: 'success'
-//                 });
-//             }
-//         }).fail(function(request) {
-//             console.log(request)
-//             alert(request.responseJSON.message);
-//             MapasCulturais.Messages.error(request.responseJSON.message);
-//           });
-//     });
-// });
+    $("#btn-taxonomy-form").click(function (e) { 
+        e.preventDefault();
+        console.log('taxonomiaForm');
+        var form = $("#taxonomiaForm").serialize();
+        console.log(form);
+        $.ajax({
+            type: "POST",
+            url: MapasCulturais.baseURL+'taxonomias/create',
+            data: form,
+            dataType: "json",
+            success: function (response) {
+                $('#taxonomiaForm')[0].reset();
+                dataTable();
+                new PNotify({
+                    title: 'Sucesso!',
+                    text: 'Cadastro realizado com sucesso.',
+                    type: 'success'
+                });
+            }
+        }).fail(function(request) {
+            console.log(request)
+            alert(request.responseJSON.message);
+            MapasCulturais.Messages.error(request.responseJSON.message);
+          });
+    });

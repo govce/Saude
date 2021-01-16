@@ -27,7 +27,7 @@ $this->bodyProperties['ng-app'] = "taxonomies";
                     </a>
                 </li>
                 <li>
-                    <a href="#main-inscritos" rel='noopener noreferrer'><?php \MapasCulturais\i::_e("inscritos");?>
+                    <a href="#main-inscritos" rel='noopener noreferrer'><?php \MapasCulturais\i::_e("Especialidades");?>
                     </a>
                 </li>
                 <?php $this->applyTemplateHook('tabs','end'); ?>
@@ -38,7 +38,23 @@ $this->bodyProperties['ng-app'] = "taxonomies";
                 <?php $this->part('academic-degree'); ?>
             </div>
             <div id="main-inscritos">
-                <h1>Inscroitp</h1>
+            <form id="taxonomiaForm">
+        <div class="form-group">
+            <input type="hidden" name="taxonomy" value="profissionais_graus_academicos" class="form-control" placeholder="taxonomias">
+
+        </div>
+        <div class="form-group">
+            <label>Nome: </label> <span class="required_form">Obrigatório</span><br>
+            <input type="text" ng-model="data.termName" id="term" class="form-control" placeholder="Taxomonias Escrita">
+        </div>
+        <div class="form-group">
+            <label for="">Descrição: </label>
+            <input type="text" name="description"  ng-model="data.termDescription" class="form-control" placeholder="Descrição do termo da taxonomia">
+            <button id="btn-taxonomy-form" ng-click="saveTaxo(data, 'profissionais_especialidades')" class="btn btn-primary"> 
+                <i class="fa fa-save"></i>
+            Cadastrar </button>
+        </div>
+    </form>
             </div>
         </div>
     </div>
