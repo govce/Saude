@@ -52,10 +52,11 @@ class Theme extends BaseV1\Theme{
         $app->view->enqueueStyle('app', 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
         //alertas
         $app->view->enqueueStyle('app', 'pnotify', 'css/pnotify.css');
-        $app->view->enqueueStyle('app', 'brighttheme', 'css/pnotify.brighttheme.css');
-        $app->view->enqueueStyle('app', 'pnotifyButtons', 'css/pnotify.buttons.css');
+        $app->view->enqueueStyle('app', 'pnotify.brighttheme', 'css/pnotify.brighttheme.css');
+        $app->view->enqueueStyle('app', 'pnotify.buttons', 'css/pnotify.buttons.css');
         $app->view->enqueueScript('app', 'pnotify', 'js/pnotify.js');
-        $app->view->enqueueScript('app', 'pnotifyButtons', 'js/pnotify.buttons.js');
+        $app->view->enqueueScript('app', 'pnotify.buttons', 'js/pnotify.buttons.js');
+        $app->view->enqueueScript('app', 'pnotify.confirm', 'js/pnotify.confirm.js');
 
     }
 

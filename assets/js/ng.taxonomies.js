@@ -24,7 +24,8 @@
         $scope.data;
         $scope.data = {
             termName: "",
-            termDescription: ""
+            termDescription: "",
+            taxonomy: "profissionais_graus_academicos"
         }
         $scope.getDataGrau = function(params){
             $http({
@@ -38,6 +39,7 @@
             });
         }
 
+        $scope.getDataGrau('profissionais_graus_academicos');
         $scope.editarTaxo = function (id) {
             console.log()
             // console.log($event.target.dataset.id)
@@ -46,9 +48,6 @@
             jQuery("#input_"+id).removeAttr('style');
             jQuery("#saveInput_"+id).removeAttr('style');
         }
-
-        $scope.getDataGrau('profissionais_graus_academicos');
-
         $scope.alterTaxo = function ($event) {
             console.log($event)
             //$event.target.dataset.id
@@ -66,9 +65,11 @@
                 });
             });
         }
-        $scope.saveTaxo = function (dados, params) {
+
+        $scope.saveTaxo = function (dados) {
             //$event.target.dataset.id
-            var data = {taxonomy: params ,term: dados.termName, description: dados.termDescription};
+            var data = {taxonomy: dados.taxonomy ,term: dados.termName, description: dados.termDescription};
+            console.log({data})
             $http.post( MapasCulturais.baseURL+'taxonomias/create', data)
             .then(function successCallback(response) {
                 $scope.graus = [];
@@ -79,6 +80,58 @@
                     type: 'success'
                 });
             });
+        }
+        $scope.excluirTaxo = function (id) {
+            new PNotify({
+                title: 'Confirmação!',
+                text: 'Deseja realmente excluir esse registro?.',
+                hide: false,
+                type: 'info',
+                closer: false,
+                sticker: false,
+                destroy: true,
+                stack: {"dir1": "down", "dir2": "right", "push": "top", "modal": true, "overlay_close": true},
+                confirm: {
+                    confirm: true,
+                    buttons: [{
+                        text: 'Sim',
+                        addClass: 'btn btn-default pull-left',
+                        click: function(notice) {
+                            $http.delete( MapasCulturais.baseURL+'taxonomias/delete/'+id)
+                            .then(function successCallback(response) {
+                                notice.remove();
+                                $scope.graus = [];
+                                $scope.getDataGrau('profissionais_graus_academicos');
+                                new PNotify({
+                                    title: 'Sucesso!',
+                                    text: 'Cadastro excluido com sucesso.',
+                                    type: 'success'
+                                });
+                            });
+                        }
+                       
+                    }, {
+                        text: 'Não, cancelar',
+                        addClass: 'btn btn-default',
+                        click: function(notice) {
+                            notice.remove();
+                        }
+                    }]
+                },
+                buttons: {
+                    closer: false,
+                    sticker: false
+                },
+                history: {
+                    history: false
+                },
+            });
+        }
+
+        $scope.chamaTabela = function (params) {
+            console.log('chamaTabela' , params);
+            $scope.graus = [];
+            $scope.getDataGrau(params);
         }
     }]);
 

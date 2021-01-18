@@ -20,41 +20,15 @@ $this->bodyProperties['ng-app'] = "taxonomies";
     <div class="panel panel-default">
         <div class="panel-heading">Taxonomias de Agentes</div>
         <div class="panel-body">
-            <?php $this->applyTemplateHook('tabs','before'); ?>
-            <ul class="abas clearfix">
-                <li class="active">
-                    <a href="#grau-academico" rel='noopener noreferrer'><?php \MapasCulturais\i::_e("Grau Acadêmico");?>
-                    </a>
-                </li>
-                <li>
-                    <a href="#main-inscritos" rel='noopener noreferrer'><?php \MapasCulturais\i::_e("Especialidades");?>
-                    </a>
-                </li>
-                <?php $this->applyTemplateHook('tabs','end'); ?>
-            </ul>
-            <?php $this->applyTemplateHook('tabs','after'); ?>
+            <div ng-controller="TaxonomiaController">
+                <?php $this->part('taxonomy/form'); ?>
 
-            <div id="grau-academico">
-                <?php $this->part('academic-degree'); ?>
+            <div>
+                <?php $this->part('taxonomy/table-taxonomy'); ?>
             </div>
             <div id="main-inscritos">
-            <form id="taxonomiaForm">
-        <div class="form-group">
-            <input type="hidden" name="taxonomy" value="profissionais_graus_academicos" class="form-control" placeholder="taxonomias">
-
-        </div>
-        <div class="form-group">
-            <label>Nome: </label> <span class="required_form">Obrigatório</span><br>
-            <input type="text" ng-model="data.termName" id="term" class="form-control" placeholder="Taxomonias Escrita">
-        </div>
-        <div class="form-group">
-            <label for="">Descrição: </label>
-            <input type="text" name="description"  ng-model="data.termDescription" class="form-control" placeholder="Descrição do termo da taxonomia">
-            <button id="btn-taxonomy-form" ng-click="saveTaxo(data, 'profissionais_especialidades')" class="btn btn-primary"> 
-                <i class="fa fa-save"></i>
-            Cadastrar </button>
-        </div>
-    </form>
+                <h1>PROFISSIONAL</h1>
+            </div>
             </div>
         </div>
     </div>

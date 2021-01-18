@@ -61,18 +61,21 @@ class Taxonomias extends \MapasCulturais\Controller{
         return $this->json(['message' => 'Cadastro com sucesso', 'status' => 'success'], 200);
         
     }
-/*
+
     function DELETE_delete()
     {
+        //dump($this->urlData);
+
        try {
             $app = App::i();
-            $taxoUp = $app->repo('Term')->find($this->postData['id']);
+            $taxoUp = $app->repo('Term')->find($this->urlData['id']);
             $taxoUp->delete();
+            $app->em->flush();
             return $this->json(true);
        } catch (\Throwable $th) {
            echo $th->getMessage();
        }
         
     }
-    */
+
 }
