@@ -18,16 +18,16 @@ $this->bodyProperties['ng-app'] = "taxonomies";
     </p>
     <?php endif; ?>
     <div class="panel panel-default">
-        <div class="panel-heading">Taxonomias de Agentes</div>
+        <div class="panel-heading"><?php \MapasCulturais\i::_e('Taxonomias dos Projetos'); ?></div>
         <div class="panel-body">
-        
+
             <div ng-controller="TaxonomiaController">
                 <?php 
                     $taxo = [
-                        'profissionais_graus_academicos' => 'Grau Acadêmico', 'profissionais_categorias_profissionais' => 'Categoria profissional', 
-                        'profissionais_especialidades' => 'Especialidade'
+                        'project_type' => 'Tipos de projeto', 
+                        'project_taxonomia' => 'Taxonomia do Projeto'
                     ];
-                    $this->part('taxonomy/form', ['taxo' => $taxo]); ?>
+                $this->part('taxonomy/form', ['taxo' => $taxo]); ?>
                 <div>
                     <?php $this->part('taxonomy/table-taxonomy'); ?>
                 </div>

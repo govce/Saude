@@ -8,6 +8,7 @@ $subsite = $app->getCurrentSubsite();
 $this->includeMapAssets();  
 $this->includeSearchAssets(); 
 $this->bodyProperties['ng-app'] = "taxonomies";
+$this->jsObject['opportunityIdSpace'] = 5;
 ?>
 <?php $this->applyTemplateHook('content','before'); ?>
 <div class="panel-main-content">
@@ -18,16 +19,15 @@ $this->bodyProperties['ng-app'] = "taxonomies";
     </p>
     <?php endif; ?>
     <div class="panel panel-default">
-        <div class="panel-heading">Taxonomias de Agentes</div>
+        <div class="panel-heading"><?php \MapasCulturais\i::_e('Taxonomias dos Espaços'); ?></div>
         <div class="panel-body">
-        
             <div ng-controller="TaxonomiaController">
                 <?php 
                     $taxo = [
-                        'profissionais_graus_academicos' => 'Grau Acadêmico', 'profissionais_categorias_profissionais' => 'Categoria profissional', 
-                        'profissionais_especialidades' => 'Especialidade'
+                        'instituicao_tipos_unidades' => 'Tipos de unidade', 'instituicao_tipos_gestao' => 'Tipo de gestão', 
+                        'instituicao_servicos' => 'Serviços'
                     ];
-                    $this->part('taxonomy/form', ['taxo' => $taxo]); ?>
+                $this->part('taxonomy/form', ['taxo' => $taxo]); ?>
                 <div>
                     <?php $this->part('taxonomy/table-taxonomy'); ?>
                 </div>

@@ -25,25 +25,20 @@
         $scope.data = {
             termName: "",
             termDescription: "",
-            taxonomy: "profissionais_graus_academicos"
+            taxonomy: "",
+            nameTaxonomy: ""
         }
         $scope.totalTaxo = 0;
         $scope.getDataGrau = function(params){
-            $http({
-                method: 'GET',
-                url: MapasCulturais.baseURL+'taxonomias/allData/?params='+params
-            }).then(function successCallback(response) {
-                console.log(response.data.length)
-                $scope.totalTaxo = response.data.length;
-                $scope.graus.push(response.data);
-            }, function errorCallback(error) {
-                console.log(error)
+            $http.get(MapasCulturais.baseURL+'taxonomias/allData/?params='+params).success(function(response){
+                $scope.totalTaxo = response.length;
+                response.forEach(element => {
+                    $scope.graus.push({'id' : element.id, 'nome' : element.nome});
+                });
             });
         }
 
-        $scope.getDataGrau('profissionais_graus_academicos');
         $scope.editarTaxo = function (id) {
-            console.log()
             // console.log($event.target.dataset.id)
             // var idInput = $scope.data.fields_.concat($event.target.dataset.id);
             // console.log(idInput);
@@ -51,8 +46,8 @@
             jQuery("#saveInput_"+id).removeAttr('style');
             jQuery("#cancelarSave_"+id).removeAttr('style');
         }
-        $scope.alterTaxo = function ($event) {
-            console.log($event)
+
+        $scope.alterTaxo = function ($event, taxo) {
             //$event.target.dataset.id
             var data = {id: $event.target.dataset.cod, nome: $event.target.dataset.nome};
             $http.post( MapasCulturais.baseURL+'taxonomias/alterTaxo', data)
@@ -60,7 +55,7 @@
                 $scope.graus = [];
                 $("#input_"+$event.target.dataset.cod).css("display","none");
                 $("#saveInput_"+$event.target.dataset.cod).css("display","none");
-                $scope.getDataGrau('profissionais_graus_academicos');
+                $scope.getDataGrau(taxo);
                 new PNotify({
                     title: 'Sucesso!',
                     text: 'Alteração realizado com sucesso.',
@@ -68,37 +63,53 @@
                 });
             });
         }
+
         $scope.cancelarSave = function (id) {
             jQuery("#input_"+id).css("display", "none");
             jQuery("#saveInput_"+id).css("display", "none");
             jQuery("#cancelarSave_"+id).css("display", "none");
         }
+
         $scope.saveTaxo = function (dados) {
             //$event.target.dataset.id
             var data = {taxonomy: dados.taxonomy ,term: dados.termName, description: dados.termDescription};
-            console.log({data})
             $http.post( MapasCulturais.baseURL+'taxonomias/create', data)
             .then(function successCallback(response) {
                 $scope.graus = [];
-                $scope.getDataGrau('profissionais_graus_academicos');
+                $scope.data.termName = "";
+                //Exercitationem repre
+                $scope.getDataGrau(response.config.data.taxonomy);
                 new PNotify({
-                    title: 'Sucesso!',
-                    text: 'Cadastro realizado com sucesso.',
-                    type: 'success'
+                    title: response.data.title,
+                    text: response.data.message,
+                    type: response.data.type
                 });
+                
             }).catch(function(e){
                 console.log(e)
-                new PNotify({
-                    title: 'Ops!',
-                    text: e.data.message,
-                    type: 'error'
-                });
-                throw e;
+                $scope.graus = [];
+                if(e.config.data.taxonomy == "") {
+                    new PNotify({
+                        title: e.data.title,
+                        text: e.data.message,
+                        type: e.data.type
+                    });
+                }else if(e.status == 500){
+                    $scope.getDataGrau(e.config.data.taxonomy);
+                    new PNotify({
+                        title: 'Ops!',
+                        text: 'Valor duplicado ou ocorreu um erro inesperado.',
+                        type: 'error'
+                    });
+                    throw e;
+                }
+                
             }).finally(function() {
                 console.log('This finally block');
             });
         }
-        $scope.excluirTaxo = function (id) {
+
+        $scope.excluirTaxo = function (id, taxo) {
             new PNotify({
                 title: 'Confirmação!',
                 text: 'Deseja realmente excluir esse registro?.',
@@ -118,7 +129,7 @@
                             .then(function successCallback(response) {
                                 notice.remove();
                                 $scope.graus = [];
-                                $scope.getDataGrau('profissionais_graus_academicos');
+                                $scope.getDataGrau(taxo);
                                 new PNotify({
                                     title: 'Sucesso!',
                                     text: 'Cadastro excluido com sucesso.',
@@ -150,79 +161,15 @@
             });
         }
 
-        $scope.chamaTabela = function (params) {
+        $scope.chamaTabela = function (params, name) {
             $scope.graus = [];
+            console.log({name})
+            $scope.data.nameTaxonomy = name;
+            console.log($scope.data.nameTaxonomy)
+            $scope.data.taxonomy = params;
             $scope.getDataGrau(params);
         }
     }]);
 
 
 })(angular);
-jQuery(document).ready(function() {
-
-
-
-});
-
-// $(document).ready(function () {
-//     console.log(MapasCulturais.baseURL);
-//     PNotify.prototype.options.styling = "brighttheme";
-// });
-// function editarTaxo(id) {
-//     console.log('editarTaxo()' , id);
-// }
-// $(function () {
-   
-//     function dataTable() {
-//         var graus = [];
-//         $.getJSON(MapasCulturais.baseURL+'taxonomias/allData',
-//             function (data, textStatus, jqXHR) {
-//                 console.log(data);
-//                 for (var i = 0; i < data.length; i++) {
-//                     $("#table-taxo-grau > tbody").append('<tr>'+
-//                         '<td>'+data[i].nome+'</td>'+
-//                         '<td><a class="btn btn-default" href="#" onclick="editarTaxo('+data[i].id+')" style="margin: 5px">'+ 
-//                             '<i class="fa fa-edit"></i> Editar'+
-//                             '</a>'+
-//                             '<a class="btn btn-danger" href="#">'+ 
-//                             '<i class="fa fa-trash"></i> Excluir'+
-//                             '</a>'+
-//                         '</td>'+
-//                         '</tr>');
-//                 }
-                
-//                 // graus.push(data);
-//                 // $("#table-taxo-grau").append('<tbody>'+
-//                 //     '<tr><td>'+data[index]+'</td></tr>'+
-//                 // '</tbody>')
-                
-//             }
-//         );
-//     }
-
-//     dataTable();
-    $("#btn-taxonomy-form").click(function (e) { 
-        e.preventDefault();
-        console.log('taxonomiaForm');
-        var form = $("#taxonomiaForm").serialize();
-        console.log(form);
-        $.ajax({
-            type: "POST",
-            url: MapasCulturais.baseURL+'taxonomias/create',
-            data: form,
-            dataType: "json",
-            success: function (response) {
-                $('#taxonomiaForm')[0].reset();
-                dataTable();
-                new PNotify({
-                    title: 'Sucesso!',
-                    text: 'Cadastro realizado com sucesso.',
-                    type: 'success'
-                });
-            }
-        }).fail(function(request) {
-            console.log(request)
-            alert(request.responseJSON.message);
-            MapasCulturais.Messages.error(request.responseJSON.message);
-          });
-    });

@@ -1,18 +1,10 @@
 <form id="taxonomiaForm">
     <div>
-        <label class="badge_default" ng-click="chamaTabela('profissionais_graus_academicos')">
-            <input type="radio" ng-model="data.taxonomy" value="profissionais_graus_academicos" ng-checked="true">  Grau Acadêmico
-        </label>
-        <label class="badge_default" 
-        ng-click="chamaTabela('profissionais_categorias_profissionais')">
-            <input type="radio" ng-model="data.taxonomy" value="profissionais_categorias_profissionais"> Categoria profissional
-        </label>
-        <label class="badge_default" ng-click="chamaTabela('profissionais_especialidades')">
-            <input type="radio" ng-model="data.taxonomy"  value="profissionais_especialidades" > Especialidade
-        </label>
-    </div>
-    <div class="form-group">
-        <input type="hidden" name="taxonomy" value="profissionais_graus_academicos" class="form-control" placeholder="taxonomias">
+    <?php foreach ($taxo as $key => $value) { ?>
+        <button class="badge_default item-taxo" ng-click="chamaTabela('<?php echo $key; ?>','<?php echo $value; ?>')" data-type="" id="btn-taxo_<?php echo $key; ?>">
+            <input type="hidden" ng-model="data.taxonomy" value="<?php echo $key; ?>">  <?php echo $value; ?>
+        </button> 
+    <?php } ?> <span class="required_form">Escolha Obrigatória</span><br>
     </div>
     <div class="form-group">
         <label>Nome: </label> <span class="required_form">Obrigatório</span><br>
