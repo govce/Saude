@@ -22,13 +22,9 @@ $this->bodyProperties['ng-app'] = "taxonomies";
         <div class="panel-body">
             <div ng-controller="TaxonomiaController">
                 <?php $this->part('taxonomy/form'); ?>
-
-            <div>
-                <?php $this->part('taxonomy/table-taxonomy'); ?>
-            </div>
-            <div id="main-inscritos">
-                <h1>PROFISSIONAL</h1>
-            </div>
+                <div>
+                    <?php $this->part('taxonomy/table-taxonomy'); ?>
+                </div>
             </div>
         </div>
     </div>

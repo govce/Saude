@@ -27,12 +27,14 @@
             termDescription: "",
             taxonomy: "profissionais_graus_academicos"
         }
+        $scope.totalTaxo = 0;
         $scope.getDataGrau = function(params){
             $http({
                 method: 'GET',
                 url: MapasCulturais.baseURL+'taxonomias/allData/?params='+params
             }).then(function successCallback(response) {
-                //console.log(response.data)
+                console.log(response.data.length)
+                $scope.totalTaxo = response.data.length;
                 $scope.graus.push(response.data);
             }, function errorCallback(error) {
                 console.log(error)
@@ -47,6 +49,7 @@
             // console.log(idInput);
             jQuery("#input_"+id).removeAttr('style');
             jQuery("#saveInput_"+id).removeAttr('style');
+            jQuery("#cancelarSave_"+id).removeAttr('style');
         }
         $scope.alterTaxo = function ($event) {
             console.log($event)
@@ -65,7 +68,11 @@
                 });
             });
         }
-
+        $scope.cancelarSave = function (id) {
+            jQuery("#input_"+id).css("display", "none");
+            jQuery("#saveInput_"+id).css("display", "none");
+            jQuery("#cancelarSave_"+id).css("display", "none");
+        }
         $scope.saveTaxo = function (dados) {
             //$event.target.dataset.id
             var data = {taxonomy: dados.taxonomy ,term: dados.termName, description: dados.termDescription};
@@ -79,6 +86,16 @@
                     text: 'Cadastro realizado com sucesso.',
                     type: 'success'
                 });
+            }).catch(function(e){
+                console.log(e)
+                new PNotify({
+                    title: 'Ops!',
+                    text: e.data.message,
+                    type: 'error'
+                });
+                throw e;
+            }).finally(function() {
+                console.log('This finally block');
             });
         }
         $scope.excluirTaxo = function (id) {
@@ -107,6 +124,11 @@
                                     text: 'Cadastro excluido com sucesso.',
                                     type: 'success'
                                 });
+                            }).catch(function(e){
+                                console.log(e)
+                                throw e;
+                            }).finally(function() {
+                                console.log('This finally block');
                             });
                         }
                        
@@ -129,7 +151,6 @@
         }
 
         $scope.chamaTabela = function (params) {
-            console.log('chamaTabela' , params);
             $scope.graus = [];
             $scope.getDataGrau(params);
         }

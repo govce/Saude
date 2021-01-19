@@ -1,4 +1,5 @@
 <div>
+    <label for="">Total de registro: {{totalTaxo}}</label>
     <table class="table table-bordered table-striped" id="" style="width: 100%;">
         <thead>
             <tr>
@@ -12,6 +13,7 @@
                 {{g.nome}}
                 <input type="text" ng-model="g.nome" class="form-control" id="input_{{g.id}}" style="display: none;">
                 <a href="#" class="btn btn-success" id="saveInput_{{g.id}}" data-cod="{{g.id}}" data-nome="{{g.nome}}" ng-click="alterTaxo($event)" style="display: none;">Salvar</a>
+                <a href="#" id="cancelarSave_{{g.id}}" class="btn-cancel-save" ng-click="cancelarSave(g.id)" style="display: none;"> Cancelar </a>
             </td>
             <td>
                 <button class="btn btn-default" data-id="{{g.id}}" data-nome="{{g.nome}}" ng-click="editarTaxo(g.id)">

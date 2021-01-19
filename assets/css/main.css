@@ -7089,3 +7089,9 @@ input-lg + .form-control-feedback,
   font-size: 9px;
   color: #914545;
 }
+.btn-cancel-save {
+  margin-left: 15px;
+  border: 1px solid #c3c3c3;
+  padding: 8px;
+  border-radius: 5px;
+}

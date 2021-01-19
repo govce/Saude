@@ -2,8 +2,6 @@
 namespace Saude\Controllers;
 use \MapasCulturais\App;
 use \MapasCulturais\i;
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 class Taxonomias extends \MapasCulturais\Controller{
 
     function GET_info() {
@@ -13,27 +11,18 @@ class Taxonomias extends \MapasCulturais\Controller{
 
 
     function POST_create() {
-        
-        // if(empty($this->postData['nome']) || empty($this->postData['description']))
-        // {
-        //     return $this->json(['message' => 'Taxonomia e Term são obrigatórios', 'status' => 'error'], 500);
-        //     //$app->redirect($app->redirect('/taxonomias/info/' , 401));
-        // }
-        // dump($this->postData);
-        // die();
-        // $app->em->persist($taxo);
-        // $app->em->flush();
-        //dump($taxo);
-         
-        $app = App::i();
-        $taxo = new \MapasCulturais\Entities\Term;
-        $taxo->taxonomy = $this->postData['taxonomy'];
-        $taxo->term = $this->postData['term'];
-        $taxo->description = $this->postData['description'];
-        $app->em->persist($taxo);
-        $app->em->flush();
-        return $this->json(['message' => 'Cadastro com sucesso', 'status' => 'success'], 200);
-        
+        try {
+            $app = App::i();
+            $taxo = new \MapasCulturais\Entities\Term;
+            $taxo->taxonomy = $this->postData['taxonomy'];
+            $taxo->term = $this->postData['term'];
+            $taxo->description = $this->postData['description'];
+            $app->em->persist($taxo);
+            $app->em->flush();
+            $this->json(true, 200);
+        } catch (\Throwable $th) {
+            $this->json(['message' => 'Erro, não pode ter valor duplicado ou tente novamente', 'status' => 'error'], 500);
+        }
     }
 
     function GET_allData() {
