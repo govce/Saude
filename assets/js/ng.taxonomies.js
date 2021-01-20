@@ -131,7 +131,7 @@
                                 $scope.graus = [];
                                 $scope.getDataGrau(taxo);
                                 new PNotify({
-                                    title: 'Sucesso!',
+                                    title: 'Excluído!',
                                     text: 'Cadastro excluido com sucesso.',
                                     type: 'success'
                                 });
@@ -163,9 +163,7 @@
 
         $scope.chamaTabela = function (params, name) {
             $scope.graus = [];
-            console.log({name})
             $scope.data.nameTaxonomy = name;
-            console.log($scope.data.nameTaxonomy)
             $scope.data.taxonomy = params;
             $scope.getDataGrau(params);
         }

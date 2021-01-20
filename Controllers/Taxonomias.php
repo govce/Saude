@@ -81,4 +81,12 @@ class Taxonomias extends \MapasCulturais\Controller{
         $this->render('projects');
     }
 
+    function GET_opportunity() {
+        $this->render('opportunity');
+    }
+
+    function GET_area() {
+        $this->render('area');
+    }
+
 }

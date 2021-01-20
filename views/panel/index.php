@@ -21,45 +21,46 @@ $button = "";
     </p>
     <?php endif; ?>
     <div class="panel panel-default">
-        <div class="panel-heading">Menu Adicional</div>
+        <div class="panel-heading">Menu Taxonomia</div>
         <div class="panel-body">
             <section id="menu-stats" class="clearfix">
                 <div>
-                    <div>
                     <div class="clearfix">
-                        <span class="alignleft"><?php \MapasCulturais\i::esc_attr_e("Taxonomias");  ?></span>
-                    </div>
-                    <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'info') ?>" class="btn btn-secound">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'info') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de agente'); ?>">
                         <i class="fa fa-user alignleft icon-fa" aria-hidden="true"></i>
                         <?php \MapasCulturais\i::_e('Agente'); ?></a>
-                    </div>
                     </div>
                 </div>
                 <!-- spaces -->
                 <div>
-                    <div>
                     <div class="clearfix">
-                        <span class="alignleft"><?php \MapasCulturais\i::esc_attr_e("Taxonomias");  ?></span>
-                    </div>
-                    <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'spaces') ?>" class="btn btn-secound">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'spaces') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de espaço'); ?>">
                         <i class="fa fa-map-marker alignleft icon-fa" aria-hidden="true"></i>
                         <?php \MapasCulturais\i::_e('Espaco'); ?></a>
-                    </div>
                     </div>
                 </div>
                 <!-- Project -->
                 <div>
-                    <div>
                     <div class="clearfix">
-                        <span class="alignleft"><?php \MapasCulturais\i::esc_attr_e("Taxonomias");  ?></span>
-                    </div>
-                    <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'projects') ?>" class="btn btn-secound">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'projects') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de projeto'); ?>">
                         <i class="fa fa-th-list alignleft icon-fa" aria-hidden="true"></i>
                         <?php \MapasCulturais\i::_e('Projeto'); ?></a>
                     </div>
+                </div>
+                <!-- Oportunidades -->
+                <div>
+                    <div class="clearfix">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'opportunity') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia da oportunidade'); ?>">
+                        <i class="fa fa-pencil-square alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Oportunidade'); ?></a>
+                    </div>
+                </div>
+                <!-- Àrea101 -->
+                <div>
+                    <div class="clearfix">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'area') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia da área'); ?>">
+                        <i class="fa fa-area-chart alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Área'); ?></a>
                     </div>
                 </div>
             </section>
