@@ -3,7 +3,8 @@ namespace Saude;
 
 use MapasCulturais\Themes\BaseV1;
 use MapasCulturais\App;
-
+use MapasCulturais\Entities;
+use MapasCulturais\Definitions;
 use MapasCulturais\i;
 
 class Theme extends BaseV1\Theme{
@@ -39,6 +40,23 @@ class Theme extends BaseV1\Theme{
     function _init() {
         parent::_init();
         $app = App::i();
+        //$this->jsObject['angularAppDependencies'][] = 'taxonomies';
+        $app->hook('view.render(<<*>>):before', function() use($app) {
+            $this->_publishAssets();
+        });
+    }
+
+    protected function _publishAssets() {
+        $app = App::i();
+        $app->view->enqueueScript('app', 'taxonomies', 'js/ng.taxonomies.js');
+        $app->view->enqueueStyle('app', 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+        //alertas
+        $app->view->enqueueStyle('app', 'pnotify', 'css/pnotify.css');
+        $app->view->enqueueStyle('app', 'pnotify.brighttheme', 'css/pnotify.brighttheme.css');
+        $app->view->enqueueStyle('app', 'pnotify.buttons', 'css/pnotify.buttons.css');
+        $app->view->enqueueScript('app', 'pnotify', 'js/pnotify.js');
+        $app->view->enqueueScript('app', 'pnotify.buttons', 'js/pnotify.buttons.js');
+        $app->view->enqueueScript('app', 'pnotify.confirm', 'js/pnotify.confirm.js');
 
     }
 
@@ -87,10 +105,10 @@ class Theme extends BaseV1\Theme{
 
     function register() {
         parent::register();
-
+        
         $app = App::i();
         $app->registerAuthProvider('keycloak');
-        // $app->registerController('location' , 'Saude\Controllers\Location');
+        $app->registerController('taxonomias', 'Saude\Controllers\Taxonomias');
     }
     
 
