@@ -13,12 +13,22 @@
         };
     }]);
 
-    module.factory('TaxonomiaService',['$http'], function($http){
+    module.factory('taxonomiaService',['$http', function($http){
        // var url = new UrlService('taxonmias');
-        console.log('url');
-    });
+        return {
+            consultaDelete: function (type, taxo, name) {
+                var data = {
+                    type: type, taxo: taxo , value: name
+                }
+                return $http.post( MapasCulturais.baseURL+'taxonomias/searchTaxo', data)
+                .then(function successCallback(response) {
+                    return response;
+                });
+            }
+        }
+    }]);
     
-    module.controller('TaxonomiaController', ['$scope' , '$http', function ($scope , $http) {
+    module.controller('TaxonomiaController', ['$scope' , '$http', 'taxonomiaService', function ($scope , $http, taxonomiaService) {
         
         $scope.graus = [];
         $scope.data;
@@ -27,8 +37,8 @@
             termDescription: "",
             taxonomy: "",
             nameTaxonomy: "",
-            loadLabel: 'Aguarde',
-            load: false
+            loadLabel: "",
+            load: true
         }
         $scope.totalTaxo = 0;
         $scope.getDataGrau = function(params){
@@ -120,65 +130,70 @@
               });
         }
 
-        $scope.consultaDelete = function (type, taxo, name) {
-            $http.get(MapasCulturais.baseURL+'taxonomias/allData/?params='+params).success(function(response){
-                $scope.totalTaxo = response.length;
-                response.forEach(element => {
-                    $scope.graus.push({'id' : element.id, 'nome' : element.nome});
-                });
-            });
-        }
-
-        $scope.excluirTaxo = function (id, taxo) {
-            //$scope.load();
-            new PNotify({
-                title: 'Confirmação!',
-                text: 'Deseja realmente excluir esse registro?.',
-                hide: false,
-                type: 'info',
-                closer: false,
-                sticker: false,
-                destroy: true,
-                stack: {"dir1": "down", "dir2": "right", "push": "top", "modal": true, "overlay_close": true},
-                confirm: {
-                    confirm: true,
-                    buttons: [{
-                        text: 'Sim',
-                        addClass: 'btn btn-default pull-left',
-                        click: function(notice) {
-                            $http.delete( MapasCulturais.baseURL+'taxonomias/delete/'+id)
-                            .then(function successCallback(response) {
-                                notice.remove();
-                                $scope.graus = [];
-                                $scope.getDataGrau(taxo);
-                                new PNotify({
-                                    title: 'Excluído!',
-                                    text: 'Cadastro excluido com sucesso.',
-                                    type: 'success'
-                                });
-                            }).catch(function(e){
-                                console.log(e)
-                                throw e;
-                            }).finally(function() {
-                                console.log('This finally block');
-                            });
-                        }
-                       
-                    }, {
-                        text: 'Não, cancelar',
-                        addClass: 'btn btn-default',
-                        click: function(notice) {
-                            notice.remove();
-                        }
-                    }]
-                },
-                buttons: {
-                    closer: false,
-                    sticker: false
-                },
-                history: {
-                    history: false
-                },
+        $scope.excluirTaxo = function (id, taxo, name) {
+            $scope.load();
+            var type = MapasCulturais.deleteType;
+            taxonomiaService.consultaDelete(type, taxo, name).then( function(response){
+                if(response.data.status == 'success'){
+                    PNotify.removeAll();
+                    new PNotify({
+                        title: 'Confirmação!',
+                        text: 'Deseja realmente excluir esse registro?.',
+                        hide: false,
+                        type: 'info',
+                        closer: false,
+                        sticker: false,
+                        destroy: true,
+                        stack: {"dir1": "down", "dir2": "right", "push": "top", "modal": true, "overlay_close": true},
+                        confirm: {
+                            confirm: true,
+                            buttons: [{
+                                text: 'Sim',
+                                addClass: 'btn btn-default pull-left',
+                                click: function(notice) {
+                                    $http.delete( MapasCulturais.baseURL+'taxonomias/delete/'+id)
+                                    .then(function successCallback(response) {
+                                        notice.remove();
+                                        $scope.graus = [];
+                                        $scope.getDataGrau(taxo);
+                                        new PNotify({
+                                            title: 'Excluído!',
+                                            text: 'Cadastro excluido com sucesso.',
+                                            type: 'success'
+                                        });
+                                    }).catch(function(e){
+                                        console.log(e)
+                                        throw e;
+                                    }).finally(function() {
+                                        console.log('This finally block');
+                                    });
+                                }
+                            
+                            }, {
+                                text: 'Não, cancelar',
+                                addClass: 'btn btn-default',
+                                click: function(notice) {
+                                    notice.remove();
+                                }
+                            }]
+                        },
+                        buttons: {
+                            closer: false,
+                            sticker: false
+                        },
+                        history: {
+                            history: false
+                        },
+                    });
+                }else{
+                    PNotify.removeAll();
+                    new PNotify({
+                        title: 'Ops!',
+                        text: response.data.message,
+                        delay: 1500,
+                        type: 'error'
+                    });
+                }
             });
         }
 
