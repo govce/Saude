@@ -26,7 +26,9 @@
             termName: "",
             termDescription: "",
             taxonomy: "",
-            nameTaxonomy: ""
+            nameTaxonomy: "",
+            loadLabel: 'Aguarde',
+            load: false
         }
         $scope.totalTaxo = 0;
         $scope.getDataGrau = function(params){
@@ -108,8 +110,27 @@
                 console.log('This finally block');
             });
         }
+        $scope.load = function () {
+            new PNotify({
+                title: 'Aguarde',
+                type: 'notice',
+                hide: false,
+                icon: 'fa fa-spinner fa-spin fa-2x fa-fw',
+                stack: {"dir1": "down", "dir2": "right", "push": "top", "modal": true, "overlay_close": true}
+              });
+        }
+
+        $scope.consultaDelete = function (type, taxo, name) {
+            $http.get(MapasCulturais.baseURL+'taxonomias/allData/?params='+params).success(function(response){
+                $scope.totalTaxo = response.length;
+                response.forEach(element => {
+                    $scope.graus.push({'id' : element.id, 'nome' : element.nome});
+                });
+            });
+        }
 
         $scope.excluirTaxo = function (id, taxo) {
+            //$scope.load();
             new PNotify({
                 title: 'Confirmação!',
                 text: 'Deseja realmente excluir esse registro?.',

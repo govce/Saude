@@ -19,11 +19,13 @@ $button = "";
     <p class="highlighted-message" style="margin-top:-2em;">
         <?php printf(\MapasCulturais\i::__('Você é administrador deste subsite. Clique %saqui%s para configurar.'), '<a rel="noopener noreferrer" href="' . $subsite->singleUrl . '">', '</a>'); ?>
     </p>
-    <?php endif; ?>
-    <div class="panel panel-default">
+    <?php endif; 
+        if($app->user->is('admin')){
+    ?>
+    <div class="panel panel-primary">
         <div class="panel-heading">Menu Taxonomia</div>
         <div class="panel-body">
-            <section id="menu-stats" class="clearfix">
+            <section id="" class="clearfix menu-stats">
                 <div>
                     <div class="clearfix">
                         <a href="<?php echo $app->createUrl('taxonomias', 'info') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de agente'); ?>">
@@ -66,8 +68,9 @@ $button = "";
             </section>
         </div>
     </div>
-
-    <?php $this->applyTemplateHook('content.entities','before'); ?>
+    <?php 
+        }// FIM IF ADMIN
+    $this->applyTemplateHook('content.entities','before'); ?>
     <section id="user-stats" class="clearfix">
         <?php $this->applyTemplateHook('content.entities','begin'); ?>
         <?php if($app->isEnabled('events')): ?>
@@ -231,7 +234,29 @@ $button = "";
     </section>
     <?php $this->applyTemplateHook('content.notification','after'); ?>
     <?php endif; ?>
-
+    <section>
+        <div class="panel panel-primary">
+        <div class="panel-heading">Conta</div>
+            <div class="panel-body">
+            <section class="clearfix menu-stats">
+                <div>
+                    <div class="clearfix">
+                        <a href="https://id.sus.ce.gov.br/auth/realms/saude/login-actions/reset-credentials?client_id=DigitalSaude" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Trocar senha de acesso'); ?>">
+                        <i class="fa fa-lock alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Trocar Senha'); ?></a>
+                    </div>
+                </div>
+                <div>
+                    <div class="clearfix">
+                        <a href="<?php echo $app->createUrl('panel', 'deleteAccount') ?>" class="btn btn-danger" title="<?php \MapasCulturais\i::_e('Apagar Conta'); ?>">
+                        <i class="fa fa-trash alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Apagar Conta'); ?></a>
+                    </div>
+                </div>
+            </section>
+            </div>
+        </div>
+    </section>
     <?php $this->applyTemplateHook('settings','before'); ?>
     <ul class="panel-settings">
         <?php $this->applyTemplateHook('settings','begin'); ?>
@@ -244,3 +269,6 @@ $button = "";
     <?php $this->applyTemplateHook('content','end'); ?>
 </div>
 <?php $this->applyTemplateHook('content','after'); ?>
+<script>
+    jQuery('.delete').css('display', 'none');
+</script>

@@ -6318,10 +6318,10 @@ button.mfp-arrow-left {
 
 /*# sourceMappingURL=main.css.map */
 /* MENU NO PAINEL*/
-#menu-stats {
+.menu-stats {
   margin-right: -0.75rem;
   margin-bottom: 1.5rem; }
-  #menu-stats > div > div {
+  .menu-stats > div > div {
     box-sizing: border-box;
     margin-right: 0.75rem;
     margin-bottom: 0.75rem;
@@ -6331,37 +6331,99 @@ button.mfp-arrow-left {
     color: #000;
     -webkit-transition: all .3s;
     transition: all .3s; }
-    #menu-stats > div > div:hover {
-      background: #249243; }
-      #menu-stats > div > div:hover .icon-add {
+    .menu-stats > div > div:hover {
+      background: #e4e4e4 }
+      .menu-stats > div > div:hover .icon-add {
         background: #000;
         color: #fff;
         -webkit-transition: all .3s;
         transition: all .3s; }
-        #menu-stats > div > div:hover .icon-add:hover {
+        .menu-stats > div > div:hover .icon-add:hover {
           background: #fff;
           color: #000; }
   @media screen and (min-width: 480px) {
-    #menu-stats > div {
+    .menu-stats > div {
       float: left;
       width: 50%; } }
   @media screen and (min-width: 992px) {
-    #menu-stats > div {
+    .menu-stats > div {
       float: left;
       width: 25%;
       margin-bottom: 0; } }
-  #menu-stats .icon {
+  .menu-stats .icon {
     display: block;
     font-size: 1rem;
     margin-bottom: 1rem; }
-    #menu-stats .icon.icon-add {
+    .menu-stats .icon.icon-add {
       margin-top: 1rem;
       margin-bottom: 0;
       background: #e2e2e2;
       border-radius: 2px; }
       @media screen and (max-width: 768px) {
-        #menu-stats .icon.icon-add {
+        .menu-stats .icon.icon-add {
           display: none; } }
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+}
+.text-nowrap {
+  white-space: nowrap;
+}
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+.text-muted {
+  color: #777;
+}
+.text-primary {
+  color: #337ab7;
+}
+a.text-primary:hover,
+a.text-primary:focus {
+  color: #286090;
+}
+.text-success {
+  color: #3c763d;
+}
+a.text-success:hover,
+a.text-success:focus {
+  color: #2b542c;
+}
+.text-info {
+  color: #31708f;
+}
+a.text-info:hover,
+a.text-info:focus {
+  color: #245269;
+}
+.text-warning {
+  color: #8a6d3b;
+}
+a.text-warning:hover,
+a.text-warning:focus {
+  color: #66512c;
+}
+.text-danger {
+  color: #d1201d;
+}
+a.text-danger:hover,
+a.text-danger:focus {
+  color: #843534;
+}
 /* para panel */
 .panel {
   margin-bottom: 20px;
