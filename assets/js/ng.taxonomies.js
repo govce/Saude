@@ -51,9 +51,6 @@
         }
 
         $scope.editarTaxo = function (id) {
-            // console.log($event.target.dataset.id)
-            // var idInput = $scope.data.fields_.concat($event.target.dataset.id);
-            // console.log(idInput);
             jQuery("#input_"+id).removeAttr('style');
             jQuery("#saveInput_"+id).removeAttr('style');
             jQuery("#cancelarSave_"+id).removeAttr('style');
@@ -138,7 +135,7 @@
                     PNotify.removeAll();
                     new PNotify({
                         title: 'Confirmação!',
-                        text: 'Deseja realmente excluir esse registro?.',
+                        text: 'Deseja realmente excluir esse registro?',
                         hide: false,
                         type: 'info',
                         closer: false,
