@@ -21,7 +21,7 @@
                 <button class="btn btn-default" data-id="{{g.id}}" data-nome="{{g.nome}}" ng-click="editarTaxo(g.id)">
                     <i class="fa fa-edit"></i> Editar
                 </button>
-                <a href="#" class="btn btn-danger" ng-click="excluirTaxo(g.id, data.taxonomy)">
+                <a href="#" class="btn btn-danger" ng-click="excluirTaxo(g.id, data.taxonomy, g.nome)">
                     <i class="fa fa-trash"></i> Excluir
                 </a>
             </td>
