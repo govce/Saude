@@ -2,8 +2,7 @@
 namespace Saude\Controllers;
 use \MapasCulturais\App;
 use \MapasCulturais\i;
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+
 class Taxonomias extends \MapasCulturais\Controller{
 
     function GET_info() {
@@ -76,12 +75,10 @@ class Taxonomias extends \MapasCulturais\Controller{
     }
 
     function GET_spaces() {
-        //dump($this->getData);
         $this->render('spaces');
     }
 
     function GET_projects() {
-        //dump($this->getData);
         $this->render('projects');
     }
 
@@ -94,7 +91,6 @@ class Taxonomias extends \MapasCulturais\Controller{
     }
 
     function POST_searchTaxo() {
-        dump($this->postData);
         $type = "";
         switch ($this->postData['type']) {
             case 'agent':
@@ -106,20 +102,23 @@ class Taxonomias extends \MapasCulturais\Controller{
             case 'project':
                 $type = "ProjectMeta";
                 break;
+            case 'opportunity':
+                $type = "OpportunityMeta";
+                break;
             case 'area':
                 $type = "TermRelation";
                 break;
-            
-            default:
-                # code...
-                break;
         }
+        
         $app = App::i();
-        $search = $app->repo($type)->findBy(
-            ['key' => $this->postData['taxo'],
-            'value' => $this->postData['value']
-            ], ['id' => "ASC"] ,1,0);
-       
+        if($this->postData['type'] == 'area') {
+            $search = $app->repo($type)->findBy(['term' => $this->postData['id'] ]);
+        }else{
+            $search = $app->repo($type)->findBy(
+                ['key' => $this->postData['taxo'],
+                'value' => $this->postData['value']
+                ], ['id' => "ASC"] ,1,0);
+        }
         (count($search) > 0) ? $this->json(['message' => 'Já existe registro com essa Taxonomia', 'status' => 'warning'], 200) : $this->json(['message' => 'Não tem registro', 'status' => 'success'], 200);
     }
 

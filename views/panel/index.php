@@ -7,6 +7,7 @@ $posini = 0;
 $posfin = 0;
 $msg = "";
 $button = "";
+
 ?>
 
 <?php $this->applyTemplateHook('content','before'); ?>

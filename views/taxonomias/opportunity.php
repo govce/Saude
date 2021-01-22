@@ -8,6 +8,7 @@ $subsite = $app->getCurrentSubsite();
 $this->includeMapAssets();  
 $this->includeSearchAssets(); 
 $this->bodyProperties['ng-app'] = "taxonomies";
+$this->jsObject['deleteType'] = "opportunity";
 ?>
 <?php $this->applyTemplateHook('content','before'); ?>
 <div class="panel-main-content">

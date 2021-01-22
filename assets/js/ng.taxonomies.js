@@ -16,9 +16,9 @@
     module.factory('taxonomiaService',['$http', function($http){
        // var url = new UrlService('taxonmias');
         return {
-            consultaDelete: function (type, taxo, name) {
+            consultaDelete: function (id, type, taxo, name) {
                 var data = {
-                    type: type, taxo: taxo , value: name
+                    id: id, type: type, taxo: taxo , value: name
                 }
                 return $http.post( MapasCulturais.baseURL+'taxonomias/searchTaxo', data)
                 .then(function successCallback(response) {
@@ -130,7 +130,7 @@
         $scope.excluirTaxo = function (id, taxo, name) {
             $scope.load();
             var type = MapasCulturais.deleteType;
-            taxonomiaService.consultaDelete(type, taxo, name).then( function(response){
+            taxonomiaService.consultaDelete(id, type, taxo, name).then( function(response){
                 if(response.data.status == 'success'){
                     PNotify.removeAll();
                     new PNotify({
