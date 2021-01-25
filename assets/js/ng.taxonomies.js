@@ -185,7 +185,7 @@
                 }else{
                     PNotify.removeAll();
                     new PNotify({
-                        title: 'Ops!',
+                        title: 'Exclusão não permitida!',
                         text: response.data.message,
                         delay: 1500,
                         type: 'error'

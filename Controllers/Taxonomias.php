@@ -117,9 +117,9 @@ class Taxonomias extends \MapasCulturais\Controller{
             $search = $app->repo($type)->findBy(
                 ['key' => $this->postData['taxo'],
                 'value' => $this->postData['value']
-                ], ['id' => "ASC"] ,1,0);
+                ], ['value' => "ASC"] ,1,0);
         }
-        (count($search) > 0) ? $this->json(['message' => 'Já existe registro com essa Taxonomia', 'status' => 'warning'], 200) : $this->json(['message' => 'Não tem registro', 'status' => 'success'], 200);
+        (count($search) > 0) ? $this->json(['message' => 'Já existem dados vinculados ao registro', 'status' => 'warning'], 200) : $this->json(['message' => 'Não tem registro', 'status' => 'success'], 200);
     }
 
 }
