@@ -249,7 +249,7 @@ $button = "";
             <section class="clearfix menu-stats">
                 <div>
                     <div class="clearfix">
-                        <a href="https://id.sus.ce.gov.br/auth/realms/saude/account/password" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Trocar Senha'); ?>">
+                        <a href="https://dev.id.org.br/auth/realms/saude/account/password" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Trocar Senha'); ?>">
                         <i class="fa fa-lock alignleft icon-fa" aria-hidden="true"></i>
                         <?php \MapasCulturais\i::_e('Trocar Senha'); ?></a>
                     </div>
