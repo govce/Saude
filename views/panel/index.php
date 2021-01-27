@@ -20,58 +20,11 @@ $button = "";
     <p class="highlighted-message" style="margin-top:-2em;">
         <?php printf(\MapasCulturais\i::__('Você é administrador deste subsite. Clique %saqui%s para configurar.'), '<a rel="noopener noreferrer" href="' . $subsite->singleUrl . '">', '</a>'); ?>
     </p>
-    <?php endif; 
-        if($app->user->is('admin')){
-    ?>
+    <?php endif; ?>
     <div class="panel panel-primary">
-        <div class="panel-heading">Menu Taxonomia</div>
-        <div class="panel-body">
-            <section id="" class="clearfix menu-stats">
-                <div>
-                    <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'info') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de agente'); ?>">
-                        <i class="fa fa-user alignleft icon-fa" aria-hidden="true"></i>
-                        <?php \MapasCulturais\i::_e('Agente'); ?></a>
-                    </div>
-                </div>
-                <!-- spaces -->
-                <div>
-                    <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'spaces') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de espaço'); ?>">
-                        <i class="fa fa-map-marker alignleft icon-fa" aria-hidden="true"></i>
-                        <?php \MapasCulturais\i::_e('Espaco'); ?></a>
-                    </div>
-                </div>
-                <!-- Project -->
-                <div>
-                    <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'projects') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de projeto'); ?>">
-                        <i class="fa fa-th-list alignleft icon-fa" aria-hidden="true"></i>
-                        <?php \MapasCulturais\i::_e('Projeto'); ?></a>
-                    </div>
-                </div>
-                <!-- Oportunidades -->
-                <div>
-                    <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'opportunity') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia da oportunidade'); ?>">
-                        <i class="fa fa-pencil-square alignleft icon-fa" aria-hidden="true"></i>
-                        <?php \MapasCulturais\i::_e('Oportunidade'); ?></a>
-                    </div>
-                </div>
-                <!-- Àrea101 -->
-                <div>
-                    <div class="clearfix">
-                        <a href="<?php echo $app->createUrl('taxonomias', 'area') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia da área'); ?>">
-                        <i class="fa fa-area-chart alignleft icon-fa" aria-hidden="true"></i>
-                        <?php \MapasCulturais\i::_e('Área'); ?></a>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-    <?php 
-        }// FIM IF ADMIN
-    $this->applyTemplateHook('content.entities','before'); ?>
+    <div class="panel-heading">Seus itens</div>
+    <div class="panel-body">
+    <?php $this->applyTemplateHook('content.entities','before'); ?>
     <section id="user-stats" class="clearfix">
         <?php $this->applyTemplateHook('content.entities','begin'); ?>
         <?php if($app->isEnabled('events')): ?>
@@ -146,7 +99,7 @@ $button = "";
             <div>
                 <div>
                     <div class="clearfix">
-                        <span class="alignleft"><?php $this->dict('entities: Opportunities') ?></span>
+                        <span class="alignleft"><?php \MapasCulturais\i::_e('Oportunidade'); ?></span>
                         <div class="icon icon-opportunity alignright"></div>
                     </div>
                     <div class="clearfix">
@@ -191,6 +144,8 @@ $button = "";
         <?php $this->applyTemplateHook('content.entities','end'); ?>
     </section>
     <?php $this->applyTemplateHook('content.entities','after'); ?>
+    </div>
+    </div>
     <?php if($app->user->notifications): ?>
     <?php $this->applyTemplateHook('content.notification','before'); ?>
     <section id="activities">
@@ -236,6 +191,58 @@ $button = "";
     <?php $this->applyTemplateHook('content.notification','after'); ?>
     <?php endif; ?>
     <section>
+    <?php 
+        if($app->user->is('admin')){
+    ?>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Menu Taxonomia</div>
+        <div class="panel-body">
+            <section id="" class="clearfix menu-stats">
+                <div>
+                    <div class="clearfix">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'info') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de agente'); ?>">
+                        <i class="fa fa-user alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Agente'); ?></a>
+                    </div>
+                </div>
+                <!-- spaces -->
+                <div>
+                    <div class="clearfix">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'spaces') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de espaço'); ?>">
+                        <i class="fa fa-map-marker alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Espaco'); ?></a>
+                    </div>
+                </div>
+                <!-- Project -->
+                <div>
+                    <div class="clearfix">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'projects') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia de projeto'); ?>">
+                        <i class="fa fa-th-list alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Projeto'); ?></a>
+                    </div>
+                </div>
+                <!-- Oportunidades -->
+                <div>
+                    <div class="clearfix">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'opportunity') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia da oportunidade'); ?>">
+                        <i class="fa fa-pencil-square alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Oportunidade'); ?></a>
+                    </div>
+                </div>
+                <!-- Àrea101 -->
+                <div>
+                    <div class="clearfix">
+                        <a href="<?php echo $app->createUrl('taxonomias', 'area') ?>" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Taxonomia da área'); ?>">
+                        <i class="fa fa-area-chart alignleft icon-fa" aria-hidden="true"></i>
+                        <?php \MapasCulturais\i::_e('Área'); ?></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <?php 
+        }// FIM IF ADMIN
+    ?>
         <div class="panel panel-primary">
         <div class="panel-heading">Conta</div>
             <div class="panel-body">
@@ -249,7 +256,7 @@ $button = "";
                 </div>
                 <div>
                     <div class="clearfix">
-                        <a href="https://id.sus.ce.gov.br/auth/realms/saude/login-actions/reset-credentials?client_id=DigitalSaude" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Em casos que você não lembra da senha atual para trocar a sua senha.'); ?>">
+                        <a href="https://id.sus.ce.gov.br/auth/realms/saude/login-actions/reset-credentials?client_id=DigitalSaude" class="btn btn-secound" title="<?php \MapasCulturais\i::_e('Em casos que você não venha lembrar da senha atual para trocar a sua senha.'); ?>">
                         <i class="fa fa-unlock-alt alignleft icon-fa" aria-hidden="true"></i>
                         <?php \MapasCulturais\i::_e('Esqueci a senha'); ?></a>
                     </div>
