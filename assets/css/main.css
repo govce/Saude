@@ -4806,7 +4806,6 @@ h1 .icon {
   #user-stats > div > div {
     box-sizing: border-box;
     margin-right: 0.75rem;
-    margin-left: 0.75rem;
     margin-bottom: 0.75rem;
     padding: 0.75rem;
     border-radius: 2px;
@@ -4828,21 +4827,22 @@ h1 .icon {
   @media screen and (min-width: 320px) {
     #user-stats > div {
       float: left;
-      width: 90%; } }
+      width: 95%; } }
   @media screen and (min-width: 360px) {
     #user-stats > div {
       float: left;
-      width: 90%; } }
+      width: 95%; } }
   @media screen and (min-width: 411px) {
     #user-stats > div {
       float: left;
-      width: 90%; } }
+      width: 95%; } }
 
   @media screen and (min-width: 992px) {
     #user-stats > div {
       float: left;
       margin-right: 0.75rem;
-      width: 45%;
+      width: 43%;
+      margin-left: 1.5rem;
       margin-bottom: 0; } }
   #user-stats .icon {
     display: block;
