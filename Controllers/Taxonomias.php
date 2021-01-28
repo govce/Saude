@@ -39,7 +39,7 @@ class Taxonomias extends \MapasCulturais\Controller{
         $app = App::i();
         $termsGraus = $app->repo('Term')->findBy(
             ['taxonomy' => $this->getData['params']],
-            ['id' => 'ASC']);
+            ['term' => 'ASC']);
         $graus = [];
         foreach ($termsGraus as $key => $value) {
             //echo $key." - ".$value."<br />";
