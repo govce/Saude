@@ -1,14 +1,23 @@
 <form id="taxonomiaForm">
     <div>
+    <ul class="nav nav-taxo">
     <?php foreach ($taxo as $key => $value) { ?>
-        <button class="badge_default item-taxo" ng-click="chamaTabela('<?php echo $key; ?>','<?php echo $value; ?>')" data-type="" id="btn-taxo_<?php echo $key; ?>">
-            <input type="hidden" ng-model="data.taxonomy" value="<?php echo $key; ?>">  <?php echo $value; ?>
-        </button> 
-    <?php } ?> <span class="required_form">Escolha Obrigatória</span><br>
+        <li role="presentation">
+            <a href="#" class="item-taxo" ng-click="chamaTabela('<?php echo $key; ?>','<?php echo $value; ?>')"  id="btn-taxo_<?php echo $key; ?>">
+                <?php echo $value; ?>
+            </a>
+        </li>
+            <input type="hidden" ng-model="data.taxonomy" value="<?php echo $key; ?>">  
+    <?php } ?> <span class="required_form">Obrigatório escolher uma taxonomia</span><br>
+    </ul>
+    <br>
     </div>
-    <div class="form-group">
-        <label>Nome: </label> <span class="required_form">Obrigatório</span><br>
-        <input type="text" ng-model="data.termName" id="term" class="form-control" placeholder="Taxomonias Escrita">
+    <div class="clearfix">
+    <hr>
+        <div class="form-group">
+            <label>Nome: </label> <span class="required_form">Obrigatório</span><br>
+            <input type="text" ng-model="data.termName" id="term" class="form-control" placeholder="Taxomonias Escrita">
+        </div>
     </div>
     <div class="form-group">
         <!-- <label for="">Descrição: </label>

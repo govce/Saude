@@ -21,7 +21,6 @@ $this->jsObject['deleteType'] = "agent";
     <div class="panel panel-default">
         <div class="panel-heading">Taxonomias de Agentes</div>
         <div class="panel-body">
-        
             <div ng-controller="TaxonomiaController">
                 <?php 
                     $taxo = [
