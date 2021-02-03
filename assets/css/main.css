@@ -7303,3 +7303,10 @@ nav {
 .nav-taxo > li > a > .badge {
   margin-left: 3px;
 }
+/* CAPITULO DE TABELAS - usado na página de inscrição da oportunidade*/
+.caption-table {
+  color: white;
+}
+.registration-col-evalutions {
+  margin-left: 5px;
+}
