@@ -44,10 +44,22 @@ class Theme extends BaseV1\Theme{
         $app->hook('view.render(<<*>>):before', function() use($app) {
             $this->_publishAssets();
         });
+
+        $app->hook('GET(opportunity.evaluationCandidate)', function() use($app){
+            $app = App::i();
+            
+            $regis = $app->repo('Registration')->findBy(
+                [
+                'owner' => $this->getData['idAgent'] , 
+                'opportunity' => $this->getData['opportunity']
+                ]);
+            empty($regis) ? $this->json(['message' => true]) : $this->json(['message' => false]);
+        });
     }
 
     protected function _publishAssets() {
-        $app = App::i();
+        $app = App::i();        
+        $app->view->enqueueScript('app', 'entity.module.opportunity', 'js/ng.entity.module.opportunity.js', array('ng-mapasculturais'));
         $app->view->enqueueScript('app', 'taxonomies', 'js/ng.taxonomies.js');
         $app->view->enqueueStyle('app', 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
         //alertas
@@ -109,6 +121,7 @@ class Theme extends BaseV1\Theme{
         $app = App::i();
         $app->registerAuthProvider('keycloak');
         $app->registerController('taxonomias', 'Saude\Controllers\Taxonomias');
+        $app->registerController('evaluationCandidate', 'Saude\Controllers\Candidate');
     }
     
 
