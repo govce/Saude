@@ -1,8 +1,14 @@
 <?php 
 $registrations = $app->repo('Registration')->findByOpportunityAndUser($entity, $app->user); 
+
 if(!empty($registrations)){
+
     $allResults = $app->repo('RegistrationEvaluation')->findBy(['registration' => $registrations[0]->id]);
+    $verifyPublish = $app->repo('Opportunity')->find($registrations[0]->opportunity->id);
+    $typeEvaluation = $app->repo('EvaluationMethodConfiguration')->findBy(
+        ['opportunity' => $registrations[0]->opportunity->id]);
 }
+
 ?>
 <?php if ($registrations): ?>
     <table class="my-registrations">
@@ -18,9 +24,12 @@ if(!empty($registrations)){
                 <th class="registration-status-col">
                     <?php \MapasCulturais\i::_e("Status");?>
                 </th>
+                <?php if($verifyPublish->publishedRegistrations == true
+                 && $typeEvaluation[0]->type->id == 'technical'): ?>
                 <th class="registration-status-col" style="text-align: center;">
                     <?php \MapasCulturais\i::_e("Nota");?>
                 </th>
+                <?php endif; ?> 
             </tr>
         </thead>
         <tbody>
@@ -64,45 +73,51 @@ if(!empty($registrations)){
                         <?php endif; ?>
                         <?php $this->applyTemplateHook('user-registration-table--registration--status', 'end', $reg_args); ?>
                     </td>
+                    <?php if($verifyPublish->publishedRegistrations == true
+                     && $typeEvaluation[0]->type->id == 'technical'): ?>
                     <td>
                         <?php echo $registration->consolidatedResult; ?>
                     </td>
+                    <?php endif; ?>
                     <?php $this->applyTemplateHook('user-registration-table--registration', 'end', $reg_args); ?>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 <?php endif; ?>
-<?php if (!empty($allResults)): ?>
-    <table class="my-registrations">
-    <caption class="caption-table"><?php \MapasCulturais\i::_e("Avaliações");?></caption>
-        <thead>
-            <tr>
-                <th class="registration-id-col">
-                    <?php \MapasCulturais\i::_e("Inscrição");?>
-                </th>
-                <th class="registration-col-evalutions">
-                    <?php \MapasCulturais\i::_e("Nota Avaliação");?>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            $count = 0;
-            foreach ($allResults as $key => $value): ?>
-                <tr>
-                    <td>
-                        
-                        <a href="<?php echo $registration->singleUrl ?>"><?php echo $registration->number ?></a>
-                    </td>
-                    <td class="registration-col-evalutions">
-                        <?php \MapasCulturais\i::_e("Nota do avaliador ".($key + 1).  ' foi: <strong>'.number_format($value->result, 2, '.','').'</strong>'); ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
 <?php 
-
-endif; 
+if(isset($verifyPublish) && $verifyPublish->publishedRegistrations == true
+&& $typeEvaluation[0]->type->id == 'technical'){
+    if (!empty($allResults)): ?>
+        <table class="my-registrations">
+        <caption class="caption-table"><?php \MapasCulturais\i::_e("Avaliações");?></caption>
+            <thead>
+                <tr>
+                    <th class="registration-id-col">
+                        <?php \MapasCulturais\i::_e("Inscrição");?>
+                    </th>
+                    <th class="registration-col-evalutions">
+                        <?php \MapasCulturais\i::_e("Nota Avaliação");?>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                $count = 0;
+                foreach ($allResults as $key => $value): ?>
+                    <tr>
+                        <td>
+                            
+                            <a href="<?php echo $registration->singleUrl ?>"><?php echo $registration->number ?></a>
+                        </td>
+                        <td class="registration-col-evalutions">
+                            <?php \MapasCulturais\i::_e("Nota do avaliador ".($key + 1).  ' foi: <strong>'.number_format($value->result, 2, '.','').'</strong>'); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+<?php 
+    endif;
+}    
 ?>
