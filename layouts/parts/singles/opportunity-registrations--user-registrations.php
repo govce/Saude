@@ -26,9 +26,12 @@ if(!empty($registrations)){
                 </th>
                 <?php if($verifyPublish->publishedRegistrations == true
                  && $typeEvaluation[0]->type->id == 'technical'): ?>
-                <th class="registration-status-col" style="text-align: center;">
-                    <?php \MapasCulturais\i::_e("Nota");?>
-                </th>
+                    <th class="registration-status-col" style="text-align: center;">
+                        <?php \MapasCulturais\i::_e("Nota preliminar");?>
+                    </th>
+                    <th class="registration-status-col" style="text-align: center;">
+                        <?php \MapasCulturais\i::_e("Nota final");?>
+                    </th>
                 <?php endif; ?> 
             </tr>
         </thead>
@@ -75,9 +78,12 @@ if(!empty($registrations)){
                     </td>
                     <?php if($verifyPublish->publishedRegistrations == true
                      && $typeEvaluation[0]->type->id == 'technical'): ?>
-                    <td>
-                        <?php echo $registration->consolidatedResult; ?>
-                    </td>
+                        <td>
+                            <?php echo $registration->preliminaryResult; ?>
+                        </td>
+                        <td>
+                            <?php echo $registration->consolidatedResult; ?>
+                        </td>
                     <?php endif; ?>
                     <?php $this->applyTemplateHook('user-registration-table--registration', 'end', $reg_args); ?>
                 </tr>
