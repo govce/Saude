@@ -14,8 +14,11 @@ return [
     'plugins' => [
         'EvaluationMethodTechnical' => ['namespace' => 'EvaluationMethodTechnical', 'config' => ['step' => 0.1]],
         'EvaluationMethodSimple' => ['namespace' => 'EvaluationMethodSimple'],
-        'EvaluationMethodDocumentary' => ['namespace' => 'EvaluationMethodDocumentary']
-        // PLUGIN ESTADO E CIDADE
+        'EvaluationMethodDocumentary' => ['namespace' => 'EvaluationMethodDocumentary'],
+        // HABILITANDO PLUGIN - DESENVOLVIDO PELA ESP
+        'LocationStateCity' => [
+            'namespace' => 'LocationStateCity'
+        ],
     ],
 
     'auth.provider' => 'OpauthKeyCloak',

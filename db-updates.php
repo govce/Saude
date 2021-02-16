@@ -227,6 +227,7 @@ return array(
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_categorias_profissionais', 'Saúde e Bem-Estar');");
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_categorias_profissionais', 'Outra');");
     },
+
     'insert especialidades para profissionais' => function () use($conn) {
         $conn->executeQuery("DELETE FROM public.term WHERE taxonomy = 'profissionais_especialidades';");
 
@@ -450,7 +451,13 @@ return array(
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_especialidades', 'Gestão Hospitalar');");
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_especialidades', 'Oftálmica');");
         $conn->executeQuery("INSERT INTO public.term (taxonomy, term) VALUES('profissionais_especialidades', 'Sistemas Biomédicos');");
-    }
+    },
+
+    'add preliminary registration' => function () use($conn) {
+        //
+        $conn->executeQuery("ALTER TABLE public.registration ADD preliminary_result character varying(255)");
+     },
+
 );
 
 
