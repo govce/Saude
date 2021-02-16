@@ -5,11 +5,13 @@ $editable = $this->isEditable() && !isset($disable_editable);
 <?php if($editable || $entity->registrationFrom): ?>
     <div class="registration-dates clear opportunity-phases">
         <?php /* Translators: "de" como início de um intervalo de data *DE* 25/1 a 25/2 às 13:00 */ ?>
-        <button class="btn-access" style="float: left; margin-left: 12px; margin-right: 12px;" title="Acessar inscrições">
-            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-            <a href="<?= $entity->singleUrl; ?>"> Acessar </a>
-        </button>
-        <?php \MapasCulturais\i::_e("Inscrições abertas de");?>
+        <ul class="list-group">
+            <li class="list-group-item" style="width: 100%;">
+                <button class="btn-access" style="float: left; margin-right: 12px;" title="Acessar inscrições">
+                    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    <a href="<?= $entity->singleUrl; ?>"> Acessar </a>
+                </button>
+                <?php \MapasCulturais\i::_e("Inscrições abertas de");?>
         <strong <?php if($editable): ?> class="js-editable" <?php endif; ?> data-type="date" data-yearrange="2000:+25" data-viewformat="dd/mm/yyyy" data-edit="registrationFrom" <?php echo $entity->registrationFrom ? "data-value='" . $entity->registrationFrom->format('Y-m-d') . "'" : ' '?> data-showbuttons="false" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Data inicial");?>"><?php echo $entity->registrationFrom ? $entity->registrationFrom->format('d/m/Y') : \MapasCulturais\i::__("Data inicial"); ?></strong>
         <?php /* Translators: "a" indicando intervalo de data de 25/1 *A* 25/2 às 13:00 */ ?>
         <?php \MapasCulturais\i::_e("a");?>
@@ -18,5 +20,7 @@ $editable = $this->isEditable() && !isset($disable_editable);
         <?php \MapasCulturais\i::_e("às");?>
         <strong <?php if($editable): ?> class="js-editable" id="registrationTo_time" <?php endif; ?> data-datetime-value="<?php echo $entity->registrationTo ? $entity->registrationTo->format('Y-m-d H:i') : ''; ?>" data-placeholder="<?php \MapasCulturais\i::esc_attr_e("Hora final");?>" data-emptytext="<?php \MapasCulturais\i::esc_attr_e("Hora final");?>"><?php echo $entity->registrationTo ? $entity->registrationTo->format('H:i') : ''; ?></strong>
         .
+        </li>
+        </ul>
     </div>
 <?php endif; ?>
