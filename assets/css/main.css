@@ -5211,7 +5211,7 @@ h1 .icon {
     .registration-dates {
       float: left;
       width: 100%;
-      margin-bottom: 0;
+      margin-bottom: 10px;
       padding-right: 125px; } }
 
 @media screen and (min-width: 768px) {
