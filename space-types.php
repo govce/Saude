@@ -435,6 +435,9 @@ return array(
             'type' => 'select',
             'options' => $tiposServico
         ],
+        'instituicao_cnes' => [
+            'label' => \MapasCulturais\i::__('Número CNES')
+        ],
     ),
 
     'items' => array(

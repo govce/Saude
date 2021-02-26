@@ -23,9 +23,11 @@ if ($entity->isRegistrationOpen()): ?>
         </form>
         <?php endif; ?>
     <?php else: ?>
-        <p><?php \MapasCulturais\i::_e("Para se inscrever é preciso ter uma conta e estar logado nesta plataforma. Clique no botão abaixo para criar uma conta ou fazer login.");?></p>
+        <div class="alert danger">
+            <p><?php \MapasCulturais\i::_e("Para se inscrever é preciso ter uma conta e estar logado nesta plataforma. Clique no botão abaixo para criar uma conta ou fazer login.");?></p>
+        </div>    
         <a class="btn btn-primary" ng-click="setRedirectUrl()" <?php echo $this->getLoginLinkAttributes() ?>>
-            <?php \MapasCulturais\i::_e("Entrar");?>
+            <?php \MapasCulturais\i::_e("Fazer login");?>
         </a>
     <?php endif; ?>
 <?php endif; ?>
