@@ -121,7 +121,8 @@ class Theme extends BaseV1\Theme{
         $app = App::i();
         $app->registerAuthProvider('keycloak');
         $app->registerController('taxonomias', 'Saude\Controllers\Taxonomias');
-        $app->registerController('evaluationCandidate', 'Saude\Controllers\Candidate');
+        $app->registerController('recursos', 'Saude\Controllers\Resources');
+
     }
     
 

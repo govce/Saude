@@ -48,9 +48,9 @@
             <li><a <?php if($this->template == 'panel/registrations') echo 'class="active"'; ?> href="<?php echo $app->createUrl('panel', 'registrations') ?>"><span class="icon icon-opportunity"></span> <?php \MapasCulturais\i::_e("Minhas Inscrições");?></a></li>
             <?php $this->applyTemplateHook('nav.panel.registrations','after'); ?>
 
-            <?php $this->applyTemplateHook('nav.panel.registrations','before'); ?>
-            <li><a <?php if($this->template == 'panel/registrations') echo 'class="active"'; ?> href="<?php echo $app->createUrl('panel', 'registrations') ?>"><span class="icon icon-opportunity"></span> <?php \MapasCulturais\i::_e("Meus Recursos");?></a></li>
-            <?php $this->applyTemplateHook('nav.panel.registrations','after'); ?>
+            <?php $this->applyTemplateHook('nav.panel.resources','before'); ?>
+            <li><a <?php if($this->template == 'panel/resources') echo 'class="active"'; ?> href="<?php echo $app->createUrl('recursos') ?>"><span class="icon icon-opportunity"></span> <?php \MapasCulturais\i::_e("Meus Recursos");?></a></li>
+            <?php $this->applyTemplateHook('nav.panel.resources','after'); ?>
         <?php endif; ?>
 
         <?php if($app->isEnabled('subsite') && $app->user->is('saasAdmin')): ?>
