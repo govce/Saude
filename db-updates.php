@@ -486,7 +486,10 @@ return array(
         ");
      },
 
-
+     'create sequence resources' => function () use($conn) {
+        $conn->executeQuery("CREATE SEQUENCE resources_id_seq INCREMENT BY 1 MINVALUE 1 START 1;");
+     }
+     
 );
 
 
