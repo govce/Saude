@@ -486,9 +486,13 @@ return array(
         ");
      },
 
-     'create sequence resources' => function () use($conn) {
+    'create sequence resources' => function () use($conn) {
         $conn->executeQuery("CREATE SEQUENCE resources_id_seq INCREMENT BY 1 MINVALUE 1 START 1;");
-     }
+    },
+
+    'add file resources' => function () use($conn) {
+        $conn->executeQuery("ALTER TABLE public.resources ADD resources_file character varying(255)");
+    },
      
 );
 

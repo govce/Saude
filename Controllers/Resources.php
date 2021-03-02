@@ -2,6 +2,7 @@
 namespace Saude\Controllers;
 use \MapasCulturais\App;
 use \MapasCulturais\i;
+use \Saude\Entities\Resources as EntitiesResources;
 
 class Resources extends \MapasCulturais\Controller{
 
@@ -10,5 +11,7 @@ class Resources extends \MapasCulturais\Controller{
         //echo "recurso";
     }
 
-
+    function GET_name() {
+        EntitiesResources::getNameClass();
+    }
 }
