@@ -458,6 +458,35 @@ return array(
         $conn->executeQuery("ALTER TABLE public.registration ADD preliminary_result character varying(255)");
      },
 
+     'create table resources' => function () use($conn) {
+        //
+        $conn->executeQuery("CREATE TABLE public.resources (
+            id INT NOT NULL CONSTRAINT firstkey PRIMARY KEY,
+            resource_text TEXT NOT NULL, 
+            resource_send timestamp,
+            resource_status varchar (10) DEFAULT 'Aguardando',
+            resource_reply TEXT DEFAULT NULL,
+            resource_date_reply timestamp,
+            registration_id INT NOT NULL,
+            opportunity_id INT NOT NULL,
+            agent_id INT NOT NULL,
+            reply_agent_id INT DEFAULT NULL
+        )");
+
+        $conn->executeQuery("ALTER TABLE ONLY resources
+        ADD CONSTRAINT registration_id_fk FOREIGN KEY (registration_id) REFERENCES registration (id);
+        ");
+
+        $conn->executeQuery("ALTER TABLE ONLY resources
+        ADD CONSTRAINT opportunity_id_fk FOREIGN KEY (opportunity_id) REFERENCES opportunity (id);
+        ");
+
+        $conn->executeQuery("ALTER TABLE ONLY resources
+        ADD CONSTRAINT agent_id_fk FOREIGN KEY (agent_id) REFERENCES agent (id);
+        ");
+     },
+
+
 );
 
 
