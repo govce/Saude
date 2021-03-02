@@ -11,7 +11,7 @@ class Resources extends \MapasCulturais\Controller{
         //echo "recurso";
     }
 
-    function GET_name() {
-        EntitiesResources::getNameClass();
+    function POST_resource() {
+        dump($this->postData);
     }
 }

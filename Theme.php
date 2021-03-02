@@ -69,7 +69,11 @@ class Theme extends BaseV1\Theme{
         $app->view->enqueueScript('app', 'pnotify', 'js/pnotify.js');
         $app->view->enqueueScript('app', 'pnotify.buttons', 'js/pnotify.buttons.js');
         $app->view->enqueueScript('app', 'pnotify.confirm', 'js/pnotify.confirm.js');
-
+        //Query Modal
+        $app->view->enqueueStyle('app', 'jqueryModal', 'css/remodal.css');
+        $app->view->enqueueStyle('app', 'jqueryModal-theme', 'css/remodal-default-theme.css');
+        $app->view->enqueueScript('app', 'jqueryModal', 'js/remodal.min.js');
+        
     }
 
     function getAddressByPostalCode($postalCode) {
