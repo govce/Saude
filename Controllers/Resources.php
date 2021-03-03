@@ -21,17 +21,15 @@ class Resources extends \MapasCulturais\Controller{
         dump($this->postData);
         $app = App::i();
         $conn = $app->em->getConnection();
+        $rec = new EntitiesResources;
+        $rec->resourceText = $this->postData['resource_text'];
+        $rec->registrationId = $this->postData['registration_id'];
+        $rec->opportunityId = $this->postData['opportunity_id'];
+        //$rec->agentId = $this->postData['agent_id'];
         $date = new DateTime('now');
-        //$dt = $date->format('Y-m-d');
         $dt = date('Y-m-d H:i:s');
-        try {
-            $conn->executeQuery("INSERT INTO resources(resource_text, registration_id, opportunity_id, agent_id, resource_send) VALUES (1,{$this->postData['resource_text']},
-            {$this->postData['registration_id']},
-            {$this->postData['opportunity_id']},
-            {$this->postData['agent_id']}, '".$dt."'
-            )");
-        } catch (\Throwable $th) {
-            echo $th->getMessage();
-        }
+        $rec->resourceSend = $date;
+        //dump($rec);
+        die;
     }
 }
