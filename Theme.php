@@ -63,6 +63,7 @@ class Theme extends BaseV1\Theme{
         $app->view->enqueueScript('app', 'taxonomies', 'js/ng.taxonomies.js');
         //RECURSOS
         $app->view->enqueueScript('app', 'resource', 'js/ng.resource.js');
+        
         $app->view->enqueueStyle('app', 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
         //alertas
         $app->view->enqueueStyle('app', 'pnotify', 'css/pnotify.css');
@@ -76,6 +77,7 @@ class Theme extends BaseV1\Theme{
         $app->view->enqueueStyle('app', 'jqueryModal-theme', 'css/remodal-default-theme.css');
         $app->view->enqueueScript('app', 'jqueryModal', 'js/remodal.min.js');
         
+       
     }
 
     function getAddressByPostalCode($postalCode) {

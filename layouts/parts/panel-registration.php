@@ -6,6 +6,7 @@ $app = MapasCulturais\App::i();
 $url = $registration->status == Registration::STATUS_DRAFT ? $registration->editUrl : $registration->singleUrl;
 $proj = $registration->opportunity;
 //dump($registration);
+
 ?>
 <article class="objeto clearfix">
     <?php if($avatar = $proj->avatar): ?>
@@ -24,27 +25,29 @@ $proj = $registration->opportunity;
     <a href="#modal-<?php echo $registration->id; ?>" class="btn btn-primary">
     <i class="fa fa-edit"></i> Abrir Recurso
     </a>
-    <div class="remodal" data-remodal-id="modal-<?php echo $registration->id; ?>">
-        <button data-remodal-action="close" class="remodal-close"></button>
-        <h1>Formulário de recurso</h1>
-        <p>
-            <label for=""><strong>Oportunidade: </strong>
-                <?php echo $registration->opportunity->name; ?>
-            </label>
-        </p>
-        <form action="" id="formSendResource">
-            <textarea name="resource_text" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
-        </form>
-        <br>
-        <button data-remodal-action="cancel" class="btn btn-default" title="Desistir de enviar o recurso">
-            <i class="fa fa-close" aria-hidden="true"></i>
-            Fechar
-        </button>
-        <button data-remodal-action="confirm" class="btn btn-primary" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
-        ng-click="sendResource()">
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            Enviar
-        </button>
+    <div ng-controller="resourceController">
+        <div class="remodal" data-remodal-id="modal-<?php echo $registration->id; ?>">
+            <button data-remodal-action="close" class="remodal-close"></button>
+            <h1>Formulário de recurso</h1>
+            <p>
+                <label for=""><strong>Oportunidade: </strong>
+                    <?php echo $registration->opportunity->name; ?>
+                </label>
+            </p>
+            <form action="" id="formSendResource">
+                <textarea name="resource_text" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
+            </form>
+            <br>
+            <button data-remodal-action="cancel" class="btn btn-default" title="Desistir de enviar o recurso">
+                <i class="fa fa-close" aria-hidden="true"></i>
+                Fechar
+            </button>
+            <butto class="btn btn-primary" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
+            ng-click="chamaAlert">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                Enviar
+            </button>
+        </div>
     </div>
     <div class="objeto-meta">
         <div><span class="label"<?php \MapasCulturais\i::esc_attr_e("Responsável:");?>></span> <?php echo $registration->owner->name ?></div>
