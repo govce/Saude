@@ -5,7 +5,7 @@ $app = MapasCulturais\App::i();
 
 $url = $registration->status == Registration::STATUS_DRAFT ? $registration->editUrl : $registration->singleUrl;
 $proj = $registration->opportunity;
-
+//dump($registration);
 ?>
 <article class="objeto clearfix">
     <?php if($avatar = $proj->avatar): ?>
@@ -26,19 +26,25 @@ $proj = $registration->opportunity;
     </a>
     <div class="remodal" data-remodal-id="modal-<?php echo $registration->id; ?>">
         <button data-remodal-action="close" class="remodal-close"></button>
-        <h1>Remodal</h1>
+        <h1>Formulário de recurso</h1>
         <p>
-        Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
+            <label for=""><strong>Oportunidade: </strong>
+                <?php echo $registration->opportunity->name; ?>
+            </label>
         </p>
-        <form action="">
-                <input type="text" name="" id="">
-                <input type="text" name="" id="">
-                <input type="text" name="" id="">
-        
+        <form action="" id="formSendResource">
+            <textarea name="resource_text" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
         </form>
         <br>
-        <button data-remodal-action="cancel" class="btn btn-default">Cancel</button>
-        <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+        <button data-remodal-action="cancel" class="btn btn-default" title="Desistir de enviar o recurso">
+            <i class="fa fa-close" aria-hidden="true"></i>
+            Fechar
+        </button>
+        <button data-remodal-action="confirm" class="btn btn-primary" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
+        ng-click="sendResource()">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            Enviar
+        </button>
     </div>
     <div class="objeto-meta">
         <div><span class="label"<?php \MapasCulturais\i::esc_attr_e("Responsável:");?>></span> <?php echo $registration->owner->name ?></div>

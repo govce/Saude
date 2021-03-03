@@ -14,4 +14,8 @@ class Resources extends \MapasCulturais\Controller{
     function POST_resource() {
         dump($this->postData);
     }
+
+    function POST_store() {
+        dump($this->postData);
+    }
 }
