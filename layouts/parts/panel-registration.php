@@ -34,19 +34,23 @@ $proj = $registration->opportunity;
                     <?php echo $registration->opportunity->name; ?>
                 </label>
             </p>
-            <form action="" id="formSendResource">
+            <form  method="post" id="formSendResource">
                 <textarea name="resource_text" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
-            </form>
+                <input type="text" name="registration_id" value="<?php echo $registration->id; ?>">
+                <input type="text" name="opportunity_id" value="<?php echo $registration->opportunity->id; ?>">
+                <input type="text" name="agent_id" value="<?php echo $registration->owner->id; ?>">
+            
             <br>
             <button data-remodal-action="cancel" class="btn btn-default" title="Desistir de enviar o recurso">
                 <i class="fa fa-close" aria-hidden="true"></i>
                 Fechar
             </button>
-            <butto class="btn btn-primary" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
-            ng-click="chamaAlert">
+            <button class="btn btn-primary" type="submit" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
+            id="">
                 <i class="fa fa-paper-plane" aria-hidden="true"></i>
                 Enviar
             </button>
+            </form>
         </div>
     </div>
     <div class="objeto-meta">

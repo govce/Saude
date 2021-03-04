@@ -18,7 +18,7 @@ class Resources extends \MapasCulturais\Controller{
     }
 
     function POST_store() {
-        dump($this->postData);
+        //dump($this->postData);
         $app = App::i();
         $conn = $app->em->getConnection();
         // RECUPERANDO OS OBJETOS PARA RELACIONAMENTO
@@ -34,10 +34,15 @@ class Resources extends \MapasCulturais\Controller{
         $rec->agentId = $ageId;
         $date = new DateTime('now');
         $rec->resourceSend = $date->format('Y-m-d H:i:s');
-        $app->em->persist($rec);
+        try {
+            $app->em->persist($rec);
         // $app->em->flush();
         //$rec->save(true);
-        $app->enableAccessControl();
-        dump($rec);
+            $app->enableAccessControl();
+            $app->redirect($app->createUrl('painel','inscricoes'));
+        } catch (\Throwable $th) {
+            $app->redirect($app->createUrl('painel','inscricoes'));
+        }
+        // $this->json(['title' => 'Sucesso','message' => 'Seu recurso foi enviado com sucesso','id' => $rec->id, 'type' => 'success'], 200); 
     }
 }
