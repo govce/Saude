@@ -493,7 +493,10 @@ return array(
     'add file resources' => function () use($conn) {
         $conn->executeQuery("ALTER TABLE public.resources ADD resources_file character varying(255)");
     },
-     
+
+    'add resources_reply_publish' => function () use($conn) {
+        $conn->executeQuery("ALTER TABLE public.resources  ADD resources_reply_publish boolean ");
+    },
 );
 
 
