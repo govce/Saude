@@ -16,7 +16,7 @@ class Resources extends \MapasCulturais\Entity{
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="resources_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="resources_id_seq", allocationSize=1, initialValue=4)
      */
     protected $id;
 
@@ -39,7 +39,7 @@ class Resources extends \MapasCulturais\Entity{
      *
      * @ORM\Column(name="resource_status", type="string", nullable=false)
     */
-    protected $resourceStatus;
+    protected $resourceStatus = 'Aguardando';
 
     /**
      * @var string
@@ -58,9 +58,9 @@ class Resources extends \MapasCulturais\Entity{
     /**
      * @var \MapasCulturais\Entities\Registration
      *
-     * @ORM\OneToOne(targetEntity="MapasCulturais\Entities\Registration", fetch="LAZY")
+     * @ORM\OneToOne(targetEntity="MapasCulturais\Entities\Registration",  mappedBy="\MapasCulturais\Entities\Registration")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="registration_id", referencedColumnName="number")
+     *   @ORM\JoinColumn(name="registration_id", referencedColumnName="id")
      * })
      */
     protected $registrationId;
@@ -68,7 +68,7 @@ class Resources extends \MapasCulturais\Entity{
     /**
      * @var \MapasCulturais\Entities\Opportunity
      *
-     * @ORM\ManyToOne(targetEntity="MapasCulturais\Entities\Opportunity", fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="MapasCulturais\Entities\Opportunity")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="opportunity_id", referencedColumnName="id")
      * })
@@ -78,7 +78,7 @@ class Resources extends \MapasCulturais\Entity{
     /**
      * @var \MapasCulturais\Entities\Agent
      *
-     * @ORM\OneToOne(targetEntity="MapasCulturais\Entities\Agent", fetch="LAZY")
+     * @ORM\OneToOne(targetEntity="MapasCulturais\Entities\Agent")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="agent_id", referencedColumnName="id")
      * })

@@ -21,15 +21,23 @@ class Resources extends \MapasCulturais\Controller{
         dump($this->postData);
         $app = App::i();
         $conn = $app->em->getConnection();
+        // RECUPERANDO OS OBJETOS PARA RELACIONAMENTO
+        $regId = $app->repo('Registration')->find($this->postData['registration_id']);
+        $oppId = $app->repo('Opportunity')->find($this->postData['opportunity_id']);
+        $ageId = $app->repo('Agent')->find($this->postData['agent_id']);
+        // INICIANDO A INSTANCIA
+        $app->disableAccessControl();
         $rec = new EntitiesResources;
         $rec->resourceText = $this->postData['resource_text'];
-        $rec->registrationId = $this->postData['registration_id'];
-        $rec->opportunityId = $this->postData['opportunity_id'];
-        //$rec->agentId = $this->postData['agent_id'];
+        $rec->registrationId = $regId;
+        $rec->opportunityId = $oppId;
+        $rec->agentId = $ageId;
         $date = new DateTime('now');
-        $dt = date('Y-m-d H:i:s');
-        $rec->resourceSend = $date;
-        //dump($rec);
-        die;
+        $rec->resourceSend = $date->format('Y-m-d H:i:s');
+        $app->em->persist($rec);
+        // $app->em->flush();
+        //$rec->save(true);
+        $app->enableAccessControl();
+        dump($rec);
     }
 }
