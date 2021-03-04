@@ -92,6 +92,13 @@ class Resources extends \MapasCulturais\Entity{
      */
     protected $replyAgentId;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="resources_reply_publish", type="boolean", nullable=true)
+     */
+    protected $replyPublish = false;
+
     public static function getNameClass() {
         echo __CLASS__;
     }
