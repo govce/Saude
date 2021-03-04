@@ -50,30 +50,29 @@ $(document).on('opened', '.remodal', function () {
 
 $(document).ready(function () {
     var inst = $.remodal.lookup[$('[data-remodal-id=modal]').data('remodal')];
-    $("#formSendResource").attr('action' , MapasCulturais.baseURL+'recursos/store');
+    // $("#formSendResource").attr('action' , MapasCulturais.baseURL+'recursos/store');
     // // open a modal
     // inst.open();
     
     // close a modal
-    // .submit(function (e) { 
-    //     e.preventDefault();
-    //     var form = $("#formSendResource").serialize();
-    //     console.log(form);
-    //     $.ajax({
-    //         type: "POST",
-    //         url: MapasCulturais.baseURL+'recursos/store',
-    //         data: form,
-    //         dataType: "json",
-    //         success: function (response) {
-    //             console.log(response)
-    //             var inst = $.remodal.lookup[$('[data-remodal-id=#modal-735327624]').data('remodal')];
-    //             inst.close();
-    //             new PNotify({
-    //                 title: response.title,
-    //                 text: response.message,
-    //                 type: response.type
-    //             });
-    //         }
-    //     });
-    // });
+    $("#formSendResource").submit(function (e) { 
+        e.preventDefault();
+        var form = $("#formSendResource").serialize();
+        $.ajax({
+            type: "POST",
+            url: MapasCulturais.baseURL+'recursos/store',
+            data: form,
+            dataType: "json",
+            success: function (response) {                
+                new PNotify({
+                    title: response.title,
+                    text: response.message,
+                    type: response.type
+                });
+                setTimeout(() => {
+                    location.href = MapasCulturais.baseURL+'painel/inscricoes';                    
+                }, 2000);
+            }
+        });
+    });
 });

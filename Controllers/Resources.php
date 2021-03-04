@@ -18,7 +18,7 @@ class Resources extends \MapasCulturais\Controller{
     }
 
     function POST_store() {
-        //dump($this->postData);
+        
         $app = App::i();
         $conn = $app->em->getConnection();
         // RECUPERANDO OS OBJETOS PARA RELACIONAMENTO
@@ -33,16 +33,14 @@ class Resources extends \MapasCulturais\Controller{
         $rec->opportunityId = $oppId;
         $rec->agentId = $ageId;
         $date = new DateTime('now');
-        $rec->resourceSend = $date->format('Y-m-d H:i:s');
+        $rec->resourceSend = $date;
         try {
             $app->em->persist($rec);
-        // $app->em->flush();
-        //$rec->save(true);
+            $app->em->flush();
             $app->enableAccessControl();
-            $app->redirect($app->createUrl('painel','inscricoes'));
+            $this->json(['title' => 'Sucesso','message' => 'Seu recurso foi enviado com sucesso','id' => $rec->id, 'type' => 'success'], 200);
         } catch (\Throwable $th) {
-            $app->redirect($app->createUrl('painel','inscricoes'));
-        }
-        // $this->json(['title' => 'Sucesso','message' => 'Seu recurso foi enviado com sucesso','id' => $rec->id, 'type' => 'success'], 200); 
+            $this->json(['title' => 'Erro','message' => 'Ocorreu um erro inesperado, tente novamente!','type' => 'eror'], 500);
+        } 
     }
 }

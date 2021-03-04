@@ -34,7 +34,7 @@ $proj = $registration->opportunity;
                     <?php echo $registration->opportunity->name; ?>
                 </label>
             </p>
-            <form  method="post" id="formSendResource">
+            <form id="formSendResource">
                 <textarea name="resource_text" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
                 <input type="text" name="registration_id" value="<?php echo $registration->id; ?>">
                 <input type="text" name="opportunity_id" value="<?php echo $registration->opportunity->id; ?>">
