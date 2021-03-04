@@ -40,24 +40,26 @@
 
 })(angular);
 
-
-$(document).on('opened', '.remodal', function () {
-    console.log('Modal is opened');
-    setTimeout(() => {
-        $(this).remodal('close');
-    }, 2000);
-});
+function showModalResource(reg, opp, age, oppName) {
+    $("#registration_id").val(reg)
+    $("#opportunity_id").val(opp)
+    $("#agent_id").val(age)
+    $("#opportunityNameLabel").html(oppName)
+}
+  
+function getAllResource() {
+    $.get(MapasCulturais.baseURL+'recursos/allResource',
+        function (data, textStatus, jqXHR) {
+            console.log(data);
+        }
+    );
+}
 
 $(document).ready(function () {
-    var inst = $.remodal.lookup[$('[data-remodal-id=modal]').data('remodal')];
-    // $("#formSendResource").attr('action' , MapasCulturais.baseURL+'recursos/store');
-    // // open a modal
-    // inst.open();
-    
-    // close a modal
-    $("#formSendResource").submit(function (e) { 
+    getAllResource();
+    $(".formSendResource").submit(function (e) { 
         e.preventDefault();
-        var form = $("#formSendResource").serialize();
+        var form = $(".formSendResource").serialize();
         $.ajax({
             type: "POST",
             url: MapasCulturais.baseURL+'recursos/store',
@@ -75,4 +77,6 @@ $(document).ready(function () {
             }
         });
     });
+
+
 });

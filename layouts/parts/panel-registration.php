@@ -22,37 +22,9 @@ $proj = $registration->opportunity;
     <!-- <a href="<?php echo $url; ?>" class="btn btn-primary" >
         <i class="fa fa-edit"></i> Abrir Recurso
     </a> -->
-    <a href="#modal-<?php echo $registration->id; ?>" class="btn btn-primary">
+    <a href="#modal-recurso" onclick="showModalResource('<?php echo $registration->id; ?>', '<?php echo $registration->opportunity->id; ?>', '<?php echo $registration->owner->id; ?>', '<?php echo $registration->opportunity->name; ?>')" class="btn btn-primary">
     <i class="fa fa-edit"></i> Abrir Recurso
     </a>
-    <div ng-controller="resourceController">
-        <div class="remodal" data-remodal-id="modal-<?php echo $registration->id; ?>">
-            <button data-remodal-action="close" class="remodal-close"></button>
-            <h1>Formulário de recurso</h1>
-            <p>
-                <label for=""><strong>Oportunidade: </strong>
-                    <?php echo $registration->opportunity->name; ?>
-                </label>
-            </p>
-            <form id="formSendResource">
-                <textarea name="resource_text" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
-                <input type="text" name="registration_id" value="<?php echo $registration->id; ?>">
-                <input type="text" name="opportunity_id" value="<?php echo $registration->opportunity->id; ?>">
-                <input type="text" name="agent_id" value="<?php echo $registration->owner->id; ?>">
-            
-            <br>
-            <button data-remodal-action="cancel" class="btn btn-default" title="Desistir de enviar o recurso">
-                <i class="fa fa-close" aria-hidden="true"></i>
-                Fechar
-            </button>
-            <button class="btn btn-primary" type="submit" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
-            id="">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                Enviar
-            </button>
-            </form>
-        </div>
-    </div>
     <div class="objeto-meta">
         <div><span class="label"<?php \MapasCulturais\i::esc_attr_e("Responsável:");?>></span> <?php echo $registration->owner->name ?></div>
         <?php

@@ -5,6 +5,7 @@ use DateTime;
 use \MapasCulturais\App;
 use \MapasCulturais\i;
 use \Saude\Entities\Resources as EntitiesResources;
+use Saude\Repositories\Resource;
 
 class Resources extends \MapasCulturais\Controller{
 
@@ -13,15 +14,12 @@ class Resources extends \MapasCulturais\Controller{
         //echo "recurso";
     }
 
-    function POST_resource() {
-        dump($this->postData);
-    }
-
     function POST_store() {
-        
         $app = App::i();
-        $conn = $app->em->getConnection();
+        
         // RECUPERANDO OS OBJETOS PARA RELACIONAMENTO
+        dump($this->postData);
+        die();
         $regId = $app->repo('Registration')->find($this->postData['registration_id']);
         $oppId = $app->repo('Opportunity')->find($this->postData['opportunity_id']);
         $ageId = $app->repo('Agent')->find($this->postData['agent_id']);
@@ -40,7 +38,15 @@ class Resources extends \MapasCulturais\Controller{
             $app->enableAccessControl();
             $this->json(['title' => 'Sucesso','message' => 'Seu recurso foi enviado com sucesso','id' => $rec->id, 'type' => 'success'], 200);
         } catch (\Throwable $th) {
-            $this->json(['title' => 'Erro','message' => 'Ocorreu um erro inesperado, tente novamente!','type' => 'eror'], 500);
+            //dump( $th->getMessage());
+            // $this->json(['title' => 'Erro','message' => 'Ocorreu um erro inesperado, tente novamente!','type' => 'eror'], 500);
         } 
+    }
+
+    function GET_allResource() {
+        $app = App::i();
+        $userId = $app->user->id;
+        $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.agent_id = {$userId} ");
+        $this->json($all);
     }
 }
