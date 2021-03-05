@@ -106,6 +106,19 @@ class Resources extends \MapasCulturais\Entity{
         return $all;
     }
 
+    public static function inforesource($reg, $opp) {
+        $app = App::i();
+        $text = $app->em->getConnection()->fetchAll("SELECT r.id, r.resource_text FROM resources r WHERE r.registration_id = {$reg} AND r.opportunity_id = {$opp}");
+
+        return $text;
+    }
+
+    public static function updateReply($id) {
+        $app = App::i();
+        $userId = $app->user->id;
+        //$up = 
+        // $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.agent_id = {$userId} ");
+    }
 
     public static function getNameClass() {
         echo __CLASS__;

@@ -47,4 +47,30 @@ class Resources extends \MapasCulturais\Controller{
         $all = EntitiesResources::allResource();
         $this->json($all);
     }
+
+    function GET_inforesource() {
+        //ID REG
+        //ID OPP
+        // dump($this->getData);
+        // die();
+        // $this->getData[''];
+        // $this->getData[''];
+        $text = EntitiesResources::inforesource($this->getData['reg'], $this->getData['opp']);        
+        $textSimple = ['id' => $text[0]['id'], 'text' => $text[0]['resource_text']];
+        $this->json($textSimple);
+    }
+
+    function PUT_replyResource() {
+        dump($this->putData);
+        $app = App::i();
+        $date = new DateTime('now');
+        $reply = $app->em->find('Saude\Entities\Resources', $this->putData['resource_id']);
+        $reply->resourceReply = $this->putData['resource_reply'];
+        $reply->resourceStatus = $this->putData['resource_status'];
+        $reply->resourceDateReply = $date;
+        $app->em->persist($reply);
+        $app->em->flush();
+        dump($reply);
+        
+    }
 }
