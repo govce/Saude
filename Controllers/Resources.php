@@ -44,9 +44,7 @@ class Resources extends \MapasCulturais\Controller{
     }
 
     function GET_allResource() {
-        $app = App::i();
-        $userId = $app->user->id;
-        $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.agent_id = {$userId} ");
+        $all = EntitiesResources::allResource();
         $this->json($all);
     }
 }

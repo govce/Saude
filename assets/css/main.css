@@ -7310,3 +7310,7 @@ nav {
 .registration-col-evalutions {
   margin-left: 5px;
 }
+
+.text-long-table {
+  white-space: revert !important;
+}

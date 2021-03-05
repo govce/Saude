@@ -99,6 +99,14 @@ class Resources extends \MapasCulturais\Entity{
      */
     protected $replyPublish = false;
 
+    public static function allResource() {
+        $app = App::i();
+        $userId = $app->user->id;
+        $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.agent_id = {$userId} ");
+        return $all;
+    }
+
+
     public static function getNameClass() {
         echo __CLASS__;
     }

@@ -46,14 +46,51 @@ function showModalResource(reg, opp, age, oppName) {
     $("#agent_id").val(age)
     $("#opportunityNameLabel").html(oppName)
 }
-  
+// para mudar a cor da class na tr > td
+function infoColorStatus(status) {
+    var classStatus = '';
+    switch (status) {
+        case 'Aguardando':
+        classStatus = '';
+        break;
+        case 'Deferido':
+        classStatus = 'text-success';
+        break;
+        case 'Indeferido':
+            classStatus = 'text-danger';
+        break;
+    }
+
+    return classStatus;
+}
+
 function getAllResource() {
     $.get(MapasCulturais.baseURL+'recursos/allResource',
         function (data, textStatus, jqXHR) {
             console.log(data);
+            $.each(data, function (indexInArray, value) { 
+                //formatando a data padrão pt-br
+                var dtFormat = moment(value.resource_send).format('DD/MM/YYYY HH:mm:ss');
+                //mudando a cor do status
+                var textStatus = infoColorStatus(value.resource_status);
+                var buttonReply = "--";
+                if(value.resource_reply !== null){
+                    buttonReply = "<button> Consutar Resposta </button>";
+                }
+                $("#bodyAllResource").append('<tr>'+
+                    '<td>'+value.registration_id+'</td>'+
+                    '<td class="text-long-table">'+value.resource_text+'</td>'+
+                    '<td>'+dtFormat+'</td>'+
+                    '<td class="'+textStatus+'"><strong>'+value.resource_status+'</strong></td>'+
+                    '<td>'+buttonReply+'</td>'+
+                '</tr></p>'+
+                '</tbody>')
+            });
+            
         }
     );
 }
+
 
 $(document).ready(function () {
     getAllResource();
