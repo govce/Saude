@@ -1,8 +1,8 @@
 $(document).ready(function () {
     getAllResource();
-    $(".formSendResource").submit(function (e) { 
+    $("#formSendResource").submit(function (e) { 
         e.preventDefault();
-        var form = $(".formSendResource").serialize();
+        var form = $("#formSendResource").serialize();
         $.ajax({
             type: "POST",
             url: MapasCulturais.baseURL+'recursos/store',

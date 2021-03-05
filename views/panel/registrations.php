@@ -108,12 +108,12 @@
         </select>
         <br>
         <hr>
-        <button data-remodal-action="cancel" class="btn btn-default" title="Desistir de enviar o recurso">
+        <button data-remodal-action="cancel" class="btn btn-default" title="Sair da resposta">
         <i class="fa fa-close" aria-hidden="true"></i>
         Fechar
         </button>
-        <input type="text" name="_METHOD" value="PUT"/>
-        <input type="text" name="resource_id" id="resource_id">
+        <input type="hidden" name="_METHOD" value="PUT"/>
+        <input type="hidden" name="resource_id" id="resource_id">
         <button class="btn btn-primary" type="submit" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
             id="">
         <i class="fa fa-paper-plane" aria-hidden="true"></i>
