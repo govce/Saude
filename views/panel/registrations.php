@@ -42,82 +42,12 @@
         <?php endif; ?>
     </div>
     <div id="recurso">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="tableAllResource" style="width:100%;">
-                <thead>
-                    <tr>
-                        <th>Inscrição</th>
-                        <th style="width:25%;">Recurso Solicitado</th>
-                        <th>Enviado em</th>
-                        <th>Situação</th>
-                        <th style="width:25%;">Resposta</th>
-                    </tr>
-                    <tbody id="bodyAllResource"></tbody>
-                </thead>
-            </table>
-        </div>
+        <?php $this->part('modals/table-resource') ?>
     </div>
     <!-- #lixeira-->
 </div>
-<div class="remodal" data-remodal-id="modal-recurso">
-    <button data-remodal-action="close" class="remodal-close"></button>
-    <h1>Formulário de recurso</h1>
-    <p>
-        <strong>Oportunidade: 
-        <label id="opportunityNameLabel"></label>
-        </strong>
-    </p>
-    <form id="formSendResource">
-        <textarea name="resource_text" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
-        <input type="text" id="registration_id" name="registration_id">
-        <input type="text" name="opportunity_id" id="opportunity_id">
-        <input type="text" name="agent_id" id="agent_id" >
-        <br>
-        <button data-remodal-action="cancel" class="btn btn-default" title="Desistir de enviar o recurso">
-        <i class="fa fa-close" aria-hidden="true"></i>
-        Fechar
-        </button>
-        <button class="btn btn-primary" type="submit" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
-            id="">
-        <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        Enviar
-        </button>
-    </form>
-</div>
+<!-- MODAL COM O FORM DE ENVIO DE RECURSO -->
+<?php $this->part('modals/table-resource') ?>
 
 <!-- modal de resposta de recurso -->
-<div class="remodal" data-remodal-id="modal-resposta-recurso">
-    <button data-remodal-action="close" class="remodal-close"></button>
-    <h1>Responder Recurso</h1>
-    <p>
-        <strong>Oportunidade: 
-        <label id="replyOpportunityNameLabel"></label>
-        </strong>
-    </p>
-    <p>
-        <small id="resourceText"></small>
-    </p>
-    <form id="formReplyResource">
-        <textarea name="resource_reply" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
-        <br>
-        <label for="">Situação</label>
-        <select name="resource_status" id="resource_status" class="form-contro">
-            <option value="">--Selecione--</option>
-            <option value="Deferido">Deferido</option>
-            <option value="Indeferido">Indeferido</option>
-        </select>
-        <br>
-        <hr>
-        <button data-remodal-action="cancel" class="btn btn-default" title="Sair da resposta">
-        <i class="fa fa-close" aria-hidden="true"></i>
-        Fechar
-        </button>
-        <input type="hidden" name="_METHOD" value="PUT"/>
-        <input type="hidden" name="resource_id" id="resource_id">
-        <button class="btn btn-primary" type="submit" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;"
-            id="">
-        <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        Responder
-        </button>
-    </form>
-</div>
+<?php $this->part('modals/form-reply-resource') ?>

@@ -27,9 +27,9 @@ $proj = $registration->opportunity;
     </a>
     <?php endif; ?>
 
-    <!-- <a href="#modal-resposta-recurso" onclick="showModalReply('<?php echo $registration->id; ?>', '<?php echo $registration->opportunity->id; ?>', '<?php echo $registration->opportunity->name; ?>')" class="btn btn-info">
+    <a href="#modal-resposta-recurso" onclick="showModalReply('<?php echo $registration->id; ?>', '<?php echo $registration->opportunity->id; ?>', '<?php echo $registration->opportunity->name; ?>')" class="btn btn-info">
         <i class="fa fa-share-square" aria-hidden="true"></i> Responder Recurso
-    </a> -->
+    </a>
     <div class="objeto-meta">
         <div><span class="label"<?php \MapasCulturais\i::esc_attr_e("Responsável:");?>></span> <?php echo $registration->owner->name ?></div>
         <?php

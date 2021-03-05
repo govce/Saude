@@ -18,8 +18,6 @@ class Resources extends \MapasCulturais\Controller{
         $app = App::i();
         
         // RECUPERANDO OS OBJETOS PARA RELACIONAMENTO
-        dump($this->postData);
-        die();
         $regId = $app->repo('Registration')->find($this->postData['registration_id']);
         $oppId = $app->repo('Opportunity')->find($this->postData['opportunity_id']);
         $ageId = $app->repo('Agent')->find($this->postData['agent_id']);

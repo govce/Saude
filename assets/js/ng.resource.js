@@ -88,14 +88,16 @@ function getAllResource() {
                 var buttonReply = "--";
                 if(value.resource_reply !== null){
                     buttonReply = value.resource_reply;
+                    buttonReply += '<br/><a href="#"  class="text-primary" onclick="eyeContent(reply, '+value.id+')">Ver completo</a>';
                 }
                 $("#bodyAllResource").append('<tr>'+
                     '<td>'+value.registration_id+'</td>'+
                     '<td class="text-long-table">'+value.resource_text.substring(0, 50)+
-                    '<br/><small><a href="#"  class="text-primary">Ver completo</a></small></td>'+
+                    '<br/><small><a href="#"  class="text-primary" onclick="eyeContent(text, '+value.id+')">Ver completo</a></small></td>'+
                     '<td>'+dtFormat+'</td>'+
                     '<td class="'+textStatus+'"><strong>'+value.resource_status+'</strong></td>'+
-                    '<td class="text-long-table">'+buttonReply+'</td>'+
+                    '<td class="text-long-table">'+buttonReply+
+                    '</td>'+
                 '</tr></p>'+
                 '</tbody>')
             });
