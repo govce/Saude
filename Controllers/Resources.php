@@ -16,7 +16,10 @@ class Resources extends \MapasCulturais\Controller{
 
     function POST_store() {
         $app = App::i();
-        
+        if(empty($this->postData['resource_text'])){
+
+            $this->json(['title' => 'Erro','message' => 'O campo não pode ser vazio', 'type' => 'error'], 500);
+        }
         // RECUPERANDO OS OBJETOS PARA RELACIONAMENTO
         $regId = $app->repo('Registration')->find($this->postData['registration_id']);
         $oppId = $app->repo('Opportunity')->find($this->postData['opportunity_id']);

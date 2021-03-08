@@ -120,6 +120,19 @@ class Resources extends \MapasCulturais\Entity{
         // $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.agent_id = {$userId} ");
     }
 
+    public static function validateOnlyResource($registrationId, $opportunityId, $agentId){
+        $app = App::i();
+        $validate = false;
+        $resources = $app->em->getConnection()->fetchAll("SELECT resource_text from resources r WHERE r.registration_id = {$registrationId} AND r.opportunity_id = {$opportunityId} AND r.agent_id = {$agentId}
+        ");
+        
+        if(count($resources) > 0){
+            $validate = true;
+        }
+
+        return $validate; 
+    }
+
     public static function getNameClass() {
         echo __CLASS__;
     }

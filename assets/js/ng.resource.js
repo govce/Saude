@@ -8,7 +8,8 @@ $(document).ready(function () {
             url: MapasCulturais.baseURL+'recursos/store',
             data: form,
             dataType: "json",
-            success: function (response) {                
+            success: function (response) {   
+                console.log(response);             
                 new PNotify({
                     title: response.title,
                     text: response.message,
@@ -18,7 +19,15 @@ $(document).ready(function () {
                     location.href = MapasCulturais.baseURL+'painel/inscricoes';                    
                 }, 2000);
             }
-        });
+        }).fail(function(error) {
+            console.log(error);
+            new PNotify({
+                title: error.responseJSON.title,
+                text: error.responseJSON.message,
+                type: error.responseJSON.type
+
+            });
+          });
     });
 
     $("#formReplyResource").submit(function (event) {

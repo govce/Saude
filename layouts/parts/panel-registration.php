@@ -1,11 +1,12 @@
 <?php
 use MapasCulturais\Entities\Registration;
+Use Saude\Entities\Resources;
 
 $app = MapasCulturais\App::i();
 
 $url = $registration->status == Registration::STATUS_DRAFT ? $registration->editUrl : $registration->singleUrl;
 $proj = $registration->opportunity;
-//dump($registration);
+$resources = Resources::validateOnlyResource($registration->id, $registration->opportunity->id, $registration->owner->id);
 ?>
 <article class="objeto clearfix">
     <?php if($avatar = $proj->avatar): ?>
