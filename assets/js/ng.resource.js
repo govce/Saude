@@ -27,7 +27,7 @@ $(document).ready(function () {
                 type: error.responseJSON.type
 
             });
-          });
+        });
     });
 
     $("#formReplyResource").submit(function (event) {
@@ -43,6 +43,13 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response)
             }
+        }).fail(function(error) {
+            new PNotify({
+                title: error.responseJSON.title,
+                text: error.responseJSON.message,
+                type: error.responseJSON.type
+
+            });
         });
     });
 });
@@ -109,7 +116,7 @@ function getAllResource() {
                 var resource = "resource";
 
                 if(value.resource_reply !== null){
-                    buttonReply = value.resource_reply;
+                    buttonReply = value.resource_reply.substring(0, 20);
                     reply = 'reply';
                     buttonReply += '<br/><a href="#modal-main"  class="text-primary" onclick="eyeContent(`'+value.resource_reply+'`, `'+reply+'`)">Ver completo</a>';
                 }

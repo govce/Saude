@@ -19,13 +19,14 @@ $resources = Resources::validateOnlyResource($registration->id, $registration->o
     <small>
         <strong>Inscrição:</strong> <?php echo $registration->number; ?>
     </small> <br>
-    <!-- <a href="<?php echo $url; ?>" class="btn btn-primary" >
-        <i class="fa fa-edit"></i> Abrir Recurso
-    </a> -->
     <?php if( $registration->canUser('sendClaimMessage') ) : ?>
-    <a href="#modal-recurso" onclick="showModalResource('<?php echo $registration->id; ?>', '<?php echo $registration->opportunity->id; ?>', '<?php echo $registration->owner->id; ?>', '<?php echo $registration->opportunity->name; ?>')" class="btn btn-primary">
-    <i class="fa fa-edit"></i> Abrir Recurso
-    </a>
+        <?php if($resources == false){ ?>
+        <a data-remodal-target="modal-recurso" onclick="showModalResource('<?php echo $registration->id; ?>', '<?php echo $registration->opportunity->id; ?>', '<?php echo $registration->owner->id; ?>', '<?php echo $registration->opportunity->name; ?>')" class="btn btn-primary">
+            <i class="fa fa-edit"></i> Abrir Recurso
+        </a>
+        <?php }else{
+            echo '<label class="text-info">Recurso enviado</label>';
+        } ?>
     <?php endif; ?>
 
     <a href="#modal-resposta-recurso" onclick="showModalReply('<?php echo $registration->id; ?>', '<?php echo $registration->opportunity->id; ?>', '<?php echo $registration->opportunity->name; ?>')" class="btn btn-info">
@@ -47,5 +48,7 @@ $resources = Resources::validateOnlyResource($registration->id, $registration->o
         <?php if($proj->registrationCategories): ?>
         <div><span class="label"><?php echo $proj->registrationCategTitle ?>:</span> <?php echo $registration->category ?></div>
         <?php endif; ?>
+
+
     </div>
 </article>

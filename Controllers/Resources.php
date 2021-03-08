@@ -62,16 +62,25 @@ class Resources extends \MapasCulturais\Controller{
     }
 
     function PUT_replyResource() {
-        dump($this->putData);
+        if(
+            empty($this->postData['resource_reply']) || 
+            empty($this->postData['resource_status']) ){
+            $this->json(['title' => 'Erro','message' => 'Todos os campos deve ser preenchidos', 'type' => 'error'], 500);
+        }
         $app = App::i();
         $date = new DateTime('now');
         $reply = $app->em->find('Saude\Entities\Resources', $this->putData['resource_id']);
         $reply->resourceReply = $this->putData['resource_reply'];
         $reply->resourceStatus = $this->putData['resource_status'];
         $reply->resourceDateReply = $date;
-        $app->em->persist($reply);
-        $app->em->flush();
-        dump($reply);
+        try {
+            $app->em->persist($reply);
+            $app->em->flush();
+            $this->json(['title' => 'Sucesso','message' => 'Sua resposta foi enviado com sucesso', 'type' => 'success'], 200);
+        } catch (Exception $th) {
+            //throw new \Exception('Controller Id already in use');
+            $this->json(['title' => 'Ops!','message' => 'Ocorreu um erro inesperado, tente mais tarde.', 'type' => 'error'], 500);
+        }
         
     }
 }

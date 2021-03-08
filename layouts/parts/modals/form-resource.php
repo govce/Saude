@@ -8,9 +8,9 @@
     </p>
     <form id="formSendResource">
         <textarea name="resource_text" id="" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
-        <input type="text" id="registration_id" name="registration_id">
-        <input type="text" name="opportunity_id" id="opportunity_id">
-        <input type="text" name="agent_id" id="agent_id" >
+        <input type="hidden" id="registration_id" name="registration_id">
+        <input type="hidden" name="opportunity_id" id="opportunity_id">
+        <input type="hidden" name="agent_id" id="agent_id" >
         <br>
         <button data-remodal-action="cancel" class="btn btn-default" title="Desistir de enviar o recurso">
         <i class="fa fa-close" aria-hidden="true"></i>
