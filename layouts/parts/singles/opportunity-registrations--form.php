@@ -24,10 +24,15 @@ if ($entity->isRegistrationOpen()): ?>
         <?php endif; ?>
     <?php else: ?>
         <div class="alert danger">
-            <p><?php \MapasCulturais\i::_e("Para se inscrever é preciso ter uma conta e estar logado nesta plataforma. Clique no botão abaixo para criar uma conta ou fazer login.");?></p>
-        </div>    
-        <a class="btn btn-primary" ng-click="setRedirectUrl()" <?php echo $this->getLoginLinkAttributes() ?>>
-            <?php \MapasCulturais\i::_e("Fazer login");?>
-        </a>
+            <p>
+                <?php \MapasCulturais\i::_e("Para se inscrever é preciso ter uma conta e estar logado nesta plataforma. Clique no botão abaixo para criar uma conta ou fazer login.");?>
+            </p>
+            <p>
+            <a class="btn btn-primary" ng-click="setRedirectUrl()" <?php echo $this->getLoginLinkAttributes() ?>>
+                    <?php \MapasCulturais\i::_e("Fazer login");?>
+                </a>
+            </p>
+        </div>
+
     <?php endif; ?>
 <?php endif; ?>
