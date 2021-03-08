@@ -76,6 +76,16 @@ function infoColorStatus(status) {
     return classStatus;
 }
 
+function eyeContent(text, type) {
+
+    if(type == "resource") {
+        $("#titleRemodal").html('Seu recurso.');
+    }else{
+        $("#titleRemodal").html('Sua resposta.');
+    }
+    $("#contentMain").html(text);
+}
+
 function getAllResource() {
     $.get(MapasCulturais.baseURL+'recursos/allResource',
         function (data, textStatus, jqXHR) {
@@ -86,14 +96,20 @@ function getAllResource() {
                 //mudando a cor do status
                 var textStatus = infoColorStatus(value.resource_status);
                 var buttonReply = "--";
+                var reply = "";
+                var resource = "resource";
+
                 if(value.resource_reply !== null){
                     buttonReply = value.resource_reply;
-                    buttonReply += '<br/><a href="#"  class="text-primary" onclick="eyeContent(reply, '+value.id+')">Ver completo</a>';
+                    reply = 'reply';
+                    buttonReply += '<br/><a href="#modal-main"  class="text-primary" onclick="eyeContent(`'+value.resource_reply+'`, `'+reply+'`)">Ver completo</a>';
                 }
+                
+
                 $("#bodyAllResource").append('<tr>'+
                     '<td>'+value.registration_id+'</td>'+
-                    '<td class="text-long-table">'+value.resource_text.substring(0, 50)+
-                    '<br/><small><a href="#"  class="text-primary" onclick="eyeContent(text, '+value.id+')">Ver completo</a></small></td>'+
+                    '<td class="text-long-table">'+value.resource_text.substring(0, 20)+
+                    '<br/><small><a href="#modal-main"  class="text-primary" onclick="eyeContent(`'+value.resource_text+'`, `'+resource+'`)">Ver completo</a></small></td>'+
                     '<td>'+dtFormat+'</td>'+
                     '<td class="'+textStatus+'"><strong>'+value.resource_status+'</strong></td>'+
                     '<td class="text-long-table">'+buttonReply+
