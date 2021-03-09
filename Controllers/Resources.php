@@ -61,6 +61,13 @@ class Resources extends \MapasCulturais\Controller{
         $this->json($textSimple);
     }
 
+    function GET_inforesourceReply() {
+        // dump($this->getData);
+        // die();
+        $text = EntitiesResources::find($this->getData['id']);
+        $this->json($text);
+    }
+
     function PUT_replyResource() {
         if(
             empty($this->postData['resource_reply']) || 

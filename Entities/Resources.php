@@ -106,6 +106,12 @@ class Resources extends \MapasCulturais\Entity{
         return $all;
     }
 
+    public static function resourceIdOpportunity($opportunity) {
+        $app = App::i();
+        $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.opportunity_id = {$opportunity} ");
+        return $all;
+    }
+
     public static function inforesource($reg, $opp) {
         $app = App::i();
         $text = $app->em->getConnection()->fetchAll("SELECT r.id, r.resource_text FROM resources r WHERE r.registration_id = {$reg} AND r.opportunity_id = {$opp}");
@@ -131,6 +137,12 @@ class Resources extends \MapasCulturais\Entity{
         }
 
         return $validate; 
+    }
+
+    public static function find($id){
+        $app = App::i();
+        $resource = $app->em->find('Saude\Entities\Resources', $id);
+        return $resource;
     }
 
     public static function getNameClass() {

@@ -49,9 +49,6 @@
 <!-- MODAL COM O FORM DE ENVIO DE RECURSO -->
 <?php $this->part('modals/form-resource') ?>
 
-<!-- modal de resposta de recurso -->
-<?php $this->part('modals/form-reply-resource') ?>
-
 <div class="remodal" data-remodal-id="modal-main">
   <button data-remodal-action="close" class="remodal-close"></button>
   <h2 id="titleRemodal"></h2>

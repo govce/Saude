@@ -14,8 +14,8 @@ $resources = Resources::validateOnlyResource($registration->id, $registration->o
         <img src="<?php echo $avatar->transform('avatarSmall')->url ?>" >
     </div>
     <?php endif; ?>
-    <a href="<?php echo $url; ?>" class="btn btn-success" >Acessar inscrição</a>
-    <h1><?php echo $proj->name ?></h1>
+    <a href="<?php echo $url; ?>" class="text-primary" >Acessar inscrição</a>
+    <h1 style="margin-top: 5px;"><?php echo $proj->name ?></h1>
     <small>
         <strong>Inscrição:</strong> <?php echo $registration->number; ?>
     </small> <br>
@@ -28,10 +28,6 @@ $resources = Resources::validateOnlyResource($registration->id, $registration->o
             echo '<label class="text-info">Recurso enviado</label>';
         } ?>
     <?php endif; ?>
-
-    <a href="#modal-resposta-recurso" onclick="showModalReply('<?php echo $registration->id; ?>', '<?php echo $registration->opportunity->id; ?>', '<?php echo $registration->opportunity->name; ?>')" class="btn btn-info">
-        <i class="fa fa-share-square" aria-hidden="true"></i> Responder Recurso
-    </a>
     <div class="objeto-meta">
         <div><span class="label"<?php \MapasCulturais\i::esc_attr_e("Responsável:");?>></span> <?php echo $registration->owner->name ?></div>
         <?php
