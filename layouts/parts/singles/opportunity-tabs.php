@@ -1,19 +1,10 @@
 <?php 
 use MapasCulturais\Entities\Registration;
+use Saude\Entities\Resources;
 
 $app = MapasCulturais\App::i();
 $sent = $app->repo('Registration')->findByUser($app->user, 'sent');
-dump($entity->id);
-$rec = $app->repo('OpportunityMeta')->findBy([
-    'owner' => $entity->id,
-    'key'   => 'claimDisabled',
-    'value' => 0
-    ]);
-dump($rec);
-$ava = $app->repo('RegistrationEvaluation')->findBy([
-    'user' => $app->user->id
-]);
-dump($ava);
+//dump($entity);
 
 $this->applyTemplateHook('tabs','before'); ?>
 <ul class="abas clearfix">
@@ -34,8 +25,13 @@ $this->applyTemplateHook('tabs','before'); ?>
 
         <?php if($entity->canUser('viewEvaluations') || $entity->canUser('@control')): ?>
             <li><a href="#evaluations" rel='noopener noreferrer'><?php \MapasCulturais\i::_e("Avaliações");?></a></li>
+            <?php 
+            // Somente mostrará a aba de recurso se o agente logado for avaliador da oportunidade e se a oportunidade está com o recurso habilitado
+            if(isset($entity->metadata['claimDisabled']) && $entity->metadata['claimDisabled'] == 0 ) :  ?>
+            <li><a href="#resource" rel='noopener noreferrer'><?php \MapasCulturais\i::_e("Recursos");?></a></li>
+            <?php endif; ?>    
         <?php endif; ?>
-
+        
     <?php endif; ?>
 
     <?php $this->applyTemplateHook('tabs','end'); ?>
