@@ -23,7 +23,7 @@ if ($entity->isRegistrationOpen()): ?>
         </form>
         <?php endif; ?>
     <?php else: ?>
-        <div class="alert danger">
+        <div class="alert danger" style="position: relative !important;">
             <p>
                 <?php \MapasCulturais\i::_e("Para se inscrever é preciso ter uma conta e estar logado nesta plataforma. Clique no botão abaixo para criar uma conta ou fazer login.");?>
             </p>
