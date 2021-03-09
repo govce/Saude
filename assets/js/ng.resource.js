@@ -42,6 +42,11 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 console.log(response)
+                new PNotify({
+                    title: response.title,
+                    text: response.message,
+                    type: response.type    
+                });
             }
         }).fail(function(error) {
             new PNotify({
@@ -52,7 +57,9 @@ $(document).ready(function () {
             });
         });
     });
+
 });
+
 
 function showModalResource(reg, opp, age, oppName) {
     $("#registration_id").val(reg)
@@ -61,19 +68,36 @@ function showModalResource(reg, opp, age, oppName) {
     $("#opportunityNameLabel").html(oppName)
 }
 
-function showModalReply(registration, opportunity, oppName) {
+function showModalReply(resourceId, opportunity, oppName) {
+    $("#replyOpportunityNameLabel").html('');
+    $("#resourceText").html('');
+    $("#resource_id").val(0);
     $("#replyOpportunityNameLabel").html(oppName);
     var data = {
-        reg: registration,
-        opp: opportunity
+        id: resourceId
     }
-    $.get(MapasCulturais.baseURL+'recursos/inforesource', data,
-        function (response, textStatus, jqXHR) {
-            $("#resourceText").html('<strong>Recurso: </strong>'+response.text);
+    $.get(MapasCulturais.baseURL+'recursos/inforesourceReply', data,
+        function (response) {
+            $("#resource_reply").val(response.resourceReply)
+            $("#resourceText").html('<strong>Recurso: </strong>'+response.resourceText);
             $("#resource_id").val(response.id);
+            $('#resource_status option[value='+response.resourceStatus+']').attr('selected','selected');
         }
     );
+    var inst = $('[data-remodal-id=modal-resposta-recurso]').remodal();
+    //ABRE MODAL
+    inst.open();
 }
+
+
+$(document).on('closed', '.remodal', function (e) {
+
+    // Reason: 'confirmation', 'cancellation'
+    console.log('Modal is closed' + (e.reason ? ', reason: ' + e.reason : ''));
+
+});
+
+
 // para mudar a cor da class na tr > td
 function infoColorStatus(status) {
     var classStatus = '';
@@ -109,6 +133,7 @@ function getAllResource() {
             $.each(data, function (indexInArray, value) { 
                 //formatando a data padrão pt-br
                 var dtFormat = moment(value.resource_send).format('DD/MM/YYYY HH:mm:ss');
+                var dtReply = moment(value.resource_send_reply).format('DD/MM/YYYY HH:mm:ss');
                 //mudando a cor do status
                 var textStatus = infoColorStatus(value.resource_status);
                 var buttonReply = "--";
@@ -121,7 +146,6 @@ function getAllResource() {
                     buttonReply += '<br/><a href="#modal-main"  class="text-primary" onclick="eyeContent(`'+value.resource_reply+'`, `'+reply+'`)">Ver completo</a>';
                 }
                 
-
                 $("#bodyAllResource").append('<tr>'+
                     '<td>'+value.registration_id+'</td>'+
                     '<td class="text-long-table">'+value.resource_text.substring(0, 20)+
@@ -130,7 +154,8 @@ function getAllResource() {
                     '<td class="'+textStatus+'"><strong>'+value.resource_status+'</strong></td>'+
                     '<td class="text-long-table">'+buttonReply+
                     '</td>'+
-                '</tr></p>'+
+                    '<td>'+dtReply+'</td>'+
+                '</tr>'+
                 '</tbody>')
             });
             
