@@ -7314,3 +7314,11 @@ nav {
 .text-long-table {
   white-space: revert !important;
 }
+
+/* modal do PNOTIFY quando tem confirmação*/
+.btn-confirm-notify {
+  float: left;
+  color: #fff !important;
+  border-radius: 5px !important;
+  padding-bottom: 30px !important;
+}

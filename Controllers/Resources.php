@@ -10,8 +10,9 @@ use Saude\Repositories\Resource;
 class Resources extends \MapasCulturais\Controller{
 
     function GET_index() {
-        $this->render('resources');
-        //echo "recurso";
+        //$this->render('resources');
+        ini_set('display_errors', 1);
+        error_reporting(E_ALL);
     }
 
     function POST_store() {
@@ -50,20 +51,12 @@ class Resources extends \MapasCulturais\Controller{
     }
 
     function GET_inforesource() {
-        //ID REG
-        //ID OPP
-        // dump($this->getData);
-        // die();
-        // $this->getData[''];
-        // $this->getData[''];
         $text = EntitiesResources::inforesource($this->getData['reg'], $this->getData['opp']);        
         $textSimple = ['id' => $text[0]['id'], 'text' => $text[0]['resource_text']];
         $this->json($textSimple);
     }
 
     function GET_inforesourceReply() {
-        // dump($this->getData);
-        // die();
         $text = EntitiesResources::find($this->getData['id']);
         $this->json($text);
     }
@@ -80,6 +73,15 @@ class Resources extends \MapasCulturais\Controller{
         $reply->resourceReply = $this->putData['resource_reply'];
         $reply->resourceStatus = $this->putData['resource_status'];
         $reply->resourceDateReply = $date;
+        $reply->replyAgentId = $app->user->id;
+
+        //ALTERAR A NOTA FINAL
+        if(!empty($this->putData['new_consolidated_result'])) {
+            $reg = $app->repo('Registration')->find($reply->registrationId->id);
+            $reg->consolidatedResult = $this->putData['new_consolidated_result'];
+            $app->em->persist($reg);
+        }
+
         try {
             $app->em->persist($reply);
             $app->em->flush();
@@ -89,5 +91,14 @@ class Resources extends \MapasCulturais\Controller{
             $this->json(['title' => 'Ops!','message' => 'Ocorreu um erro inesperado, tente mais tarde.', 'type' => 'error'], 500);
         }
         
+    }
+
+    function POST_publishResource() {
+        //dump($this->postData);
+        $res = EntitiesResources::publishResource($this->postData['opportunity_id']);
+        if($res > 0) {
+            $this->json([ 'title' => 'Sucesso', 'message' => 'Publicação realizada com sucesso', 'type' => 'success'], 200);
+        }
+        $this->json([ 'title' => 'Error', 'message' => 'Ocorreu um erro inesperado.', 'type' => 'error'], 500);
     }
 }

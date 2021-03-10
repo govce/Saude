@@ -464,7 +464,7 @@ return array(
             id INT NOT NULL CONSTRAINT firstkey PRIMARY KEY,
             resource_text TEXT NOT NULL, 
             resource_send timestamp,
-            resource_status varchar (10) DEFAULT 'Aguardando',
+            resource_status varchar (25) DEFAULT 'Aguardando',
             resource_reply TEXT DEFAULT NULL,
             resource_date_reply timestamp,
             registration_id INT NOT NULL,

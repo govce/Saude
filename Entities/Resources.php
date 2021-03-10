@@ -101,7 +101,7 @@ class Resources extends \MapasCulturais\Entity{
 
     public static function allResource() {
         $app = App::i();
-        $userId = $app->user->id;
+        $userId = $app->user->profile->id;
         $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.agent_id = {$userId} ");
         return $all;
     }
@@ -122,8 +122,7 @@ class Resources extends \MapasCulturais\Entity{
     public static function updateReply($id) {
         $app = App::i();
         $userId = $app->user->id;
-        //$up = 
-        // $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.agent_id = {$userId} ");
+        $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.agent_id = {$userId} ");
     }
 
     public static function validateOnlyResource($registrationId, $opportunityId, $agentId){
@@ -145,8 +144,12 @@ class Resources extends \MapasCulturais\Entity{
         return $resource;
     }
 
-    public static function getNameClass() {
-        echo __CLASS__;
+    public static function publishResource($opportunityId) {
+        $app = App::i();
+        $dql = "UPDATE Saude\Entities\Resources r SET r.replyPublish = true WHERE r.opportunityId = {$opportunityId}";
+        $query = $app->em->createQuery($dql);
+        $resource = $query->getResult();
+        return $resource;
     }
 
     /** @ORM\PrePersist */

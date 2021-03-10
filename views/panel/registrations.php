@@ -14,10 +14,10 @@
     </header>
     <?php $this->applyTemplateHook('panel-header','after'); ?>
     <ul class="abas clearfix clear">
-        <li class="active">
+        <li>
             <a href="#enviadas" rel='noopener noreferrer'><?php \MapasCulturais\i::_e("Enviadas");?></a>
         </li>
-        <li>
+        <li class="active">
             <a href="#ativos" rel='noopener noreferrer'><?php \MapasCulturais\i::_e("Rascunhos");?></a>
         </li>
         <li>
