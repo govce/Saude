@@ -21,7 +21,7 @@
                             <select name="resource_status" id="resource_status" class="form-control">
                                 <option value="">--Selecione--</option>
                                 <option value="Deferido">Deferido</option>
-                                <option value="Parcialmente deferido">Parcialmente Deferido</option>
+                                <option value="ParcialmenteDeferido">Parcialmente Deferido</option>
                                 <option value="Indeferido">Indeferido</option>
                             </select>
                         </td>

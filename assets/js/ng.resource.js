@@ -1,6 +1,8 @@
 $(document).ready(function () {
     //OCULTANDO CAMPO NO FORMULÁRIO DE RESPOSTA
     $("#divDeferido").hide();
+    $("#div-publish").show();
+    $("#div-alert-publish").hide();
     getAllResource();
     $("#formSendResource").submit(function (e) { 
         e.preventDefault();
@@ -29,7 +31,9 @@ $(document).ready(function () {
             });
         });
     });
+    // adicionando link no botão ir para recurso na página de oportunidade
     $("#btn-recurso").attr('href', MapasCulturais.baseURL+'painel/inscricoes/#tab=enviadas');
+    // ENVIO DE RESPOSTA DA BANCA
     $("#formReplyResource").submit(function (event) {
         event.preventDefault();
         var form = $("#formReplyResource").serialize();
@@ -49,6 +53,7 @@ $(document).ready(function () {
                 setTimeout(() => {
                     // $( "#resource_status option:selected" ).text('--Selecione--');
                     inst.close();
+                    location.reload();
                 }, 1000);
                 
                 
@@ -65,7 +70,7 @@ $(document).ready(function () {
     //habilitando div para nota
     $('#resource_status').on('change', function() {
         var type = this.value;
-        if(type == 'Deferido') {
+        if(type == 'Deferido' || type == 'ParcialmenteDeferido') {
             $("#divDeferido").show();
         }else{
             $("#divDeferido").hide();
@@ -93,14 +98,16 @@ function showModalReply(resourceId, opportunity, oppName, note) {
     }
     $.get(MapasCulturais.baseURL+'recursos/inforesourceReply', data,
         function (response) {
+            console.log('status' , response);
             $("#resource_reply").val(response.resourceReply)
             $("#resourceText").html('<strong>Recurso: </strong>'+response.resourceText);
             $("#resource_id").val(response.id);
             if(response.resourceStatus == 'Aguardando'){
-                $( "#resource_status option:selected" ).text('--Selecione--');
+                //$( "#resource_status option:selected" ).text('--Selecione--');
+                $('#resource_status option[value=Aguardando]').attr('selected','selected');
             }else{
-                // $('#resource_status option[value='+response.resourceStatus+']').attr('selected','selected');
-                $( "#resource_status option:selected" ).text(response.resourceStatus);
+                $('#resource_status option[value='+response.resourceStatus+']').attr('selected','selected');
+                // $( "#resource_status option:selected" ).text(response.resourceStatus);
             }
             
         }
@@ -144,6 +151,8 @@ function getAllResource() {
     $.get(MapasCulturais.baseURL+'recursos/allResource',
         function (data, textStatus, jqXHR) {
             $.each(data, function (indexInArray, value) { 
+                console.log(value)
+                getNameOpportunity(value.opportunity_id); 
                 //formatando a data padrão pt-br
                 var dtFormat = moment(value.resource_send).format('DD/MM/YYYY HH:mm:ss');
                 var dtReply = "--";
@@ -163,6 +172,7 @@ function getAllResource() {
                 }
                 
                 $("#bodyAllResource").append('<tr>'+
+                    '<td id="tdNameOpportunity_'+value.opportunity_id+'"></td>'+
                     '<td>'+value.registration_id+'</td>'+
                     '<td class="text-long-table">'+value.resource_text.substring(0, 20)+
                     '<br/><small><a href="#modal-main"  class="text-primary" onclick="eyeContent(`'+value.resource_text+'`, `'+resource+'`)">Ver completo</a></small></td>'+
@@ -178,11 +188,21 @@ function getAllResource() {
     );
 }
 
+function getNameOpportunity(id) {
+    $.ajax({
+        type: "GET",
+        url: MapasCulturais.baseURL + 'recursos/getNameOpportunity?id=' + id,
+        dataType: "json",
+        success: function (response) {
+            $("#tdNameOpportunity_" + id).html(response);
+        }
+    });
+}
 function clickPublish(opportunity) {
     var id = opportunity;
     new PNotify({
         title: 'Confirmação',
-        text: 'Você realmente deseja fazer essa publicação?',
+        text: 'Esta ação não poderá ser revertida! Deseja realmente publicar estas respostas?',
         icon: 'fa fa-question-circle',
         type: 'info',
         hide: false,
@@ -191,7 +211,7 @@ function clickPublish(opportunity) {
             confirm: true,
             buttons: [
             {
-                text: 'Sim',
+                text: 'Publicar',
                 addClass: 'btn btn-primary btn-confirm-notify',
                 click: function(notice){
                     publishResource(id);
@@ -199,7 +219,7 @@ function clickPublish(opportunity) {
                 }
             },
             {
-                text: 'Não, desitir.',
+                text: 'Cancelar',
                 addClass: 'btn btn-default',
                 click: function(notice){
                   PNotify.removeAll();
@@ -231,6 +251,8 @@ function publishResource(opportunity) {
                 text: response.message,
                 type: response.type    
             });
+            $("#div-publish").hide();
+            $("#div-alert-publish").show();
         }
     });
 }

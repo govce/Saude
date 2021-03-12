@@ -13,6 +13,24 @@ class Resources extends \MapasCulturais\Controller{
         //$this->render('resources');
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
+        $app = App::i();
+        $dql = "SELECT r, o
+        FROM 
+        Saude\Entities\Resources r
+        JOIN r.opportunityId o
+        JOIN r.registrationId re
+        WHERE r.opportunityId = 17 
+        and r.registrationId  = 905535015";
+
+        $query = $app->em->createQuery($dql);
+        $resource = $query->getResult();
+        if(!empty($resource)) {
+            if($resource[0]->resourceText !== "" && $resource[0]->replyPublish == TRUE )
+            // dump($resource[0]->resourceText);
+            // dump($resource[0]->replyPublish);
+            dump(true);
+        }
+        dump(false);
     }
 
     function POST_store() {
@@ -101,4 +119,11 @@ class Resources extends \MapasCulturais\Controller{
         }
         $this->json([ 'title' => 'Error', 'message' => 'Ocorreu um erro inesperado.', 'type' => 'error'], 500);
     }
+
+    function GET_getNameOpportunity() {
+        $app = App::i();
+        $opp = $app->repo('Opportunity')->find($this->getData['id']);
+        $this->json($opp->name);
+    }
+
 }

@@ -3,6 +3,7 @@ namespace Saude\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use MapasCulturais\App;
+use MapasCulturais\Entities\Opportunity;
 
 /**
  * Resources
@@ -58,7 +59,7 @@ class Resources extends \MapasCulturais\Entity{
     /**
      * @var \MapasCulturais\Entities\Registration
      *
-     * @ORM\OneToOne(targetEntity="MapasCulturais\Entities\Registration",  mappedBy="\MapasCulturais\Entities\Registration")
+     * @ORM\OneToOne(targetEntity="MapasCulturais\Entities\Registration", fetch="LAZY", mappedBy="\MapasCulturais\Entities\Registration")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="registration_id", referencedColumnName="id")
      * })
@@ -68,7 +69,7 @@ class Resources extends \MapasCulturais\Entity{
     /**
      * @var \MapasCulturais\Entities\Opportunity
      *
-     * @ORM\ManyToOne(targetEntity="MapasCulturais\Entities\Opportunity")
+     * @ORM\ManyToOne(targetEntity="MapasCulturais\Entities\Opportunity", fetch="LAZY")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="opportunity_id", referencedColumnName="id")
      * })
@@ -78,7 +79,7 @@ class Resources extends \MapasCulturais\Entity{
     /**
      * @var \MapasCulturais\Entities\Agent
      *
-     * @ORM\OneToOne(targetEntity="MapasCulturais\Entities\Agent")
+     * @ORM\OneToOne(targetEntity="MapasCulturais\Entities\Agent", fetch="LAZY")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="agent_id", referencedColumnName="id")
      * })
@@ -106,6 +107,7 @@ class Resources extends \MapasCulturais\Entity{
         return $all;
     }
 
+    
     public static function resourceIdOpportunity($opportunity) {
         $app = App::i();
         $all = $app->em->getConnection()->fetchAll("SELECT * FROM resources r WHERE r.opportunity_id = {$opportunity} ");
@@ -150,6 +152,28 @@ class Resources extends \MapasCulturais\Entity{
         $query = $app->em->createQuery($dql);
         $resource = $query->getResult();
         return $resource;
+    }
+
+    public static function checkPublishOpportunity($oppotunity, $registration) {
+        $app = App::i();
+        $dql = "SELECT r, o
+        FROM 
+        Saude\Entities\Resources r
+        JOIN r.opportunityId o
+        JOIN r.registrationId re
+        WHERE r.opportunityId = {$oppotunity}
+        and r.registrationId  = {$registration}";
+        $query = $app->em->createQuery($dql);
+        $resource = $query->getResult();
+        //dump($resource);
+        if(!empty($resource)) {
+            //if($resource[0]->resourceText !== "" && $resource[0]->replyPublish == TRUE )
+            // dump($resource[0]->resourceText);
+            // dump($resource[0]->replyPublish);
+            return ['text' => $resource[0]->resourceText, 'publish' => $resource[0]->replyPublish];
+
+        }
+        return ['text' => 'Não existe texto', 'publish' => 'sem publicacao'];
     }
 
     /** @ORM\PrePersist */
