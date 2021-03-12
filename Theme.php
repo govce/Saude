@@ -61,6 +61,9 @@ class Theme extends BaseV1\Theme{
         $app = App::i();        
         $app->view->enqueueScript('app', 'entity.module.opportunity', 'js/ng.entity.module.opportunity.js', array('ng-mapasculturais'));
         $app->view->enqueueScript('app', 'taxonomies', 'js/ng.taxonomies.js');
+        //RECURSOS
+        $app->view->enqueueScript('app', 'resource', 'js/ng.resource.js');
+        
         $app->view->enqueueStyle('app', 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
         //alertas
         $app->view->enqueueStyle('app', 'pnotify', 'css/pnotify.css');
@@ -69,7 +72,12 @@ class Theme extends BaseV1\Theme{
         $app->view->enqueueScript('app', 'pnotify', 'js/pnotify.js');
         $app->view->enqueueScript('app', 'pnotify.buttons', 'js/pnotify.buttons.js');
         $app->view->enqueueScript('app', 'pnotify.confirm', 'js/pnotify.confirm.js');
-
+        //Query Modal
+        $app->view->enqueueStyle('app', 'jqueryModal', 'css/remodal.css');
+        $app->view->enqueueStyle('app', 'jqueryModal-theme', 'css/remodal-default-theme.css');
+        $app->view->enqueueScript('app', 'jqueryModal', 'js/remodal.min.js');
+        
+       
     }
 
     function getAddressByPostalCode($postalCode) {
@@ -121,7 +129,8 @@ class Theme extends BaseV1\Theme{
         $app = App::i();
         $app->registerAuthProvider('keycloak');
         $app->registerController('taxonomias', 'Saude\Controllers\Taxonomias');
-        $app->registerController('evaluationCandidate', 'Saude\Controllers\Candidate');
+        $app->registerController('recursos', 'Saude\Controllers\Resources');
+
     }
     
 
