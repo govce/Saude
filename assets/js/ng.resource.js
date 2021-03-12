@@ -1,8 +1,7 @@
 $(document).ready(function () {
     //OCULTANDO CAMPO NO FORMULÁRIO DE RESPOSTA
     $("#divDeferido").hide();
-    $("#div-publish").show();
-    $("#div-alert-publish").hide();
+
     getAllResource();
     $("#formSendResource").submit(function (e) { 
         e.preventDefault();

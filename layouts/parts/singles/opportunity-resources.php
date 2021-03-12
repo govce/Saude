@@ -46,17 +46,20 @@ $resources = Resources::resourceIdOpportunity($entity->id);
         </tbody>
     </table>
     <div class="form-group">
+    <?php if($resources[0]['resources_reply_publish'] == false) { ?>
         <div id="div-publish">
             <button class="btn btn-primary" onclick="clickPublish(<?php echo $entity->id; ?>)"> 
                 <i class="fa fa-bullhorn" aria-hidden="true"></i>
                 Publicar Recurso
             </button>
         </div>
+    <?php }else{ ?>
         <div id="div-alert-publish" class="text-success show-publish">
             <i class="fa fa-check"></i>
             <label for="" class="text-success">Recurso já enviado.</label>
         </div>
     </div>
+    <?php } ?>
 </div>
 <!-- modal de resposta de recurso -->
 <?php $this->part('modals/form-reply-resource') ?>
