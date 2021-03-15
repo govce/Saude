@@ -117,11 +117,10 @@ class Resources extends \MapasCulturais\Controller{
     function POST_candidateData() {
         $app = App::i();
         //dump($this->getData);
-        $dompdf = new Dompdf();
         $id = base64_decode($this->postData['id']);
         $report = EntitiesResources::find($id);
 
-        $this->render('printResource', ['report' => $report, 'dompdf' => $dompdf]);
+        $this->render('printResource', ['report' => $report]);
     }
 
 }

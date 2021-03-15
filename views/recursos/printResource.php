@@ -17,6 +17,13 @@ $this->layout = 'nolayout';
   .table-bordered td {
     border: 1px solid #ddd !important;
   }
+.img-logo {
+    height: 50px;
+    width: 600px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 20%;
+}  
 </style>
 <div class="container">
     <div class="row">
@@ -24,7 +31,7 @@ $this->layout = 'nolayout';
             <thead>
                 <tr>
                     <th>
-                        <img src="https://servicos.esp.ce.gov.br/eventos/2020/eve012020cenic/images/logo_espce_gov.png" alt="" width="50%" height="50%">
+                        <img class="img-logo " src="https://servicos.esp.ce.gov.br/eventos/2020/eve012020cenic/images/logo_espce_gov.png" alt="">
                     </th>
                 </tr>
             </thead>
