@@ -53,7 +53,7 @@ $resources = Resources::resourceIdOpportunity($entity->id);
                 Publicar Recurso
             </button>
         </div>
-    <?php }else{ ?>
+    <?php }elseif(isset($resources[0]['resources_reply_publish']) && $resources[0]['resources_reply_publish'] == true){ ?>
         <div id="div-alert-publish" class="text-success show-publish">
             <i class="fa fa-check"></i>
             <label for="" class="text-success">Recurso já enviado.</label>
