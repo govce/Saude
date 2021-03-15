@@ -9,6 +9,7 @@
                 <th>Situação</th>
                 <th style="width:25%;">Resposta</th>
                 <th>Respondido em</th>
+                <th>Imp. Recurso</th>
             </tr>
             <tbody id="bodyAllResource"></tbody>
         </thead>

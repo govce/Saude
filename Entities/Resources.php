@@ -176,6 +176,27 @@ class Resources extends \MapasCulturais\Entity{
         return ['text' => 'Não existe texto', 'publish' => 'sem publicacao'];
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $type agentOpportunity
+     * @return void
+    */
+    public static function reportResource($type) {
+        switch ($type) {
+            case 'agentOpportunity':
+                
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+    }
+
+    public function agentOpportunity() {
+
+    }
     /** @ORM\PrePersist */
     public function _prePersist($args = null){
         App::i()->applyHookBoundTo($this, 'entity(Resources).meta(' . $this->key . ').insert:before', $args);

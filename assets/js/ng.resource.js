@@ -180,6 +180,8 @@ function getAllResource() {
                     '<td class="text-long-table">'+buttonReply+
                     '</td>'+
                     '<td>'+dtReply+'</td>'+
+                    '<td> <a href="'+MapasCulturais.baseURL+'recursos/dadosCandidato?id='+value.id+'" target="_blank"> Imprimir </a>'+
+                    '</td>'+
                 '</tr>'+
                 '</tbody>')
             });

@@ -5,7 +5,8 @@ use DateTime;
 use \MapasCulturais\App;
 use \MapasCulturais\i;
 use \Saude\Entities\Resources as EntitiesResources;
-use Saude\Repositories\Resource;
+use Dompdf\Dompdf;
+require_once PROTECTED_PATH. 'vendor/dompdf/autoload.inc.php';
 
 class Resources extends \MapasCulturais\Controller{
 
@@ -124,6 +125,30 @@ class Resources extends \MapasCulturais\Controller{
         $app = App::i();
         $opp = $app->repo('Opportunity')->find($this->getData['id']);
         $this->json($opp->name);
+    }
+
+    function GET_dadosCandidato() {
+        ini_set('display_errors', 1);
+        error_reporting(E_ALL);
+        $app = App::i();
+        //dump($this->getData);
+        $dompdf = new Dompdf();
+        $report = EntitiesResources::find($this->getData['id']);
+        // $this->render('printResource', ['report' => $report, 'dompdf' => $dompdf]);
+        $content = $app->view->fetch('recursos/printResource', ['report' => $report, 'dompdf' => $dompdf]);
+//         $html = file_get_contents("https://github.com/dompdf/dompdf"); 
+        $dompdf->loadHtml($content);
+
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('A4', 'landscape');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+// Output the generated PDF to Browser
+$dompdf->stream();
+
+
     }
 
 }
