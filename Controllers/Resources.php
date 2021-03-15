@@ -134,21 +134,16 @@ class Resources extends \MapasCulturais\Controller{
         //dump($this->getData);
         $dompdf = new Dompdf();
         $report = EntitiesResources::find($this->getData['id']);
-        // $this->render('printResource', ['report' => $report, 'dompdf' => $dompdf]);
+        //$this->render('printResource', ['report' => $report, 'dompdf' => $dompdf]);
         $content = $app->view->fetch('recursos/printResource', ['report' => $report, 'dompdf' => $dompdf]);
-//         $html = file_get_contents("https://github.com/dompdf/dompdf"); 
         $dompdf->loadHtml($content);
-
-// (Optional) Setup the paper size and orientation
-$dompdf->setPaper('A4', 'landscape');
-
-// Render the HTML as PDF
-$dompdf->render();
-
-// Output the generated PDF to Browser
-$dompdf->stream();
-
-
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();     
+        //$dompdf->output();
+        $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+        exit(0);
+        //file_put_contents('Brochure.pdf', $output);
+        //$dompdf->stream();
     }
 
 }

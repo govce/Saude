@@ -20,7 +20,7 @@ $this->layout = 'nolayout';
 </div>
 <div class="container">
     <div class="row">
-        <table>
+        <table  class="table table-bordered">
         <thead>
             <tr>
                 <th>
@@ -32,7 +32,7 @@ $this->layout = 'nolayout';
     </div>
     <div class="row">
 
-        <table>
+        <table class="table table-bordered">
         <thead>
             <tr class="active">
                 <th>Nome</th>
