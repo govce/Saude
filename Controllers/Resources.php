@@ -3,7 +3,6 @@ namespace Saude\Controllers;
 
 use DateTime;
 use \MapasCulturais\App;
-use \MapasCulturais\i;
 use \Saude\Entities\Resources as EntitiesResources;
 // use Dompdf\Dompdf;
 // require_once PROTECTED_PATH. 'vendor/dompdf/autoload.inc.php';
@@ -42,15 +41,19 @@ class Resources extends \MapasCulturais\Controller{
             $app->em->flush();
             $app->enableAccessControl();
             $this->json(['title' => 'Sucesso','message' => 'Seu recurso foi enviado com sucesso','id' => $rec->id, 'type' => 'success'], 200);
-        } catch (\Throwable $th) {
-            //dump( $th->getMessage());
+        } catch (Exception $e) {
+            dump( $e->getMessage());
             // $this->json(['title' => 'Erro','message' => 'Ocorreu um erro inesperado, tente novamente!','type' => 'eror'], 500);
         } 
     }
 
     function GET_allResource() {
-        $all = EntitiesResources::allResource();
-        $this->json($all);
+        try {
+            $all = EntitiesResources::allResource();
+            $this->json($all);
+        } catch (Exception $e) {
+            dump($e->getMessage());
+        }
     }
 
     function GET_inforesource() {
@@ -110,4 +113,15 @@ class Resources extends \MapasCulturais\Controller{
         $opp = $app->repo('Opportunity')->find($this->getData['id']);
         $this->json($opp->name);
     }
+
+    function POST_candidateData() {
+        $app = App::i();
+        //dump($this->getData);
+        $dompdf = new Dompdf();
+        $id = base64_decode($this->postData['id']);
+        $report = EntitiesResources::find($id);
+
+        $this->render('printResource', ['report' => $report, 'dompdf' => $dompdf]);
+    }
+
 }

@@ -180,8 +180,7 @@ function getAllResource() {
                     '<td class="text-long-table">'+buttonReply+
                     '</td>'+
                     '<td>'+dtReply+'</td>'+
-                    '<td> <a href="'+MapasCulturais.baseURL+'recursos/dadosCandidato?id='+value.id+'" target="_blank"> Imprimir </a>'+
-                    '</td>'+
+                    '<td><form action="'+MapasCulturais.baseURL+'recursos/candidateData" method="post"><input type="hidden" name="id" value="'+btoa(value.id)+'"><button type="submit" title="Imprimir Esse Recurso"><i class="fa fa-print"></i></button></form>'+
                 '</tr>'+
                 '</tbody>')
             });

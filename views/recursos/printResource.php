@@ -1,10 +1,23 @@
 <?php
 
 $this->layout = 'nolayout';
-// instantiate and use the dompdf class
-?>
-<!-- $html = <<<'ENDHTML' -->
 
+?>
+
+<!-- $html = <<<'ENDHTML' -->
+<style>
+.table {
+    border-collapse: collapse !important;
+  }
+  .table td,
+  .table th {
+    background-color: #fff !important;
+  }
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #ddd !important;
+  }
+</style>
 <div class="container">
     <div class="row">
         <table>
@@ -20,10 +33,10 @@ $this->layout = 'nolayout';
 </div>
 <div class="container">
     <div class="row">
-        <table  class="table table-bordered">
+        <table class="table table-bordered"  style="width: 100%;">
         <thead>
             <tr>
-                <th>
+                <th style="background-color: red;">
                 <h5>Relatório de solicitação de recurso</h5>
                 </th>
             </tr>
@@ -31,10 +44,9 @@ $this->layout = 'nolayout';
         </table>
     </div>
     <div class="row">
-
         <table class="table table-bordered">
         <thead>
-            <tr class="active">
+            <tr>
                 <th>Nome</th>
                 <th>Nº Inscrição</th>
                 <th>Oportunidade</th>
@@ -47,19 +59,21 @@ $this->layout = 'nolayout';
         </thead>
         <tbody>
             <tr>
-                <td>Junior</td>
-                <td>000007</td>
-                <td>A minha</td>
-                <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti voluptatum quam necessitatibus! Fuga inventore, ipsam vitae a ducimus repudiandae minus repellat odit vel consectetur. Accusantium distinctio nihil numquam quo dignissimos?</td>
-                <td>05/11/1984</td>
-                <td>Deferido</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim veritatis facilis quas adipisci minus porro est deserunt exercitationem, blanditiis animi nemo officiis explicabo saepe, optio, voluptas ab perferendis suscipit? Accusantium!</td>
-                <td>12/03/2021</td>
+                <td><?php echo $report->agentId->name; ?></td>
+                <td><?php echo $report->registrationId->id; ?></td>
+                <td><?php echo $report->opportunityId->name; ?></td>
+                <td><?php echo $report->resourceText; ?></td>
+                <td><?php echo $report->resourceSend->format('d/m/Y H:i'); ?></td>
+                <td><?php echo $report->resourceStatus; ?></td>
+                <td><?php echo $report->resourceReply; ?></td>
+                <td><?php echo $report->resourceDateReply->format('d/m/Y H:i'); ?></td>
+                
             </tr>
         </tbody>
         </table>
     </div>
 </div>
+
 <?php
 // ENDHTML;
 
