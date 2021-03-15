@@ -126,24 +126,4 @@ class Resources extends \MapasCulturais\Controller{
         $opp = $app->repo('Opportunity')->find($this->getData['id']);
         $this->json($opp->name);
     }
-
-    function GET_dadosCandidato() {
-        ini_set('display_errors', 1);
-        error_reporting(E_ALL);
-        $app = App::i();
-        //dump($this->getData);
-        $dompdf = new Dompdf();
-        $report = EntitiesResources::find($this->getData['id']);
-        //$this->render('printResource', ['report' => $report, 'dompdf' => $dompdf]);
-        $content = $app->view->fetch('recursos/printResource', ['report' => $report, 'dompdf' => $dompdf]);
-        $dompdf->loadHtml($content);
-        $dompdf->setPaper('A4', 'landscape');
-        $dompdf->render();     
-        //$dompdf->output();
-        $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
-        exit(0);
-        //file_put_contents('Brochure.pdf', $output);
-        //$dompdf->stream();
-    }
-
 }
