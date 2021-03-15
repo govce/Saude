@@ -5,8 +5,8 @@ use DateTime;
 use \MapasCulturais\App;
 use \MapasCulturais\i;
 use \Saude\Entities\Resources as EntitiesResources;
-use Dompdf\Dompdf;
-require_once PROTECTED_PATH. 'vendor/dompdf/autoload.inc.php';
+// use Dompdf\Dompdf;
+// require_once PROTECTED_PATH. 'vendor/dompdf/autoload.inc.php';
 
 class Resources extends \MapasCulturais\Controller{
 
@@ -15,23 +15,7 @@ class Resources extends \MapasCulturais\Controller{
         ini_set('display_errors', 1);
         error_reporting(E_ALL);
         $app = App::i();
-        $dql = "SELECT r, o
-        FROM 
-        Saude\Entities\Resources r
-        JOIN r.opportunityId o
-        JOIN r.registrationId re
-        WHERE r.opportunityId = 17 
-        and r.registrationId  = 905535015";
-
-        $query = $app->em->createQuery($dql);
-        $resource = $query->getResult();
-        if(!empty($resource)) {
-            if($resource[0]->resourceText !== "" && $resource[0]->replyPublish == TRUE )
-            // dump($resource[0]->resourceText);
-            // dump($resource[0]->replyPublish);
-            dump(true);
-        }
-        dump(false);
+        dump($app);
     }
 
     function POST_store() {
