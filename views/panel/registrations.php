@@ -1,9 +1,13 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
     use MapasCulturais\Entities\Registration;
     $this->layout = 'panel';
     
     $drafts = $app->repo('Registration')->findByUser($app->user, Registration::STATUS_DRAFT);
     $sent = $app->repo('Registration')->findByUser($app->user, 'sent');
+    // ORDENANDO O ARRAY EM ORDEM DECRESCENTE
+    krsort($sent);
     ?>
 <div class="panel-list panel-main-content">
     <?php $this->applyTemplateHook('panel-header','before'); ?>
