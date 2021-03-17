@@ -864,15 +864,16 @@ module.controller('RegistrationFieldsController', ['$scope', '$rootScope', '$int
         var val = $scope.entity[field.fieldName];
 
         field.unchangedFieldJSON = JSON.stringify(val);        
-
+        console.log(field.fieldType)
+        
         if (field.fieldType == 'date' && typeof val == 'string' ) {
-            val = moment(val).toDate();
+            val = moment(val).format('DD/MM/YYYY');
         } else if(field.fieldType == 'number' && typeof val == 'string' ) {
             val = parseFloat(val);
         } else if (/\d{4}-\d{2}-\d{2}/.test(val)) {
-            val = moment(val).toDate();
+            val = moment(val).format('DD/MM/YYYY');
         }
-
+        console.log({val})
         $scope.entity[field.fieldName] = val;
     });
 
