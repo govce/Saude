@@ -311,6 +311,7 @@ module.factory('EvaluationMethodConfigurationService', ['$rootScope', '$q', '$ht
 }]);
 
 module.controller('RegistrationConfigurationsController', ['$scope', '$rootScope', '$timeout', '$interval', 'UrlService', 'RegistrationConfigurationService', 'EditBox', '$http', function ($scope, $rootScope, $timeout, $interval, UrlService, RegistrationConfigurationService, EditBox, $http) {
+
     var fileService = RegistrationConfigurationService('registrationfileconfiguration');
     var fieldService = RegistrationConfigurationService('registrationfieldconfiguration');
 
@@ -671,7 +672,7 @@ module.controller('RegistrationConfigurationsController', ['$scope', '$rootScope
 module.controller('OpportunityEventsController', ['$scope', '$rootScope', '$timeout', 'OpportunityEventsService', 'EditBox', '$http', 'UrlService', function ($scope, $rootScope, $timeout, OpportunityEventsService, EditBox, $http, UrlService) {
     $scope.events = $scope.data.entity.events.slice();
     $scope.numSelectedEvents = 0;
-
+    
     var labels = MapasCulturais.gettext.moduleOpportunity;
 
     $scope.events.forEach(function(evt){

@@ -1,8 +1,10 @@
 <?php 
+use Saude\Entities\Resources;
+//dump($registration);
 $registrations = $app->repo('Registration')->findByOpportunityAndUser($entity, $app->user); 
 
 if(!empty($registrations)){
-
+    $resource = Resources::checkPublishOpportunity($entity->id, $registrations[0]->id);
     $allResults = $app->repo('RegistrationEvaluation')->findBy(['registration' => $registrations[0]->id]);
     $verifyPublish = $app->repo('Opportunity')->find($registrations[0]->opportunity->id);
     $typeEvaluation = $app->repo('EvaluationMethodConfiguration')->findBy(
@@ -79,11 +81,25 @@ if(!empty($registrations)){
                     <?php if($verifyPublish->publishedRegistrations == true
                      && $typeEvaluation[0]->type->id == 'technical'): ?>
                         <td>
-                            <?php echo $registration->preliminaryResult; ?>
+                            <?php echo "---";
+                            //$registration->preliminaryResult;
+                            ?>
                         </td>
-                        <td>
-                            <?php echo $registration->consolidatedResult; ?>
-                        </td>
+                        <?php
+                        //entrou em recurso e já está publicado $registration->consolidatedResult
+                        if($resource['text'] !== "" && $resource['publish'] == true) {
+                            echo '<td> --- </td>';
+                        }else
+                        //SE ENTROU EM RECURSO MAIS AINDA NAO FOI PUBLICADO
+                        if($resource['text'] !== "" && $resource['publish'] == false) {
+                            echo '<td>Recurso enviado. Aguarde!</td>';
+                        }else
+                        //SE NÃO ENTROU EM RECURSO
+                        if($resource['text'] == 'Não existe texto' && $resource['publish'] == 'sem publicacao'){
+                            echo '<td>'.$registration->consolidatedResult.'</td>';
+                        }   
+                        ?>
+
                     <?php endif; ?>
                     <?php $this->applyTemplateHook('user-registration-table--registration', 'end', $reg_args); ?>
                 </tr>
