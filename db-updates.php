@@ -497,6 +497,20 @@ return array(
     'add resources_reply_publish' => function () use($conn) {
         $conn->executeQuery("ALTER TABLE public.resources  ADD resources_reply_publish boolean ");
     },
+
+    'create table examination_room' => function () use($conn) {
+        //
+        $conn->executeQuery("CREATE TABLE public.examination_room (
+            registration_id INT NOT NULL,
+            agent_cpf TEXT NOT NULL,
+            room_number TEXT NOT NULL, 
+            room_link TEXT NOT NULL, 
+            meet_link TEXT NOT NULL, 
+            examination_date DATE DEFAULT NULL,
+            initial_hour TEXT DEFAULT NULL,
+            final_hour DATE DEFAULT NULL
+        )");
+    }
 );
 
 
