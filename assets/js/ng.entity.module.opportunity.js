@@ -1096,9 +1096,6 @@ module.controller('RegistrationFieldsController', ['$scope', '$rootScope', '$int
     }
 
     $scope.printField = function(field, value){
-        // console.log('fieldType :',field.fieldType);
-        // console.log('fieldName :',field.title);
-        // console.log({value})
         if (field.fieldType === 'date') {
             return moment(value).format('DD/MM/YYYY');
         } else if (field.fieldType === 'url'){
