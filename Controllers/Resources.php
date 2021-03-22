@@ -84,8 +84,12 @@ class Resources extends \MapasCulturais\Controller{
         //ALTERAR A NOTA FINAL
         if(!empty($this->putData['new_consolidated_result'])) {
             $reg = $app->repo('Registration')->find($reply->registrationId->id);
-            $reg->consolidatedResult = $this->putData['new_consolidated_result'];
-            $app->em->persist($reg);
+            if($this->putData['new_consolidated_result'] > 17) {
+                $this->json(['title' => 'Ops!','message' => 'A nova nota não pode ser maior que a nota máxima', 'type' => 'error'], 401);
+            }else{
+                $reg->consolidatedResult = $this->putData['new_consolidated_result'];
+                $app->em->persist($reg);
+            }
         }
 
         try {
@@ -131,6 +135,20 @@ class Resources extends \MapasCulturais\Controller{
         }else{
             $this->json([ 'title' => 'Sucesso!', 'message' => 'Autorizado publicar', 'type' => 'success'], 200);
         }
+    }
+
+    function GET_pointMax() {
+        $app = App::i();
+        $pointMax = $app->repo("EvaluationMethodConfigurationMeta")->findBy([
+            'owner' => $this->getData['opportunityId'],
+            'key' => 'criteria'
+        ]);
+        $spotsToarray = json_decode($pointMax[0]->value);
+        $spots = 0;
+        foreach ($spotsToarray as $value) {
+            $spots = ($spots + $value->max);
+        }
+        $this->json(['message' => $spots], 200);
     }
 
 }

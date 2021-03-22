@@ -191,6 +191,7 @@ class Resources extends \MapasCulturais\Entity{
         $resource = $query->getResult();
         return $resource;
     }
+
     /** @ORM\PrePersist */
     public function _prePersist($args = null){
         App::i()->applyHookBoundTo($this, 'entity(Resources).meta(' . $this->key . ').insert:before', $args);

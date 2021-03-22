@@ -30,20 +30,24 @@
                             <input type="text" name="consolidated_result" id="consolidated_result" disabled class="form-control" style="background: #eaeaea;" >
                         </td>
                         <td>
-                            <div id="divDeferido">
-                                <label for="">Nova nota</label>
-                                <input type="number" 
-                                min="0"
-                                step=".01"
-                                name="new_consolidated_result" id="new_consolidated_result"
-                                class="form-control">
-                            </div>
+                            
                         </td>
                     </tr>
                 </thead>
             </table>
         </div>
         <br>
+        <div id="divDeferido" style="display: inline-table !important;">
+            <div class="alert info">
+                <label id="infoNotaMaxima"></label>
+            </div>
+            <label for="">Nova nota</label>
+            <input type="number" 
+            min="0"
+            step=".01"
+            name="new_consolidated_result" id="new_consolidated_result"
+            class="form-control">
+        </div>
         <hr>
         <button data-remodal-action="cancel" class="btn btn-default" title="Sair da resposta">
         <i class="fa fa-close" aria-hidden="true"></i>
@@ -51,6 +55,7 @@
         </button>
         <input type="hidden" name="_METHOD" value="PUT"/>
         <input type="hidden" name="resource_id" id="resource_id">
+        <input type="text" name="notamax" id="notamax">
         <button class="btn btn-primary" type="submit" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;">
         <i class="fa fa-paper-plane" aria-hidden="true"></i>
         Responder
