@@ -185,7 +185,7 @@ class Resources extends \MapasCulturais\Entity{
         FROM 
         Saude\Entities\Resources r
         WHERE r.opportunityId = {$opportunity}
-        and r.resourceReply  = '' 
+        and r.resourceReply is null
         and r.replyPublish = false";
         $query = $app->em->createQuery($dql);
         $resource = $query->getResult();
