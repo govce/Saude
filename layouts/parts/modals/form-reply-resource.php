@@ -10,7 +10,7 @@
         <small id="resourceText"></small>
     </p>
     <form id="formReplyResource">
-        <textarea name="resource_reply" id="resource_reply" cols="30" rows="20" class="form-control" style="height: 322px !important"></textarea>
+        <textarea name="resource_reply" id="resource_reply" cols="30" rows="20" class="form-control" style="height: 222px !important"></textarea>
         <br>
         <div class="table-responsive">
             <table class="table">
@@ -55,7 +55,6 @@
         </button>
         <input type="hidden" name="_METHOD" value="PUT"/>
         <input type="hidden" name="resource_id" id="resource_id">
-        <input type="text" name="notamax" id="notamax">
         <button class="btn btn-primary" type="submit" title="Enviar o seu recurso para essa oportunidade" style="margin-left: 20px;">
         <i class="fa fa-paper-plane" aria-hidden="true"></i>
         Responder

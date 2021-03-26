@@ -290,9 +290,8 @@ function pointMax(opportunity) {
         dataType: "json",
         success: function (response) {
             console.log(response)
-            $("#infoNotaMaxima").html("A nota máxima é " + response.message);
+            $("#infoNotaMaxima").html("Gostariamos de lhe lembrar que a nota máxima de pontuação é de: " + response.message);
             $("#new_consolidated_result").attr('max' , response.message);
-            $("#notamax").val(response.message)
         }
     });
 }
